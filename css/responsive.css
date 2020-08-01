@@ -1,0 +1,193 @@
+@media screen and (max-width: 767px) {
+    .register-form .col-sm-1 {
+        display: none;
+    }
+    .header-section {
+        display: block;
+    }
+    .download-btn img {
+        width: 100%;
+    }
+    .carousel-control {
+        display: none;
+    }
+    .carousel-indicators {
+        display: none;
+    }
+    .about-avatar {
+        width: 100% !important;
+    }
+}
+@media screen and (min-width: 799px) {
+
+}
+@media only screen and (min-width: 1280px) {
+
+}
+@media only screen and (max-width: 1139px) {
+
+}
+@media only screen and (max-width: 950px) {
+
+}
+@media only screen and (max-width: 500px) {
+
+}
+@media only screen and (max-width: 340px) {
+
+}
+@media only screen and (max-width: 991px) {
+    .mobile-menu {
+        display: block;
+    }
+    .header-section {
+        display: none;
+    }
+    .logo img {
+        width: 80%;
+    }
+    .mobile-menu i {
+        font-size: 30px;
+        padding-top: 40px;
+        position: absolute;
+        top: 35px;
+        right: 12px;
+        color: #662d91;
+    }
+    .mobile-dropdown-menu ul {
+        list-style: none;
+        padding: 5px 10px;
+        margin: 0;
+    }
+    .mobile-dropdown-menu ul li {
+        font-size: 22px;
+        font-weight: 500;
+        padding: 0px 0 10px;
+    }
+    .mobile-dropdown-menu ul li a {
+        color: #333;
+    }
+    .mobile-dropdown-menu ul li a:hover {
+        color: #662d91;
+        text-decoration: none;
+    }
+    a.animated-button.victoria-two {
+        margin: 5px 3px 5px;
+    }
+    .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+        height: auto;
+    }
+    .btn-custome {
+        width: 100%;
+    }
+}
+@media (min-width: 992px) and (max-width: 1440px) {
+
+}
+
+
+@media (max-width: 1100px) {
+    .profile-side {
+        width: 250px;
+        padding: 90px 15px 20px;
+    }
+
+    .profile-img img {
+        height: 200px;
+        width: 200px;
+        left: 50px;
+        top: 50px;
+    }
+}
+
+@media (max-width: 900px) {
+    body {
+        /*        margin: 0 20px;*/
+    }
+
+    .profile-header {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    .profile-img {
+        float: left;
+        width: 100%;
+        height: 200px;
+    }
+
+    .profile-img img {
+        position: relative;
+        height: 200px;
+        width: 200px;
+        left: 0px;
+    }
+
+    .profile-nav-info {
+        text-align: center;
+    }
+
+    .profile-option {
+        right: 20px;
+        top: 75%;
+        transform: translateY(50%);
+    }
+
+    .main-bd {
+        flex-direction: column;
+        padding-right: 0;
+    }
+
+    .profile-side {
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+        margin: 5px 0;
+    }
+
+    .profile-nav-info .address {
+        justify-content: center;
+    }
+
+    .user-rating {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 400px) {
+    /*    body {
+            margin: ;
+        }*/
+
+    .profile-header h3 {
+    }
+
+    .profile-option {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        right: 15px;
+        top: 83%;
+    }
+
+    .profile-option .notification .alert-message {
+        top: -3px;
+        right: -4px;
+        padding: 4px;
+        height: 15px;
+        width: 15px;
+        font-size: 0.7rem;
+    }
+
+    .profile-nav-info h3 {
+        font-size: 2.9rem;
+    }
+
+    .profile-nav-info .address p,
+    .profile-nav-info .address span {
+        font-size: 1.7rem;
+    }
+}
