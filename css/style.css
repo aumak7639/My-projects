@@ -629,7 +629,7 @@ button.createbtn {
     border-radius: 3px;
     background: #e40046;
     color: #fff;
-/*    font-family: "Bree Serif";*/
+    /*    font-family: "Bree Serif";*/
     font-size: 1rem;
     margin: 5px 2px;
     cursor: pointer;
@@ -725,7 +725,7 @@ button.createbtn i {
     text-transform: lowercase;
 }
 .tab h1 {
-/*    font-family: "Bree Serif", sans-serif;*/
+    /*    font-family: "Bree Serif", sans-serif;*/
     display: flex;
     justify-content: center;
     margin: 20px auto;
@@ -769,4 +769,84 @@ button.createbtn i {
     max-width: 200px;
     height: auto;
     max-height: 200px;
+}
+
+/* User Profile Multiple image css */
+#gallerywrapper {
+    width:640px;
+    height:400px;
+    margin:0 auto;
+    position:relative;
+    font-family:verdana, arial, sans-serif;
+} 
+
+#gallerywrapper #gallery {
+    position:absolute;
+    left:0;
+    top:0;
+    height:450px;
+    width:640px;
+    overflow:hidden;
+    text-align:center;
+} 
+
+#gallerywrapper #gallery div {
+    width:640px; height:900px; 
+    padding-top:10px; 
+    position:relative;
+} 
+
+#gallerywrapper #gallery div img {
+    clear:both; 
+    display:block; 
+    margin:0 auto; 
+    border:0;
+} 
+
+#gallerywrapper #gallery div h3 {
+    padding:10px 0 0 0; 
+    margin:0; 
+    font-size:18px;
+} 
+
+#gallerywrapper #gallery div p {
+    padding:5px 0; 
+    margin:0; 
+    font-size:12px; 
+    line-height:18px;
+} 
+
+#gallery .previous{ 
+    display:inline;
+    float:left;
+    margin-left:80px;
+    text-decoration:none;
+} 
+
+#gallery .next{ 
+    display:inline;
+    float:right;
+    margin-right:80px;
+    text-decoration:none;
+}
+
+/* End Css */
+
+.user-profile {
+    padding: 50px 0 30px;
+}
+
+.user-details {
+    width: 50%;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+.user-details table {
+    width: 100%;
+    padding: 20px;
+}
+
+.user-details table td, .user-details table th {
+    padding: 10px;
 }

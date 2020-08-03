@@ -17,6 +17,27 @@
     .about-avatar {
         width: 100% !important;
     }
+    #gallerywrapper {
+        width: 100%;
+    }
+    #gallerywrapper #gallery {
+        width: 100%;
+    }
+    #gallerywrapper #gallery div {
+        width: 100%;
+    }
+    #gallerywrapper #gallery div img {
+        width: 100%;
+    }
+    #gallery .previous {
+        margin-left: 0;
+    }
+    #gallery .next {
+        margin-right: 0;
+    }
+    .user-details {
+        width: 100%;
+    }
 }
 @media screen and (min-width: 799px) {
 
