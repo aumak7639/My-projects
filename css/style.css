@@ -850,3 +850,25 @@ button.createbtn i {
 .user-details table td, .user-details table th {
     padding: 10px;
 }
+
+.contact-info {
+    padding: 20px 0;
+}
+
+.contact-info .btn-contact {
+    background: #f6bc00;
+    color: #fff;
+    transition: all .5s;
+    border: 1px solid #f6bc00;
+}
+
+.contact-info .btn-contact:hover {
+    background: #fff;
+    color: #f6bc00;
+    transition: all .5s;
+    border: 1px solid #f6bc00;
+}
+
+.contact-info .btn-contact:focus {
+    outline: none;
+}

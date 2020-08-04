@@ -96,6 +96,9 @@ $user = $obj->selectAll('*', 'users', 'user_id > 0');
                                         <td>Religion</td>
                                     </tr>
                                 </table>
+                                <div class="text-center contact-info">
+                                    <button class="btn btn-contact">See Our Contact Info...</button>
+                                </div>
                             </div>
                         </div>
                     </div>
