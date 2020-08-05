@@ -286,7 +286,7 @@
                         <span class="col-sm-1"> : </span>
                         <div class="col-sm-7">
                             <div id="upload_container">
-                                <input type="file" class="form-control" id="profile_picture" accept="image/x-png,image/gif,image/jpeg" onchange="attachFile('profile_picture');">
+                                <input type="file" class="form-control" id="profile_picture" onchange="attachFile('profile_picture');">
                             </div>
                             <div class="image-preview hidden" id="preview_container">
                                 <button type="button" onclick="closeProfilePic();" class="close-button-profile-img"><i class="fa fa-close"></i></button>

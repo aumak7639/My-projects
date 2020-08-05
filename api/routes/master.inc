@@ -41,7 +41,6 @@ $app->post('/upload_file', function() use ($app) {
     echoRespnse(201, $res);
 });
 
-
 $app->post('/upload_fileimage', function() use ($app) {
 
     $image = $_POST['image'];
