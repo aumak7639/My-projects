@@ -872,3 +872,62 @@ button.createbtn i {
 .contact-info .btn-contact:focus {
     outline: none;
 }
+
+.login-section {
+    float: right;
+    padding-top: 25px; 
+    display: flex;
+}
+
+.login-section .profile-menu-img {
+    width: 50px;
+    overflow: hidden;
+    border-radius: 100%;
+    margin-left: 10px;
+    margin-top: -10px;
+    box-shadow: 0 0 6px 2px #e3e3e3;
+    cursor: pointer;
+}
+
+.login-section .profile-menu-img img {
+    width: 100%;
+}
+
+.login-dropdown {
+    display: none;
+    position: absolute;
+    background: #fff;
+    top: 70px;
+    z-index: 2;
+    box-shadow: 0 0 6px 0 #e3e3e3;
+}
+
+.login-dropdown ul {
+    display: block !important;
+    padding: 10px 10px !important;
+    margin: 0 !important;
+}
+
+.login-dropdown ul li {
+    padding: 10px 10px 0 !important;
+    border-bottom: 1px dashed #000;
+}
+
+.mobile-login-section {
+    padding: 20px;
+}
+
+.mobile-login-section .profile-mobile-menu-img {
+    width: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+
+.mobile-login-section .profile-mobile-menu-img img {
+    width: 100%;
+}
+
+.mobile-login-dropdown ul li {
+    border-bottom: 1px dashed #000;
+}

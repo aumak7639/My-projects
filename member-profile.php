@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once 'api/include/common.php';
+$obj = new Common();
+?>
 <!DOCTYPE html>
 <html>
     <?php include 'head.php'; ?>

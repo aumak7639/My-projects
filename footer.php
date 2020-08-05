@@ -43,6 +43,15 @@
             x.style.display = "block";
         }
     }
+    
+    function menu_login() {
+        var x = document.getElementById("login-section");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
 </script>
 <script>
     $(document).ready(function () {

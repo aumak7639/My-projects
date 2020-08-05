@@ -87,7 +87,7 @@ function loginUser() {
     $.ajax({
         type: "POST",
         url: 'api/v1/login_user',
-        data: {user_name: $('#user_name').val(), password: $('#password').val()},
+        data: {user_name: $('#user_name1').val(), password: $('#password1').val()},
         success: function (data) {
             $('.loader').removeClass('is-active');
             if (data.result.error === false) {
@@ -107,6 +107,29 @@ function loginUser() {
     return false;
 }
 
+function logoutUser(name) {
+    $('.loader').addClass('is-active');
+    $.ajax({
+        type: "POST",
+        url: 'api/v1/logout_user',
+        data: {},
+        success: function (data) {
+            $('.loader').removeClass('is-active');
+            if (data.result.error === false) {
+                swal('', 'Thanks ' + name + ' Your Account has been Sucessfully logout', 'info');
+                setTimeout(function () {
+                    window.location = 'index';
+                }, 3000);
+            } else {
+                swal('Information', data.result.message, 'info');
+            }
+        },
+        error: function (err) {
+            $('.loader').removeClass('is-active');
+            swal('Error', err.statusText, 'error');
+        }
+    });
+}
 
 function closeProfilePic() {
     $("#profile_picture").val('');

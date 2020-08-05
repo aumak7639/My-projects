@@ -131,13 +131,17 @@ $app->post('/login_user', function() use ($app) {
     $record = $obj->selectRow('*', 'users', 'user_name=\'' . $data['user_name'] . '\'');
     if (count($record) > 0) {
         if ($data['password'] == $record['password']) {
+            $_SESSION['user_id']=$record['user_id'];
             $res['error'] = false;
-            //$_SESSION['users_id'] = $record['users_id'];
-            //$res['message'] = 'Welcome ' . $record['name'];
-            $res['data'] = $record;
         } else {
             $res['message'] = 'Username or Password mismatch';
         }
     }
+    echoRespnse(201, $res);
+});
+
+$app->post('/logout_user', function() use ($app) {
+    $res = array('error' => false, 'message' => 'No user found in this User Name');
+    session_destroy();
     echoRespnse(201, $res);
 });

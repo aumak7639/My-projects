@@ -14,14 +14,14 @@
                         <label class="col-sm-4 col-form-label">User Name</label>
                         <span class="col-sm-1"> : </span>
                         <div class="col-sm-7">
-                            <input class="form-control" id="user_name" placeholder="" type="text"/>
+                            <input class="form-control" id="user_name1" placeholder="" type="text"/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Password</label>
                         <span class="col-sm-1"> : </span>
                         <div class="col-sm-7">
-                            <input class="form-control" id="password" placeholder="" type="password"/>
+                            <input class="form-control" id="password1" placeholder="" type="password"/>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">SUBMIT</button>
