@@ -9,36 +9,36 @@
 
         <!-- start banner Area -->
         <div id="carousel" class="carousel slide banner-area" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
+            <!--            <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        </ol>-->
 
             <div class="carousel-inner" role="listbox">
 
                 <div class="carousel-item active" style="background: url(img/banner/1.jpg)no-repeat;background-position: center;background-size: cover">
                     <div class="caption">
-                        <h1>Create and share your whatever</h1>
-                        <h2>Make it easy for you to do whatever this thing does.</h2>
+                        <h1>AADI SALE</h1>
+                        <h2>Don't Miss Out Upto 30% off</h2>
                     </div>
                 </div>
 
                 <div class="carousel-item" style="background: url(img/banner/2.jpg)no-repeat;background-position: center;background-size: cover">
                     <div class="caption">
-                        <h1>Something and share your whatever</h1>
-                        <h2>Else it easy for you to do whatever this thing does.</h2>
+                        <h1>FAMILY SHOPPING</h1>
+                        <h2>At Your Best</h2>
 
-                        <a class="big-button" href="" title="">Create Project</a>
+<!--                        <a class="big-button" href="" title="">Create Project</a>
                         <div class="clear"></div>
-                        <a class="view-demo" href="" title="">View Demo</a>
+                        <a class="view-demo" href="" title="">View Demo</a>-->
                     </div>
                 </div>
 
-                <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1476553986076-d59060d397e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1989&q=80'); background-size: cover;">
+                <div class="carousel-item" style="background: url(img/banner/3.jpg)no-repeat;background-position: center;background-size: cover">
                     <div class="caption">
-                        <h1>Create and share your whatever</h1>
-                        <h2>Make it easy for you to do whatever this thing does.</h2>
+                        <h1>KURTI COLLECTION</h1>
+                        <h2>Shop Now!</h2>
                     </div>
                 </div>
 
@@ -85,9 +85,9 @@
                     </div>
                 </div>					
                 <div class="row">
-                    <div class="col-lg-8 col-md-8 mb-10">
+                    <div class="col-lg-12 col-md-12 mb-10">
                         <div class="row category-bottom">
-                            <div class="col-lg-6 col-md-6 mb-30">
+                            <div class="col-lg-4 col-md-4 mb-30">
                                 <div class="content">
                                     <a href="#" target="_blank">
                                         <div class="content-overlay"></div>
@@ -98,7 +98,7 @@
                                     </a>
                                 </div>
                             </div>	
-                            <div class="col-lg-6 col-md-6 mb-30">
+                            <div class="col-lg-4 col-md-4 mb-30">
                                 <div class="content">
                                     <a href="#" target="_blank">
                                         <div class="content-overlay"></div>
@@ -109,36 +109,56 @@
                                     </a>
                                 </div>
                             </div>
-
-                            <div class="col-lg-12">
+                            <div class="col-lg-4 col-md-4 mb-30">
                                 <div class="content">
                                     <a href="#" target="_blank">
                                         <div class="content-overlay"></div>
-                                        <img class="content-image img-fluid d-block mx-auto" src="img/banner_vannam.jpg" alt="">
+                                        <img class="content-image img-fluid d-block mx-auto" src="img/fron1.webp" alt="">
                                         <div class="content-details fadeIn-bottom">
                                             <h3 class="content-title">Designer Sarees</h3>
                                         </div>
                                     </a>
                                 </div>
-
-
-
                             </div>	
-
                         </div>							
                     </div>
-                    <div class="col-lg-4 col-md-4 mb-10">
-                        <div class="content">
-                            <a href="#" target="_blank">
-                                <div class="content-overlay"></div>
-                                <img class="content-image img-fluid d-block mx-auto" src="img/fron1.webp" alt="">
-                                <div class="content-details fadeIn-bottom">
-                                    <h3 class="content-title">Designer Sarees</h3>
+                    <div class="col-lg-12 col-md-12 mb-10">
+                        <div class="row category-bottom">
+                            <div class="col-lg-4 col-md-4 mb-30">
+                                <div class="content">
+                                    <a href="#" target="_blank">
+                                        <div class="content-overlay"></div>
+                                        <img class="content-image img-fluid d-block mx-auto" src="img/banner-bottom-img/chudi-1.jpg" alt="">
+                                        <div class="content-details fadeIn-bottom">
+                                            <h3 class="content-title">Anarkali Suits</h3>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                            </div>
+                            <div class="col-lg-4 col-md-4 mb-30">
+                                <div class="content">
+                                    <a href="#" target="_blank">
+                                        <div class="content-overlay"></div>
+                                        <img class="content-image img-fluid d-block mx-auto" src="img/banner-bottom-img/chudi-3.jpg" alt="">
+                                        <div class="content-details fadeIn-bottom">
+                                            <h3 class="content-title">Salwar Kameez</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 mb-30">
+                                <div class="content">
+                                    <a href="#" target="_blank">
+                                        <div class="content-overlay"></div>
+                                        <img class="content-image img-fluid d-block mx-auto" src="img/banner-bottom-img/chudi-4.jpg" alt="">
+                                        <div class="content-details fadeIn-bottom">
+                                            <h3 class="content-title">Party Wear</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>	
-
+                    </div>
                 </div>
             </div>	
         </section>
@@ -235,7 +255,7 @@
         <!-- End men-product Area -->
 
         <!-- Start women-product Area -->
-        <section class="women-product-area section-gap" id="women">
+<!--        <section class="women-product-area section-gap" id="women">
             <div class="container">
                 <div class="countdown-content pb-40">
                     <div class="title text-center">
@@ -318,33 +338,61 @@
                     </div>																			
                 </div>
             </div>	
-        </section>
+        </section>-->
         <!-- End women-product Area -->
 
         <!-- Start Count Down Area -->
 
 
         <!-- Start brand Area -->
-        <section class="brand-area pb-100">
+        <section class="brand-area pb-100 section-gap">
+            <!--            <div class="container">
+                            <div class="row logo-wrap">
+                            </div>	
+                        </div>-->
             <div class="container">
-                <div class="row logo-wrap">
-                    <a class="col single-img" href="#">
-                        <img class="d-block mx-auto" src="img/logo/magilzi.jpg" alt="">
-                    </a>
-                    <a class="col single-img" href="#">
-                        <img class="d-block mx-auto" src="img/logo/mrp market copy.jpg" alt="">
-                    </a>
-                    <a class="col single-img" href="#">
-                        <img class="d-block mx-auto" src="img/logo/mrpdigital copy.jpg" alt="">
-                    </a>
-                    <a class="col single-img" href="#">
-                        <img class="d-block mx-auto" src="img/logo/mrpvannam.jpg" alt="">
-                    </a>
-                    <a class="col single-img" href="#">
-                        <img class="d-block mx-auto" src="img/logo/mag.jpg" alt="">
-                    </a>
-                </div>	
-            </div>	
+                <div class="title text-center">
+                    <h1 class="mb-10">Our  Partners</h1>
+                    <!--<p>Who are in extremely love with eco friendly system.</p>-->
+                </div>
+                <section class="customer-logos slider logo-wrap">
+                    <div class="slide">
+                        <a class="col single-img" href="#">
+                            <img class="d-block mx-auto" src="img/logo/magilzi.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="slide">
+                        <a class="col single-img" href="#">
+                            <img class="d-block mx-auto" src="img/logo/magilzi.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="slide">
+                        <a class="col single-img" href="#">
+                            <img class="d-block mx-auto" src="img/logo/mrp market copy.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="slide">
+                        <a class="col single-img" href="#">
+                            <img class="d-block mx-auto" src="img/logo/mrpdigital copy.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="slide">
+                        <a class="col single-img" href="#">
+                            <img class="d-block mx-auto" src="img/logo/mrpvannam.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="slide">
+                        <a class="col single-img" href="#">
+                            <img class="d-block mx-auto" src="img/logo/mrpvannam.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="slide">
+                        <a class="col single-img" href="#">
+                            <img class="d-block mx-auto" src="img/logo/mag.jpg" alt="">
+                        </a>
+                    </div>
+                </section>
+            </div>
         </section>
         <!-- End brand Area -->
 
@@ -354,6 +402,7 @@
 
         <script src="js/vendor/jquery-2.2.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/jquery.ajaxchimp.min.js"></script>
         <script src="js/jquery.nice-select.min.js"></script>
@@ -362,6 +411,30 @@
         <script src="js/jquery.magnific-popup.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>			
         <script src="js/main.js"></script>	
+        <script>
+            $(document).ready(function () {
+                $('.customer-logos').slick({
+                    slidesToShow: 6,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 1500,
+                    arrows: false,
+                    dots: false,
+                    pauseOnHover: false,
+                    responsive: [{
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: 4
+                            }
+                        }, {
+                            breakpoint: 520,
+                            settings: {
+                                slidesToShow: 3
+                            }
+                        }]
+                });
+            });
+        </script>	
 
     </body>
 </html>
