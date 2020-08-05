@@ -107,7 +107,7 @@ function loginUser() {
     return false;
 }
 
-function logoutUser(name) {
+function logoutUser() {
     $('.loader').addClass('is-active');
     $.ajax({
         type: "POST",
@@ -116,7 +116,7 @@ function logoutUser(name) {
         success: function (data) {
             $('.loader').removeClass('is-active');
             if (data.result.error === false) {
-                swal('', 'Thanks ' + name + ' Your Account has been Sucessfully logout', 'info');
+                swal('', 'Your Account has been Sucessfully logout', 'info');
                 setTimeout(function () {
                     window.location = 'index';
                 }, 3000);

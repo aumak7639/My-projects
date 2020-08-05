@@ -33,11 +33,16 @@ class Common {
     }
 
     public function updateRecordWithWhere($fields, $table, $where) {
-        $records = array();
+        $records = [];
         foreach ($fields as $key => $val) {
             array_push($records, $key . ' = \'' . mysqli_real_escape_string($this->conn, $val) . '\'');
         }
         $this->conn->query('UPDATE `' . $table . '` SET ' . implode(',', $records) . ' WHERE ' . $where);
+        return $this->conn->affected_rows;
+    }
+
+    public function updateRecord($fields, $table, $where) {
+        $this->conn->query('UPDATE `' . $table . '` SET ' . $fields . ' WHERE ' . $where);
         return $this->conn->affected_rows;
     }
 
