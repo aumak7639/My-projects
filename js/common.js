@@ -10,7 +10,7 @@ function attachFile(id) {
         form.append('file', $('#' + id)[0].files[0]);
         $.ajax({
             type: "POST",
-            url: 'api/v1/upload_file',
+            url: 'api/v1/index.php/upload_file',
             processData: false,
             contentType: false,
             data: form,
@@ -43,7 +43,7 @@ function registerMember() {
     $('.loader').addClass('is-active');
     $.ajax({
         type: "POST",
-        url: 'api/v1/insert_user',
+        url: 'api/v1/index.php/insert_user',
         data: {name: $('#name').val(), phone_no: $('#phone_no').val(), profile_picture: avatar, gender: $('#gender').val(), age: $('#age').val(), date_of_birth: $('#date_of_birth').val(), education: $('#education').val(), occupation: $('#occupation').val(), marital_status: $('#marital_status').val(), income: $('#income').val(), height: $('#height').val(), weight: $('#weight').val(), religian: $('#religian').val(), caste: $('#caste').val(), location: $('#location').val(), aboutme: $('#aboutme').val(), user_name: $('#user_name').val(), password: $('#password').val()},
         success: function (data) {
             $('.loader').removeClass('is-active');
@@ -86,7 +86,7 @@ function loginUser() {
     $('.loader').addClass('is-active');
     $.ajax({
         type: "POST",
-        url: 'api/v1/login_user',
+        url: 'api/v1/index.php/login_user',
         data: {user_name: $('#user_name1').val(), password: $('#password1').val()},
         success: function (data) {
             $('.loader').removeClass('is-active');
@@ -111,7 +111,7 @@ function logoutUser() {
     $('.loader').addClass('is-active');
     $.ajax({
         type: "POST",
-        url: 'api/v1/logout_user',
+        url: 'api/v1/index.php/logout_user',
         data: {},
         success: function (data) {
             $('.loader').removeClass('is-active');

@@ -112,6 +112,7 @@ $app->post('/insert_user', function() use ($app) {
         }
         $record = $com->insertRecord(array('name' => $data['name'], 'phone_no' => $data['phone_no'], 'image_path' => $data['profile_picture'], 'gender' => $data['gender'], 'age' => $data['age'], 'date_of_birth' => $data['date_of_birth'], 'education' => $data['education'], 'occupation' => $data['occupation'], 'marital_status' => $data['marital_status'], 'income' => $data['income'], 'height' => $data['height'], 'weight' => $data['weight'], 'religian' => $data['religian'], 'caste' => $data['caste'], 'location' => $data['location'], 'aboutme' => $data['aboutme'], 'user_name' => $data['user_name'], 'password' => $data['password']), 'users');
         if ($record > 0) {
+            $_SESSION['user_id']=$record;
             $res['error'] = false;
             $res['message'] = 'Record inserted successfully';
         }
