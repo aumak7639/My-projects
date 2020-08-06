@@ -35,7 +35,7 @@ $user = $obj->selectAll('*', 'users', 'user_id > 0');
                                                     <td> : </td>
                                                     <td> <?php echo $row['age']; ?></td>
                                                 </tr>
-                                                <tr>
+<!--                                                <tr>
                                                     <th>Height</th>
                                                     <td> : </td>
                                                     <td> <?php echo $row['height']; ?></td>
@@ -49,9 +49,9 @@ $user = $obj->selectAll('*', 'users', 'user_id > 0');
                                                     <th>Education</th>
                                                     <td> : </td>
                                                     <td> <?php echo $row['education']; ?></td>
-                                                </tr>
+                                                </tr>-->
                                             </table>
-                                            <a href='user-profile?lan=<?php echo $row['user_id']; ?>' class="btn profile-btn">View Full Profile</a>
+                                            <a href='user-profile.php?lan=<?php echo $row['user_id']; ?>' class="btn profile-btn">View Full Profile</a>
                                         </div>
                                     </div>
                                     <div class="member-content-footer">

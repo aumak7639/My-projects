@@ -68,7 +68,7 @@ function registerMember() {
                 $('#password').val('');
                 swal("Thanks for Registration!", "Your Account Has been Created...", "success");
                 setTimeout(function () {
-                    window.location = 'profiles';
+                    window.location = 'profiles.php';
                 }, 2000);
             } else {
                 swal("Oops!", data.result.message, "info");
@@ -93,7 +93,7 @@ function loginUser() {
             if (data.result.error === false) {
                 swal('Logged In', 'Your Account Has Been Successfully Logged In', 'success');
                 setTimeout(function () {
-                    window.location = 'profiles';
+                    window.location = 'profiles.php';
                 }, 3000);
             } else {
                 swal('Information', data.result.message, 'info');
@@ -118,7 +118,7 @@ function logoutUser() {
             if (data.result.error === false) {
                 swal('', 'Your Account has been Sucessfully logout', 'info');
                 setTimeout(function () {
-                    window.location = 'index';
+                    window.location = 'index.php';
                 }, 3000);
             } else {
                 swal('Information', data.result.message, 'info');

@@ -8,7 +8,7 @@ if (isset($_SESSION['user_id'])) {
 <header>
     <div class="header-section">
         <div class="logo">
-            <a href='index'><img src="img/logo-1.png" /></a>
+            <a href='index.php'><img src="img/logo-1.png" /></a>
         </div>
         <div class="full-menu">
             <?php
@@ -29,8 +29,8 @@ if (isset($_SESSION['user_id'])) {
                     </div>
                     <div id="login-section" class="login-dropdown">
                         <ul>
-                            <li><a href="profiles"><i class="fa fa-address-card"></i> Profiles</a></li>
-                            <li><a href="member-profile"><i class="fa fa-user"></i> My Account</a></li>
+                            <li><a href="profiles.php"><i class="fa fa-address-card"></i> Profiles</a></li>
+                            <li><a href="member-profile.php"><i class="fa fa-user"></i> My Account</a></li>
                             <li><a href="#" onclick="logoutUser();"><i class="fa fa-sign-out"></i> Logout</a></li>
                         </ul>
                     </div>
@@ -59,8 +59,8 @@ if (isset($_SESSION['user_id'])) {
                     </div>
                     <div class="mobile-login-dropdown">
                         <ul>
-                            <li><a href="profiles"><i class="fa fa-address-card"></i> Profiles</a></li>
-                            <li><a href="member-profile"><i class="fa fa-user"></i> My Account</a></li>
+                            <li><a href="profiles.php"><i class="fa fa-address-card"></i> Profiles</a></li>
+                            <li><a href="member-profile.php"><i class="fa fa-user"></i> My Account</a></li>
                             <li><a href="#" onclick="logoutUser('<?php echo $member['user_name']; ?>');"><i class="fa fa-sign-out"></i> Logout</a></li>
                         </ul>
                     </div>
