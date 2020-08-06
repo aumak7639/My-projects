@@ -18,13 +18,6 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Mobile No</label>
-                        <span class="col-sm-1"> : </span>
-                        <div class="col-sm-7">
-                            <input type="mobile" class="form-control" id="phone_no" maxlength="10" placeholder="Parent Number">
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Gender</label>
                         <span class="col-sm-1"> : </span>
                         <div class="col-sm-7">
@@ -264,6 +257,13 @@
                         <span class="col-sm-1"> : </span>
                         <div class="col-sm-7">
                             <textarea class="form-control" id="aboutme" placeholder="" rows="3" type="text"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Mobile No</label>
+                        <span class="col-sm-1"> : </span>
+                        <div class="col-sm-7">
+                            <input type="mobile" class="form-control" id="phone_no" maxlength="10" placeholder="Parent Number">
                         </div>
                     </div>
                     <h4>Login Detail:</h4>
