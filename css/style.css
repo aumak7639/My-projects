@@ -931,3 +931,37 @@ button.createbtn i {
 .mobile-login-dropdown ul li {
     border-bottom: 1px dashed #000;
 }
+
+.tab-content > .active {
+    width: 100%;
+    padding: 20px;
+}
+
+.basic-info {
+    width: 100%;
+    padding: 20px;
+}
+
+.basic-info table {
+    width: 100%;
+    margin: 0;
+    padding: 0 20px;
+}
+
+.basic-info table th, .basic-info table td {
+    margin: 10px;
+    padding: 10px;
+}
+
+.picture-section {
+    padding: 20px;
+}
+
+.picture-section img {
+    /*    padding: 10px;*/
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background: #fff;
+    box-shadow: 0 0 6px 2px #e3e3e3;
+}

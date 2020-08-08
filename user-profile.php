@@ -1,8 +1,12 @@
 <?php
 session_start();
+if (!isset($_GET['uid'])) {
+    header('Location: index.php');
+}
+$uid = $_GET['uid'];
 require_once 'api/include/common.php';
 $obj = new Common();
-$user = $obj->selectAll('*', 'users', 'user_id > 0');
+$user = $obj->selectRow('*', 'users', 'user_id = ' . $uid);
 ?>
 <!DOCTYPE html>
 <html>
@@ -53,47 +57,67 @@ $user = $obj->selectAll('*', 'users', 'user_id > 0');
                                     <tr>
                                         <th>Name</th>
                                         <th>:</th>
-                                        <td>Name Comes Here</td>
+                                        <td><?php echo $user['name'];?></td>
                                     </tr>
                                     <tr>
                                         <th>Age</th>
                                         <th>:</th>
-                                        <td>Age</td>
+                                        <td><?php echo $user['age'];?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Date of Birth</th>
+                                        <th>:</th>
+                                        <td><?php echo $user['date_of_birth'];?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Gender</th>
+                                        <th>:</th>
+                                        <td><?php echo $user['gender'];?></td>
                                     </tr>
                                     <tr>
                                         <th>Height</th>
                                         <th>:</th>
-                                        <td>Height</td>
+                                        <td><?php echo $user['height'];?></td>
                                     </tr>
                                     <tr>
                                         <th>Weight</th>
                                         <th>:</th>
-                                        <td>weight</td>
+                                        <td><?php echo $user['weight'];?></td>
                                     </tr>
                                     <tr>
                                         <th>Education</th>
                                         <th>:</th>
-                                        <td>Education</td>
+                                        <td><?php echo $user['education'];?></td>
                                     </tr>
                                     <tr>
                                         <th>Occupation</th>
                                         <th>:</th>
-                                        <td>Occupation</td>
+                                        <td><?php echo $user['occupation'];?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Income</th>
+                                        <th>:</th>
+                                        <td><?php echo $user['income'];?></td>
                                     </tr>
                                     <tr>
                                         <th>Caste</th>
                                         <th>:</th>
-                                        <td>Caste</td>
+                                        <td><?php echo $user['caste'];?></td>
                                     </tr>
                                     <tr>
                                         <th>Religion</th>
                                         <th>:</th>
-                                        <td>Religion</td>
+                                        <td><?php echo $user['religian'];?></td>
                                     </tr>
                                     <tr>
                                         <th>Marital Status</th>
                                         <th>:</th>
-                                        <td>Religion</td>
+                                        <td><?php echo $user['marital_status'];?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Location</th>
+                                        <th>:</th>
+                                        <td><?php echo $user['location'];?></td>
                                     </tr>
                                 </table>
                                 <div class="text-center contact-info">

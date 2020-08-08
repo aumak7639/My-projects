@@ -2,6 +2,9 @@
 session_start();
 require_once 'api/include/common.php';
 $obj = new Common();
+if (isset($_SESSION['user_id'])) {
+    $myprofile = $obj->selectRow('*', 'users', 'user_id=' . $_SESSION['user_id']);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,17 +18,17 @@ $obj = new Common();
                         <img src="img/female_user.png" width="200" alt="Profile Image">
                     </div>
                     <div class="profile-nav-info">
-                        <h3 class="user-name">Bright Code</h3>
+                        <h3 class="user-name"><?php echo $myprofile['name']; ?></h3>
                         <div class="address">
-                            <p id="state" class="state">New York,</p>
-                            <span id="country" class="country">USA.</span>
+                            <p id="state" class="state"><?php echo $myprofile['address']; ?></p>
+                            <span id="country" class="country"><?php echo $myprofile['location']; ?></span>
                         </div>
 
                     </div>
                     <div class="profile-option">
                         <div class="notification">
-                            <i class="fa fa-bell"></i>
-                            <span class="alert-message">3</span>
+                            <i class="fa fa-pencil"></i>
+<!--                            <span class="alert-message">3</span>-->
                         </div>
                     </div>
                 </div>
@@ -33,47 +36,132 @@ $obj = new Common();
                 <div class="main-bd">
                     <div class="left-side">
                         <div class="profile-side">
-                            <p class="mobile-no"><i class="fa fa-phone"></i> +23470xxxxx700</p>
-                            <p class="user-mail"><i class="fa fa-envelope"></i> Brightisaac80@gmail.com</p>
+                            <p class="mobile-no"><i class="fa fa-phone"></i> <?php echo $myprofile['phone_no']; ?></p>
+<!--                            <p class="user-mail"><i class="fa fa-envelope"></i> <?php echo $myprofile['email']; ?></p>-->
                             <div class="user-bio">
                                 <h3>Bio</h3>
                                 <p class="bio">
-                                    Lorem ipsum dolor sit amet, hello how consectetur adipisicing elit. Sint consectetur provident magni yohoho consequuntur, voluptatibus ghdfff exercitationem at quis similique. Optio, amet!
+                                    <?php echo $myprofile['aboutme']; ?>
                                 </p>
                             </div>
                         </div>
 
                     </div>
                     <div class="right-side">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#home">Your Information</a></li>
+                            <li><a data-toggle="tab" href="#menu1">Your Pictures</a></li>
+                            <!--                            <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+                                                        <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>-->
+                        </ul>
 
-                        <div class="nav">
-                            <ul>
-                                <li onclick="tabs(0)" class="user-post active">Basic Info</li>
-                                <li onclick="tabs(1)" class="user-review">Contact Info</li>
-                                <li onclick="tabs(2)" class="user-setting"> Personal Details</li>
-                            </ul>
-                        </div>
-                        <div class="profile-body">
-                            <div class="profile-posts tab">
-                                <h1>Basic Info</h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa quia sunt itaque ut libero cupiditate ullam qui velit laborum placeat doloribus, non tempore nisi ratione error rem minima ducimus. Accusamus adipisci quasi at itaque repellat sed
-                                    magni eius magnam repellendus. Quidem inventore repudiandae sunt odit. Aliquid facilis fugiat earum ex officia eveniet, nisi, similique ad ullam repudiandae molestias aspernatur qui autem, nam? Cupiditate ut quasi iste, eos perspiciatis maiores
-                                    molestiae.</p>
-                            </div>
-                            <div class="profile-reviews tab">
-                                <h1>Contact Info</h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam pariatur officia, aperiam quidem quasi, tenetur molestiae. Architecto mollitia laborum possimus iste esse. Perferendis tempora consectetur, quae qui nihil voluptas. Maiores debitis
-                                    repellendus excepturi quisquam temporibus quam nobis voluptatem, reiciendis distinctio deserunt vitae! Maxime provident, distinctio animi commodi nemo, eveniet fugit porro quos nesciunt quidem a, corporis nisi dolorum minus sit eaque error
-                                    sequi ullam. Quidem ut fugiat, praesentium velit aliquam!</p>
-                            </div>
-                            <div class="profile-settings tab">
-                                <div class="account-setting">
-                                    <h1>Personal Details</h1>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit omnis eaque, expedita nostrum, facere libero provident laudantium. Quis, hic doloribus! Laboriosam nemo tempora praesentium. Culpa quo velit omnis, debitis maxime, sequi
-                                        animi dolores commodi odio placeat, magnam, cupiditate facilis impedit veniam? Soluta aliquam excepturi illum natus adipisci ipsum quo, voluptatem, nemo, commodi, molestiae doloribus magni et. Cum, saepe enim quam voluptatum vel debitis
-                                        nihil, recusandae, omnis officiis tenetur, ullam rerum.</p>
+                        <div class="tab-content">
+                            <div id="home" class="tab-pane fade in active">
+                                <div class="basic-info">
+                                    <table>
+                                        <tr>
+                                            <th>Your Name</th>
+                                            <th> : </th>
+                                            <td><?php echo $myprofile['name']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Mobile Number</th>
+                                            <th> : </th>
+                                            <td><?php echo $myprofile['phone_no']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Age</th>
+                                            <th> : </th>
+                                            <td><?php echo $myprofile['age']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Date of Birth</th>
+                                            <th> : </th>
+                                            <td><?php echo $myprofile['date_of_birth']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Gender</th>
+                                            <th> : </th>
+                                            <td><?php echo $myprofile['gender']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Marital Status</th>
+                                            <th> : </th>
+                                            <td><?php echo $myprofile['marital_status']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Education</th>
+                                            <th> : </th>
+                                            <td><?php echo $myprofile['education']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Occupation</th>
+                                            <th> : </th>
+                                            <td><?php echo $myprofile['occupation']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Income</th>
+                                            <th> : </th>
+                                            <td><?php echo $myprofile['income']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Height</th>
+                                            <th> : </th>
+                                            <td><?php echo $myprofile['height']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Weight</th>
+                                            <th> : </th>
+                                            <td><?php echo $myprofile['weight']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Religion</th>
+                                            <th> : </th>
+                                            <td><?php echo $myprofile['religian']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Caste</th>
+                                            <th> : </th>
+                                            <td><?php echo $myprofile['caste']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Location</th>
+                                            <th> : </th>
+                                            <td><?php echo $myprofile['location']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>User Name</th>
+                                            <th> : </th>
+                                            <td><?php echo $myprofile['user_name']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Change Password</th>
+                                            <th> : </th>
+                                            <td><button class="btn btn-primary">Change Your Password</button></td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
+                            <div id="menu1" class="tab-pane fade">
+                                <div class="text-right" style="width: 100%;">
+                                    <button type="file" class="btn btn-success">Upload Photos</button>
+                                </div>
+                                <div class="picture-section">
+                                    <img src="img/dummy-profile.jpg"/>
+                                    <img src="img/dummy-profile.jpg"/>
+                                    <img src="img/dummy-profile.jpg"/>
+                                    <img src="img/dummy-profile.jpg"/>
+                                    <img src="img/dummy-profile.jpg"/>
+                                </div>
+                            </div>
+                            <!--                            <div id="menu2" class="tab-pane fade">
+                                                            <h3>Menu 2</h3>
+                                                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                                                        </div>
+                                                        <div id="menu3" class="tab-pane fade">
+                                                            <h3>Menu 3</h3>
+                                                            <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                                                        </div>-->
                         </div>
                     </div>
                 </div>
@@ -81,49 +169,6 @@ $obj = new Common();
         </section>
         <?php include 'footer.php'; ?>
         <script>
-            $(".nav ul li").click(function () {
-                $(this)
-                        .addClass("active")
-                        .siblings()
-                        .removeClass("active");
-            });
-
-            const tabBtn = document.querySelectorAll(".nav ul li");
-            const tab = document.querySelectorAll(".tab");
-
-            function tabs(panelIndex) {
-                tab.forEach(function (node) {
-                    node.style.display = "none";
-                });
-                tab[panelIndex].style.display = "block";
-            }
-            tabs(0);
-
-            let bio = document.querySelector(".bio");
-            const bioMore = document.querySelector("#see-more-bio");
-            const bioLength = bio.innerText.length;
-
-            function bioText() {
-                bio.oldText = bio.innerText;
-
-                bio.innerText = bio.innerText.substring(0, 100) + "...";
-                bio.innerHTML += `<span onclick='addLength()' id='see-more-bio'>See More</span>`;
-            }
-//        console.log(bio.innerText)
-
-            bioText();
-
-            function addLength() {
-                bio.innerText = bio.oldText;
-                bio.innerHTML +=
-                        "&nbsp;" + `<span onclick='bioText()' id='see-less-bio'>See Less</span>`;
-                document.getElementById("see-less-bio").addEventListener("click", () => {
-                    document.getElementById("see-less-bio").style.display = "none";
-                });
-            }
-            if (document.querySelector(".alert-message").innerText > 9) {
-                document.querySelector(".alert-message").style.fontSize = ".7rem";
-            }
 
         </script>
     </body>

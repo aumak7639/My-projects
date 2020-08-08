@@ -51,7 +51,7 @@ $user = $obj->selectAll('*', 'users', 'user_id > 0');
                                                     <td> <?php echo $row['education']; ?></td>
                                                 </tr>-->
                                             </table>
-                                            <a href='user-profile.php?lan=<?php echo $row['user_id']; ?>' class="btn profile-btn">View Full Profile</a>
+                                            <a href='user-profile.php?uid=<?php echo $row['user_id']; ?>' class="btn profile-btn">View Full Profile</a>
                                         </div>
                                     </div>
                                     <div class="member-content-footer">

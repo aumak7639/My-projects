@@ -14,6 +14,23 @@
 <script src="js/sweetalert.min.js" type="text/javascript"></script>
 <script src="js/common.js" type="text/javascript"></script>
 <script>
+
+    // With jQuery
+    $(document).on({
+        "contextmenu": function (e) {
+            console.log("ctx menu button:", e.which);
+
+            // Stop the context menu
+            e.preventDefault();
+        },
+        "mousedown": function (e) {
+            console.log("normal mouse down:", e.which);
+        },
+        "mouseup": function (e) {
+            console.log("normal mouse up:", e.which);
+        }
+    });
+
     $('.carousel').carousel({
         interval: 2000
     });
@@ -43,7 +60,7 @@
             x.style.display = "block";
         }
     }
-    
+
     function menu_login() {
         var x = document.getElementById("login-section");
         if (x.style.display === "block") {
