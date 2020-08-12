@@ -965,3 +965,7 @@ button.createbtn i {
     background: #fff;
     box-shadow: 0 0 6px 2px #e3e3e3;
 }
+
+.razorpay-payment-button {
+    display: none;
+}

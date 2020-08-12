@@ -57,72 +57,77 @@ $user = $obj->selectRow('*', 'users', 'user_id = ' . $uid);
                                     <tr>
                                         <th>Name</th>
                                         <th>:</th>
-                                        <td><?php echo $user['name'];?></td>
+                                        <td><?php echo $user['name']; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Age</th>
                                         <th>:</th>
-                                        <td><?php echo $user['age'];?></td>
+                                        <td><?php echo $user['age']; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Date of Birth</th>
                                         <th>:</th>
-                                        <td><?php echo $user['date_of_birth'];?></td>
+                                        <td><?php echo $user['date_of_birth']; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Gender</th>
                                         <th>:</th>
-                                        <td><?php echo $user['gender'];?></td>
+                                        <td><?php echo $user['gender']; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Height</th>
                                         <th>:</th>
-                                        <td><?php echo $user['height'];?></td>
+                                        <td><?php echo $user['height']; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Weight</th>
                                         <th>:</th>
-                                        <td><?php echo $user['weight'];?></td>
+                                        <td><?php echo $user['weight']; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Education</th>
                                         <th>:</th>
-                                        <td><?php echo $user['education'];?></td>
+                                        <td><?php echo $user['education']; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Occupation</th>
                                         <th>:</th>
-                                        <td><?php echo $user['occupation'];?></td>
+                                        <td><?php echo $user['occupation']; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Income</th>
                                         <th>:</th>
-                                        <td><?php echo $user['income'];?></td>
+                                        <td><?php echo $user['income']; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Caste</th>
                                         <th>:</th>
-                                        <td><?php echo $user['caste'];?></td>
+                                        <td><?php echo $user['caste']; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Religion</th>
                                         <th>:</th>
-                                        <td><?php echo $user['religian'];?></td>
+                                        <td><?php echo $user['religian']; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Marital Status</th>
                                         <th>:</th>
-                                        <td><?php echo $user['marital_status'];?></td>
+                                        <td><?php echo $user['marital_status']; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Location</th>
                                         <th>:</th>
-                                        <td><?php echo $user['location'];?></td>
+                                        <td><?php echo $user['location']; ?></td>
                                     </tr>
                                 </table>
-                                <div class="text-center contact-info">
-                                    <button class="btn btn-contact">See Our Contact Info...</button>
-                                </div>
+
+                                <form action="https://www.example.com/payment/success/" method="POST">
+                                    <div class="text-center contact-info">
+                                        <button class="btn btn-contact">See Our Contact Info...</button>
+                                        <!--<input type="hidden" custom="Hidden Element" name="hidden">-->
+                                    </div>
+
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -130,5 +135,17 @@ $user = $obj->selectRow('*', 'users', 'user_id = ' . $uid);
             </div>
         </div>
         <?php include 'footer.php'; ?>
-    </body>
+        <script
+            src="https://checkout.razorpay.com/v1/checkout.js"
+            data-key="rzp_test_4S1JzqVDtmIyws"
+            data-amount="2000"
+            data-currency="INR"
+            data-name="Iniyaa Matrimony"
+            data-description="Find your Perfect Match"
+            data-image="http://www.iniyaamatrimony.com/beta/img/logo.png"
+            data-prefill.name="Iniya"
+            data-theme.color="#662d91"
+        ></script>
+    </form>
+</body>
 </html>
