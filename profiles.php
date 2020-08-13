@@ -9,6 +9,13 @@ $user = $obj->selectAll('*', 'users', 'user_id > 0');
     <?php include 'head.php'; ?>
     <body>
         <?php include 'menu.php'; ?>
+        <div class="sub-banner-section">
+            <div class="container">
+                <div class="sub-banner-content">
+                    <h1>Profile</h1>
+                </div>
+            </div>
+        </div>
         <section class="">
             <div class="container">
                 <div class="row">

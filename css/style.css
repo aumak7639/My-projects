@@ -817,17 +817,21 @@ button.createbtn i {
 } 
 
 #gallery .previous{ 
-    display:inline;
-    float:left;
-    margin-left:80px;
-    text-decoration:none;
+    display: inline;
+    float: left;
+    position: absolute;
+    text-decoration: none;
+    top: 20%;
+    left: 0;
 } 
 
 #gallery .next{ 
-    display:inline;
-    float:right;
-    margin-right:80px;
-    text-decoration:none;
+    display: inline;
+    float: left;
+    position: absolute;
+    text-decoration: none;
+    top: 20%;
+    right: 0;
 }
 
 /* End Css */
@@ -856,17 +860,17 @@ button.createbtn i {
 }
 
 .contact-info .btn-contact {
-    background: #f6bc00;
+    background: #662d91;
     color: #fff;
     transition: all .5s;
-    border: 1px solid #f6bc00;
+    border: 1px solid #662d91;
 }
 
 .contact-info .btn-contact:hover {
     background: #fff;
-    color: #f6bc00;
+    color: #662d91;
     transition: all .5s;
-    border: 1px solid #f6bc00;
+    border: 1px solid #662d91;
 }
 
 .contact-info .btn-contact:focus {
@@ -968,4 +972,10 @@ button.createbtn i {
 
 .razorpay-payment-button {
     display: none;
+}
+
+.sub-banner-section {
+    background: url("../img/banner-2.jpg")no-repeat 50% 50%;
+    background-size: cover;
+    background-position: center;
 }
