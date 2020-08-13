@@ -30,7 +30,7 @@ header {
 }
 
 .header-section .full-menu ul li {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     text-transform: uppercase;
     padding: 0 15px;
@@ -125,7 +125,7 @@ footer {
     padding: 0 20px;
     list-style: none;
     text-align: center;
-    width: 24%;
+    width: 45%;
     margin: 0 auto 10px;
 }
 
@@ -371,25 +371,28 @@ blink {
 .member-detail {
     background: #fff;
     box-shadow: 0 0 6px 2px #e3e3e3;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 10px;
+    /* border-radius: 10px; */
     margin-bottom: 20px;
+    border: 1px solid #662d91;
 }
 
-.member-section {
+/*.member-section {
     display: flex;
-}
+}*/
 
 .member-img {
-    width: 200px;
+    width: 100%;
+    border-bottom: 1px solid #662d91;
 }
 
 .member-img img {
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .member-info {
-    padding-left: 20px;
+    /*padding-left: 20px;*/
     width: 100%;
     position: relative;
 }
@@ -403,14 +406,20 @@ blink {
     width: 100%;
 }
 
+.member-info h4 {
+    font-size: 22px;
+}
+
+.member-info p {
+    font-size: 18px;
+}
+
 .profile-btn {
     background: #662d91;
     border: 1px solid #662d91;
     color: #fff;
-    position: absolute;
-    right: 0;
-    bottom: 0;
     transition: all 0.3s;
+    margin: 0px 0 0;
 }
 
 .profile-btn:hover {
@@ -420,7 +429,6 @@ blink {
 }
 
 .member-content-footer {
-    border-top: 1px solid #662d91;
     padding-top: 10px;
     margin-top: 10px;
 }
@@ -459,6 +467,7 @@ blink {
 
 .side-box .side-header h3 {
     margin: 5px 0;
+    color: #662d91;
 }
 
 .side-box .side-content {
@@ -474,6 +483,15 @@ blink {
 .side-box .side-content ul li {
     font-size: 18px;
     margin-bottom: 10px;
+    color: #662d91;
+}
+
+.side-box .side-content ul li i {
+    color: #662d91;
+}
+
+.side-box .side-content p {
+    font-size: 18px;
 }
 
 
@@ -617,9 +635,9 @@ blink {
     color: #e40046;
 }
 
-.profile-btn {
+/*.profile-btn {
     display: flex;
-}
+}*/
 
 button.chatbtn,
 button.createbtn {
@@ -834,6 +852,10 @@ button.createbtn i {
     right: 0;
 }
 
+#gallery .previous i, #gallery .next i {
+    font-size: 20px;
+}
+
 /* End Css */
 
 .user-profile {
@@ -887,7 +909,7 @@ button.createbtn i {
     width: 50px;
     overflow: hidden;
     border-radius: 100%;
-    margin-left: 10px;
+    margin-left: 20px;
     margin-top: -10px;
     box-shadow: 0 0 6px 2px #e3e3e3;
     cursor: pointer;
@@ -978,4 +1000,5 @@ button.createbtn i {
     background: url("../img/banner-2.jpg")no-repeat 50% 50%;
     background-size: cover;
     background-position: center;
+    padding: 15% 0px;
 }

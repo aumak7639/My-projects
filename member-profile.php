@@ -11,6 +11,7 @@ if (isset($_SESSION['user_id'])) {
     <?php include 'head.php'; ?>
     <body>
         <?php include 'menu.php'; ?>
+        <div class="sub-banner-section"></div>
         <section class="member-profile-section">
             <div class="container">
                 <div class="profile-header">
@@ -134,12 +135,9 @@ if (isset($_SESSION['user_id'])) {
                                             <th> : </th>
                                             <td><?php echo $myprofile['user_name']; ?></td>
                                         </tr>
-                                        <tr>
-                                            <th>Change Password</th>
-                                            <th> : </th>
-                                            <td><button class="btn btn-primary">Change Your Password</button></td>
-                                        </tr>
                                     </table>
+                                    <br/>
+                                    <center><button class="btn btn-primary">Change Your Password</button></center>
                                 </div>
                             </div>
                             <div id="menu1" class="tab-pane fade">

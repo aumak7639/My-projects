@@ -49,6 +49,24 @@
         right: 0;
         color: #662d91;
     }
+    .footer-menu {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 0;
+    }
+    .footer-menu li {
+        border: none;
+    }
+    .register-btn-section {
+        top: 65%;
+    }
+    .tab-content > .active {
+        padding: 0;
+    }
+    .basic-info {
+        padding: 0;
+    }
 }
 @media screen and (min-width: 799px) {
 

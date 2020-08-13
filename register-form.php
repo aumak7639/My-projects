@@ -4,8 +4,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <div class="register-section">
+                <div class="register-section text-center">
                     <h4 class="modal-title">Register Form</h4>
+                    <p style="color: #662d91;margin-top: 10px;">பதிவு இலவசம்.... Free register..</p>
                 </div>
             </div>
             <div class="modal-body text-center">

@@ -13,6 +13,7 @@ $user = $obj->selectRow('*', 'users', 'user_id = ' . $uid);
     <?php include 'head.php'; ?>
     <body>
         <?php include 'menu.php'; ?>
+        <div class="sub-banner-section"></div>
         <div class="user-profile-section">
             <div class="container">
                 <div class="row">

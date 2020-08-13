@@ -31,6 +31,7 @@ if (isset($_SESSION['user_id'])) {
                         <ul>
                             <li><a href="profiles.php"><i class="fa fa-address-card"></i> Profiles</a></li>
                             <li><a href="member-profile.php"><i class="fa fa-user"></i> My Account</a></li>
+                            <li><a href="#"><i class="fa fa-comments-o"></i> Your Complaints</a></li>
                             <li><a href="#" onclick="logoutUser();"><i class="fa fa-sign-out"></i> Logout</a></li>
                         </ul>
                     </div>
@@ -61,6 +62,7 @@ if (isset($_SESSION['user_id'])) {
                         <ul>
                             <li><a href="profiles.php"><i class="fa fa-address-card"></i> Profiles</a></li>
                             <li><a href="member-profile.php"><i class="fa fa-user"></i> My Account</a></li>
+                            <li><a href="#"><i class="fa fa-comments-o"></i> Your Complaints</a></li>
                             <li><a href="#" onclick="logoutUser('<?php echo $member['user_name']; ?>');"><i class="fa fa-sign-out"></i> Logout</a></li>
                         </ul>
                     </div>
