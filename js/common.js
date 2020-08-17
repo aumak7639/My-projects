@@ -136,3 +136,47 @@ function closeProfilePic() {
     $("#preview_container").addClass('hidden');
     $("#upload_container").removeClass('hidden');
 }
+
+
+function makePayment() {
+    var rzpOptions = {
+        key: "rzp_test_4S1JzqVDtmIyws",
+        amount: 2000,
+        name: "Iniyaa Matrimony",
+        description: "Find your Perfect Match",
+        image: "http://www.iniyaamatrimony.com/beta/img/logo.png",
+        notes: {
+            address: "RazorpayTransaction"
+        },
+        theme: {
+            color: "#662d91"
+        }
+    };
+    var rzp1 = new Razorpay(rzpOptions);
+    rzp1.open();
+    return false;
+}
+
+
+function updateMember(mid) {
+    var data = {name: $('#name').val(),gender: $('#gender').val(), age: $('#age').val(), date_of_birth: $('#date_of_birth').val(), education:$('#education').val(), occupation: $('#occupation').val(), marital_status: $('#marital_status').val(), income: $('#income').val(), height: $('#height').val(), weight: $('#weight').val(), religian: $('#religian').val(), caste: $('#caste').val(), location: $('#location').va(), aboutme: $('#aboutme').va(), phone_no: $('#phone_no').va(), user_name: $('#user_name').va()};
+    $('.loader').addClass('is-active');
+    $.ajax({
+        type: "POST",
+        url: 'api/v1/update_record/users/user_id='+mid,
+        data: data,
+        success: function (data) {
+            $('.loader').removeClass('is-active');
+            if (data.result.error === false) {
+                window.location = 'member-profile.php';
+            } else {
+                swal('Information', data.result.message, 'info');
+            }
+        },
+        error: function (err) {
+            $('.loader').removeClass('is-active');
+            swal('Error', err.statusText, 'error');
+        }
+    });
+    return false;
+}

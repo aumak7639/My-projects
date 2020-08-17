@@ -121,14 +121,10 @@ $user = $obj->selectRow('*', 'users', 'user_id = ' . $uid);
                                         <td><?php echo $user['location']; ?></td>
                                     </tr>
                                 </table>
-
-                                <form action="https://www.example.com/payment/success/" method="POST">
-                                    <div class="text-center contact-info">
-                                        <button class="btn btn-contact">See Our Contact Info...</button>
-                                        <!--<input type="hidden" custom="Hidden Element" name="hidden">-->
-                                    </div>
-
-                                </form>
+                                <div class="text-center contact-info">
+                                    <button class="btn btn-contact" onclick="makePayment();">See Our Contact Info...</button>
+                                    <!--<input type="hidden" custom="Hidden Element" name="hidden">-->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -136,17 +132,6 @@ $user = $obj->selectRow('*', 'users', 'user_id = ' . $uid);
             </div>
         </div>
         <?php include 'footer.php'; ?>
-        <script
-            src="https://checkout.razorpay.com/v1/checkout.js"
-            data-key="rzp_test_4S1JzqVDtmIyws"
-            data-amount="2000"
-            data-currency="INR"
-            data-name="Iniyaa Matrimony"
-            data-description="Find your Perfect Match"
-            data-image="http://www.iniyaamatrimony.com/beta/img/logo.png"
-            data-prefill.name="Iniya"
-            data-theme.color="#662d91"
-        ></script>
-    </form>
-</body>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    </body>
 </html>

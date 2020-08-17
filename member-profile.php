@@ -16,7 +16,7 @@ if (isset($_SESSION['user_id'])) {
             <div class="container">
                 <div class="profile-header">
                     <div class="profile-img">
-                        <img src="img/female_user.png" width="200" alt="Profile Image">
+                        <img src="<?php echo BASE_URL . $myprofile['image_path']; ?>" width="200" alt="Profile Image">
                     </div>
                     <div class="profile-nav-info">
                         <h3 class="user-name"><?php echo $myprofile['name']; ?></h3>
@@ -26,7 +26,7 @@ if (isset($_SESSION['user_id'])) {
                         </div>
 
                     </div>
-                    <div class="profile-option">
+                    <div class="profile-option" onclick="window.location ='edit-account.php'">
                         <div class="notification">
                             <i class="fa fa-pencil"></i>
 <!--                            <span class="alert-message">3</span>-->

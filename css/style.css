@@ -1002,3 +1002,29 @@ button.createbtn i {
     background-position: center;
     padding: 15% 0px;
 }
+
+.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus {
+    outline: 0px auto -webkit-focus-ring-color;
+}
+
+.complaint-section {
+    padding: 50px 0;
+}
+
+.complaint-form {
+    width: 40%;
+    margin: 0 auto;
+    border: 1px solid #662d91;
+    padding: 20px;
+}
+
+.edit-account-section {
+    padding: 50px 0;
+}
+
+.edit-account-section .register-form {
+    width: 50%;
+    margin: 0 auto;
+    border: 1px solid #662d91;
+    padding: 20px;
+}
