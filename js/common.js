@@ -138,13 +138,22 @@ function closeProfilePic() {
 }
 
 
-function makePayment() {
+function makePayment(uid) {
+    var gst = (20 * 18) / 100;
     var rzpOptions = {
         key: "rzp_test_4S1JzqVDtmIyws",
-        amount: 2000,
+        amount: (2000 + (gst * 100)),
         name: "Iniyaa Matrimony",
         description: "Find your Perfect Match",
         image: "http://www.iniyaamatrimony.com/beta/img/logo.png",
+        handler: function (response) {
+            if (typeof response.razorpay_payment_id !== 'undefined') {
+                swal('Thank You', 'Payment Successful', 'success');
+                window.location = 'contact-info.php?uid='+uid;
+            } else {
+                swal('Information', response.result.message, 'info');
+            }
+        },
         notes: {
             address: "RazorpayTransaction"
         },

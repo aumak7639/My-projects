@@ -32,8 +32,7 @@ $user = $obj->selectAll('*', 'users', 'user_id > 0');
                                                     <p>About : <?php echo $row['aboutme']; ?></p>
                                                 </div>
                                             </div>
-                                            <!--                                            <div class="member-content-footer">
-                                                                                            
+                                            <!--                                            <div class="member-content-footer">                   
                                                                                         </div>-->
 
                                             <a href='user-profile.php?uid=<?php echo $row['user_id']; ?>' class="btn profile-btn">View Full Profile</a>

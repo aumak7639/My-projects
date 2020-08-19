@@ -911,7 +911,7 @@ button.createbtn i {
     border-radius: 100%;
     margin-left: 20px;
     margin-top: -10px;
-    box-shadow: 0 0 6px 2px #e3e3e3;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
     cursor: pointer;
 }
 
@@ -925,7 +925,8 @@ button.createbtn i {
     background: #fff;
     top: 70px;
     z-index: 2;
-    box-shadow: 0 0 6px 0 #e3e3e3;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    border-radius: 5px;
 }
 
 .login-dropdown ul {
@@ -1016,6 +1017,8 @@ button.createbtn i {
     margin: 0 auto;
     border: 1px solid #662d91;
     padding: 20px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    border-radius: 5px;
 }
 
 .edit-account-section {
@@ -1027,4 +1030,70 @@ button.createbtn i {
     margin: 0 auto;
     border: 1px solid #662d91;
     padding: 20px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    border-radius: 5px;
+}
+
+.change-password-secttion {
+    padding: 75px 0;
+}
+
+.password-section {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #662d91;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    border-radius: 5px;
+}
+
+.password-section input {
+    width: 80%;
+    padding: 12px;
+    border-radius: 5px
+}
+
+.password-section h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.contact-info-section {
+    padding: 75px 0;
+}
+
+
+.contact-info-no {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #662d91;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    border-radius: 5px;
+}
+
+.contact-info-no h3 {
+    border-bottom: 2px solid #662d91;
+    padding-bottom: 10px;
+}
+
+.contact-info-no table {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.contact-info-no table td, .contact-info table th {
+    font-size: 18px;
+}
+
+.contact-info-no table td i {
+    font-size: 18px;
+    color: #662d91;
+    background: #fff;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 }

@@ -11,16 +11,18 @@ if (isset($_SESSION['user_id'])) {
     <body>
         <?php include 'menu.php'; ?>
         <div class="sub-banner-section"></div>
-        <div class="member-full-version-secttion">
+        <div class="change-password-secttion">
             <div class="container">
-                <div class="forgot-section">
-                    <div class="text-center"><p>Change Your Password </p></div>
+                <div class="password-section">
+                    <div class="text-center">
+                        <h3>Change Your Password </h3>
+                    </div>
                     <form onsubmit="return changePassword(<?php echo $login_member['user_id'];  ?>);" class="reset-form">
                         <div class="form-group">
                             <input type = 'password' id = 'password' placeholder = 'New Password' required>
                         </div>
                         <div class="form-group">
-                            <button type = 'submit' class = 'btn btn-custom'>Change password</button>
+                            <button type = 'submit' class = 'btn btn-primary mb-2'>Change password</button>
                 <!--                <p class = 'aligncenter margintop20'>
                             Please put your registered user name. you have reset the your password...
                         </p>-->

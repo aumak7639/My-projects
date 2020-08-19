@@ -122,7 +122,7 @@ $user = $obj->selectRow('*', 'users', 'user_id = ' . $uid);
                                     </tr>
                                 </table>
                                 <div class="text-center contact-info">
-                                    <button class="btn btn-contact" onclick="makePayment();">See Our Contact Info...</button>
+                                    <button class="btn btn-contact" onclick="makePayment(<?php echo $user['user_id']; ?>);">See Our Contact Info...</button>
                                     <!--<input type="hidden" custom="Hidden Element" name="hidden">-->
                                 </div>
                             </div>
