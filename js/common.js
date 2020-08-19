@@ -157,17 +157,45 @@ function makePayment() {
     return false;
 }
 
+function changePassword(uid) {
+    $('.loader').addClass('is-active');
+    var pwd = $('#password').val();
+    $.ajax({
+        type: "POST",
+        url: 'api/v1/reset_password',
+        data: {password: pwd, 'member': uid},
+        success: function (data) {
+            $('.loader').removeClass('is-active');
+            if (data.result.error === false) {
+                swal('Password Changed', 'Your Password has been Changed', 'success');
+                $('#password').val('');
+                setTimeout(function () {
+                    window.location = 'member-profile.php';
+                }, 2000);
+            } else {
+                swal('Information', data.result.message, 'info');
+            }
+        },
+        error: function (err) {
+            $('.loader').removeClass('is-active');
+            swal('Error', err.statusText, 'error');
+        }
+    });
+    return false;
+}
 
-function updateMember(mid) {
-    var data = {name: $('#name').val(),gender: $('#gender').val(), age: $('#age').val(), date_of_birth: $('#date_of_birth').val(), education:$('#education').val(), occupation: $('#occupation').val(), marital_status: $('#marital_status').val(), income: $('#income').val(), height: $('#height').val(), weight: $('#weight').val(), religian: $('#religian').val(), caste: $('#caste').val(), location: $('#location').va(), aboutme: $('#aboutme').va(), phone_no: $('#phone_no').va(), user_name: $('#user_name').va()};
+
+function updateMemberProfile(mid) {
+    var data = {name: $('#name').val(), gender: $('#gender').val(), age: $('#age').val(), date_of_birth: $('#date_of_birth').val(), education: $('#education').val(), occupation: $('#occupation').val(), marital_status: $('#marital_status').val(), income: $('#income').val(), height: $('#height').val(), weight: $('#weight').val(), religian: $('#religian').val(), caste: $('#caste').val()};
     $('.loader').addClass('is-active');
     $.ajax({
         type: "POST",
-        url: 'api/v1/update_record/users/user_id='+mid,
+        url: 'api/v1/update_record/users/user_id=' + mid,
         data: data,
         success: function (data) {
             $('.loader').removeClass('is-active');
             if (data.result.error === false) {
+                swal('Updated', 'Your Account has been Updated Successfully', 'success');
                 window.location = 'member-profile.php';
             } else {
                 swal('Information', data.result.message, 'info');

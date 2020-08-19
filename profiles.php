@@ -29,22 +29,7 @@ $user = $obj->selectAll('*', 'users', 'user_id > 0');
                                                 <div class="member-info">
                                                     <strong><h4><?php echo $row['name']; ?> - Id: <?php echo $row['user_id']; ?></h4></strong>
                                                     <p><?php echo $row['age']; ?> Years / <?php echo $row['height']; ?></p>
-                                                    <div id="profile-description">
-                                                        <p class="text">About : <?php echo $row['aboutme']; ?></p>
-                                                        <div class="show-more">(Show More)</div>
-                                                    </div>
-        <!--                                                    <table>
-                                                        <tr>
-                                                            <th>Name</th>
-                                                            <td> : </td>
-                                                            <td> </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Age</th>
-                                                            <td> : </td>
-                                                            <td> </td>
-                                                        </tr>
-                                                    </table>-->
+                                                    <p>About : <?php echo $row['aboutme']; ?></p>
                                                 </div>
                                             </div>
                                             <!--                                            <div class="member-content-footer">
@@ -80,16 +65,5 @@ $user = $obj->selectAll('*', 'users', 'user_id > 0');
             </div>
         </section>
         <?php include 'footer.php'; ?>
-        <script>
-            $(".show-more").click(function () {
-                if ($(".text").hasClass("show-more-height")) {
-                    $(this).text("(Show Less)");
-                } else {
-                    $(this).text("(Show More)");
-                }
-
-                $(".text").toggleClass("show-more-height");
-            });
-        </script>
     </body>
 </html>

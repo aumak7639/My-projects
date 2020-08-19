@@ -145,3 +145,20 @@ $app->post('/logout_user', function() use ($app) {
     session_destroy();
     echoRespnse(201, $res);
 });
+
+$app->post('/reset_password', function() use ($app) {
+    $data = $app->request->post();
+    $obj = new Common();
+    $res = array('error' => true, 'message' => 'Unable to update your password');
+    $user = $obj->selectRow('*', 'users', 'user_id=\'' . $data['member'] . '\'');
+    if (count($user) > 0) {
+        $update = $obj->updateRecordWithWhere(array('password' => $data['password']), 'users', 'user_id=\'' . $data['member'] . '\'');
+        if ($update > 0) {
+            $res['error'] = false;
+            $res['message'] = 'Password updated successfully';
+        }
+    } else {
+        $res['message'] = 'User Name Incorrect';
+    }
+    echoRespnse(201, $res);
+});

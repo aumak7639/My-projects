@@ -26,7 +26,7 @@ if (isset($_SESSION['user_id'])) {
                         </div>
 
                     </div>
-                    <div class="profile-option" onclick="window.location ='edit-account.php'">
+                    <div class="profile-option" onclick="window.location = 'edit-account.php'">
                         <div class="notification">
                             <i class="fa fa-pencil"></i>
 <!--                            <span class="alert-message">3</span>-->
@@ -137,7 +137,7 @@ if (isset($_SESSION['user_id'])) {
                                         </tr>
                                     </table>
                                     <br/>
-                                    <center><button class="btn btn-primary">Change Your Password</button></center>
+                                    <center><button class="btn btn-primary" onclick="window.location = 'change-password.php'">Change Your Password</button></center>
                                 </div>
                             </div>
                             <div id="menu1" class="tab-pane fade">
