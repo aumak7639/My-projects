@@ -29,9 +29,9 @@
                         <h1>FAMILY SHOPPING</h1>
                         <h2>At Your Best</h2>
 
-<!--                        <a class="big-button" href="" title="">Create Project</a>
-                        <div class="clear"></div>
-                        <a class="view-demo" href="" title="">View Demo</a>-->
+                        <!--                        <a class="big-button" href="" title="">Create Project</a>
+                                                <div class="clear"></div>
+                                                <a class="view-demo" href="" title="">View Demo</a>-->
                     </div>
                 </div>
 
@@ -355,43 +355,57 @@
                     <h1 class="mb-10">Our  Partners</h1>
                     <!--<p>Who are in extremely love with eco friendly system.</p>-->
                 </div>
-                <section class="customer-logos slider logo-wrap">
-                    <div class="slide">
-                        <a class="col single-img" href="#">
-                            <img class="d-block mx-auto" src="img/logo/magilzi.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="slide">
-                        <a class="col single-img" href="#">
-                            <img class="d-block mx-auto" src="img/logo/magilzi.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="slide">
-                        <a class="col single-img" href="#">
-                            <img class="d-block mx-auto" src="img/logo/mrp market copy.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="slide">
-                        <a class="col single-img" href="#">
-                            <img class="d-block mx-auto" src="img/logo/mrpdigital copy.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="slide">
-                        <a class="col single-img" href="#">
-                            <img class="d-block mx-auto" src="img/logo/mrpvannam.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="slide">
-                        <a class="col single-img" href="#">
-                            <img class="d-block mx-auto" src="img/logo/mrpvannam.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="slide">
-                        <a class="col single-img" href="#">
-                            <img class="d-block mx-auto" src="img/logo/mag.jpg" alt="">
-                        </a>
-                    </div>
-                </section>
+                <div class="customer-logos slider logo-wrap">
+                    <a class="col single-img" href="#">
+                        <img class="d-block mx-auto" src="img/logo/magilzi.jpg" alt="">
+                    </a>
+                    <a class="col single-img" href="#">
+                        <img class="d-block mx-auto" src="img/logo/mrp market copy.jpg" alt="">
+                    </a>
+                    <a class="col single-img" href="#">
+                        <img class="d-block mx-auto" src="img/logo/mrpvannam.jpg" alt="">
+                    </a>
+                    <a class="col single-img" href="#">
+                        <img class="d-block mx-auto" src="img/logo/mag.jpg" alt="">
+                    </a>
+                </div>
+        <!--                <section class="customer-logos slider logo-wrap">
+                            <div class="slide">
+                                <a class="col single-img" href="#">
+                                    <img class="d-block mx-auto" src="img/logo/magilzi.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="slide">
+                                <a class="col single-img" href="#">
+                                    <img class="d-block mx-auto" src="img/logo/magilzi.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="slide">
+                                <a class="col single-img" href="#">
+                                    <img class="d-block mx-auto" src="img/logo/mrp market copy.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="slide">
+                                <a class="col single-img" href="#">
+                                    <img class="d-block mx-auto" src="img/logo/mrpdigital copy.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="slide">
+                                <a class="col single-img" href="#">
+                                    <img class="d-block mx-auto" src="img/logo/mrpvannam.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="slide">
+                                <a class="col single-img" href="#">
+                                    <img class="d-block mx-auto" src="img/logo/mrpvannam.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="slide">
+                                <a class="col single-img" href="#">
+                                    <img class="d-block mx-auto" src="img/logo/mag.jpg" alt="">
+                                </a>
+                            </div>
+                        </section>-->
             </div>
         </section>
         <!-- End brand Area -->
@@ -402,7 +416,7 @@
 
         <script src="js/vendor/jquery-2.2.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+        <script src="js/slick-slider.js" type="text/javascript"></script>
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/jquery.ajaxchimp.min.js"></script>
         <script src="js/jquery.nice-select.min.js"></script>
@@ -412,28 +426,34 @@
         <script src="js/owl.carousel.min.js"></script>			
         <script src="js/main.js"></script>	
         <script>
-            $(document).ready(function () {
-                $('.customer-logos').slick({
-                    slidesToShow: 6,
+            jQuery(document).ready(function ($) {
+                $('.slider').slick({
+                    dots: false,
+                    infinite: true,
+                    speed: 500,
+                    slidesToShow: 4,
                     slidesToScroll: 1,
                     autoplay: true,
-                    autoplaySpeed: 1500,
-                    arrows: false,
-                    dots: false,
-                    pauseOnHover: false,
+                    autoplaySpeed: 2000,
+                    arrows: true,
                     responsive: [{
-                            breakpoint: 768,
+                            breakpoint: 600,
                             settings: {
-                                slidesToShow: 4
+                                slidesToShow: 2,
+                                slidesToScroll: 1
                             }
-                        }, {
-                            breakpoint: 520,
+                        },
+                        {
+                            breakpoint: 400,
                             settings: {
-                                slidesToShow: 3
+                                arrows: false,
+                                slidesToShow: 1,
+                                slidesToScroll: 1
                             }
                         }]
                 });
             });
+
         </script>	
 
     </body>
