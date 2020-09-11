@@ -30,12 +30,12 @@
             <h2 class="loader">Loading</h2>
         </div>
     </section>-->
-    <div class="site-wrapper">
 
 
-        <!-- Boxed -->
-        <div class="boxed">
 
+    <!-- Boxed -->
+    <div class="boxed">
+        <div class="site-wrapper">
             <div class="top bg-white">
                 <div class="container">
                     <div class="row">
