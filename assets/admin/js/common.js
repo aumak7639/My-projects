@@ -38,99 +38,284 @@ jQuery(document).ready(function(){
 
 
 
-	$('#payout-status-update').submit(function(e){ 
-		e.preventDefault();
-		
-		var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
-		
-		if(is_required(this_id) === true)
-		{
-			$.ajax({
-				type: 'POST',
-				url: baseURL + "admin/payout_status_update",
-				data: new FormData(this),
-				dataType: "json",
-				contentType: false,
-				processData: false,
-				beforeSend: function() {
-					$(this_id + ' input[type=submit]').attr('disabled', 'true');
-				},
-				success: function(response){
-					console.log(response)
-					if(response.result == 1)
-					{
-						$(this_id)[0].reset();
-						toastr.success('Status has been updated!');
-						$(this_id + ' input[type=submit]').removeAttr('disabled');
-					}
-					else
-					{
-						toastr.error('Something went wrong! Please try again later!');
-						$(this_id + ' input[type=submit]').removeAttr('disabled');
-					}
+
+
+
+
+
+
+
+
+
+$('.insert_data_1').submit(function(e){
+	e.preventDefault();
+	
+	var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
+	
+	if(is_required(this_id) === true)
+	{
+		$.ajax({
+			type: 'POST',
+			url: baseURL+"admin/form1",
+			data: new FormData(this),
+			dataType: "json",
+			contentType: false,
+			processData: false,
+			beforeSend: function() {
+				$(this_id + ' input[type=submit]').attr('disabled', 'true');
+			},
+			success: function(response){
+				console.log(response)
+				if(response.result == 1)
+				{
+					//toastr.success('Success!');
+
+
+                        $(this_id + ' input[type=submit]').removeAttr('disabled');
+                        $("#id").val(response.uniq_id);
+                        $("#form11").val(response.uniq_id);
+                        $(".ps-tab").removeClass("active");
+                        $("#step-2").addClass("active");
+					
+					
 				}
-			});
-		}
-		else
-		{
-			toastr.error('Please check the required fields!');
-		}
-	});
-	function statusChange(obj,row_id,status,field,table) {
-		alert("hi");
-		Swal.fire({
-			title: 'Are you sure?',
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Yes, Update it!'
-		  }).then((result) => {
-			if (result.value) {
-
-
-				$.ajax({
-					type: 'POST',
-					url: baseURL + "admin/status-update",
-					data: 'table=' + table + '&row_id=' + row_id + '&status='+status+'&field='+field,
-					dataType: "json",
-					success: function(response){
-						if(response.result == 1)
-						{
-						
-							setTimeout(function () {
-							location.reload(1);
-							},2000);
-
-							document.getElementsByClassName(row_id).style.display = "none";
-						
-							
-							
-							//$(this).parent().next('td').html("<span class='btn btn-sm btn-danger'>Inactive</span>");
-							
-
-							
-						}
-						else
-						{
-							toastr.error('Something went wrong! Please try again later!');
-						}
-					}
-				});
-		
-	
-			  Swal.fire(
-				'Updated!',
-				'Your Record  has been Updated.',
-				'success'
-			  )
-
-
-
+				else
+				{
+					toastr.error('Something went wrong! Please try again later!');
+					$(this_id + ' input[type=submit]').removeAttr('disabled');
+				}
 			}
-		  })
-	
+		});
 	}
+	else
+	{
+		toastr.error('Please check the required fields!');
+	}
+	
+});
+
+
+
+$('.insert_data_2').submit(function(e){
+	e.preventDefault();
+	
+	var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
+	
+	if(is_required(this_id) === true)
+	{
+		$.ajax({
+			type: 'POST',
+			url: baseURL+"admin/form2",
+			data: new FormData(this),
+			dataType: "json",
+			contentType: false,
+			processData: false,
+			beforeSend: function() {
+				$(this_id + ' input[type=submit]').attr('disabled', 'true');
+			},
+			success: function(response){
+				console.log(response)
+				if(response.result == 1)
+				{
+					//toastr.success('Success!');
+					$(this_id + ' input[type=submit]').removeAttr('disabled');
+					$("#id2").val(response.uniq_id);
+
+                        $("#form11").val(response.uniq_id);
+					  $(".ps-tab").removeClass("active");
+					$("#step-3").addClass("active");
+					
+					
+					
+				}
+				else
+				{
+					toastr.error('Something went wrong! Please try again later!');
+					$(this_id + ' input[type=submit]').removeAttr('disabled');
+				}
+			}
+		});
+	}
+	else
+	{
+		toastr.error('Please check the required fields!');
+	}
+	
+});
+
+
+
+ $('.insert_data_3').submit(function(e){
+	e.preventDefault();
+	
+	var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
+	
+	if(is_required(this_id) === true)
+	{
+		$.ajax({
+			type: 'POST',
+			url: baseURL+"admin/form3",
+			data: new FormData(this),
+			dataType: "json",
+			contentType: false,
+			processData: false,
+			beforeSend: function() {
+				$(this_id + ' input[type=submit]').attr('disabled', 'true');
+			},
+			success: function(response){
+				console.log(response)
+				if(response.result == 1)
+				{
+					//toastr.success('Success!');
+					$(this_id + ' input[type=submit]').removeAttr('disabled');
+					$("#id3").val(response.uniq_id);
+					  
+					$(".ps-tab").removeClass("active");
+					$("#step-4").addClass("active");
+					
+					
+				}
+				else
+				{
+					toastr.error('Something went wrong! Please try again later!');
+					$(this_id + ' input[type=submit]').removeAttr('disabled');
+				}
+			}
+		});
+	}
+	else
+	{
+		toastr.error('Please check the required fields!');
+	}
+	
+});
+
+  $('.insert_data_4').submit(function(e){
+	e.preventDefault();
+	
+	var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
+	
+	if(is_required(this_id) === true)
+	{
+		$.ajax({
+			type: 'POST',
+			url: baseURL+"admin/form4",
+			data: new FormData(this),
+			dataType: "json",
+			contentType: false,
+			processData: false,
+			beforeSend: function() {
+				$(this_id + ' input[type=submit]').attr('disabled', 'true');
+			},
+			success: function(response){
+				console.log(response)
+				if(response.result == 1)
+				{
+					$(this_id + ' input[type=submit]').removeAttr('disabled');
+					$("#id5").val(response.uniq_id);
+					 $("#id6").val(response.uniq_id);
+					$(".ps-tab").removeClass("active");
+					$("#step-5").addClass("active");
+				}
+				else
+				{
+					toastr.error('Something went wrong! Please try again later!');
+					$(this_id + ' input[type=submit]').removeAttr('disabled');
+				}
+			}
+		});
+	}
+	else
+	{
+		toastr.error('Please check the required fields!');
+	}
+	
+});
+   $('.insert_data_5').submit(function(e){
+	e.preventDefault();
+	
+	var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
+	
+	if(is_required(this_id) === true)
+	{
+		$.ajax({
+			type: 'POST',
+			url: baseURL+"admin/form5",
+			data: new FormData(this),
+			dataType: "json",
+			contentType: false,
+			processData: false,
+			beforeSend: function() {
+				$(this_id + ' input[type=submit]').attr('disabled', 'true');
+			},
+			success: function(response){
+				console.log(response)
+				if(response.result == 1)
+				{
+					$(this_id + ' input[type=submit]').removeAttr('disabled');
+					$("#id6").val(response.uniq_id);
+					 $("#id7").val(response.uniq_id);
+					// window.location.href="property";
+					
+					
+				}
+				else
+				{
+					toastr.error('Something went wrong! Please try again later!');
+					$(this_id + ' input[type=submit]').removeAttr('disabled');
+				}
+			}
+		});
+	}
+	else
+	{
+		toastr.error('Please check the required fields!');
+	}
+	
+});
+
+$('.insert_data_6').submit(function(e){
+	e.preventDefault();
+	
+	var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
+	
+	if(is_required(this_id) === true)
+	{
+		$.ajax({
+			type: 'POST',
+			url: baseURL+"admin/form6",
+			data: new FormData(this),
+			dataType: "json",
+			contentType: false,
+			processData: false,
+			beforeSend: function() {
+				$(this_id + ' input[type=submit]').attr('disabled', 'true');
+			},
+			success: function(response){
+				console.log(response)
+				if(response.result == 1)
+				{
+					$(this_id + ' input[type=submit]').removeAttr('disabled');
+					$("#id6").val(response.uniq_id);
+					 $("#id7").val(response.uniq_id);
+					 window.location.href="property";
+					
+					
+				}
+				else
+				{
+					toastr.error('Something went wrong! Please try again later!');
+					$(this_id + ' input[type=submit]').removeAttr('disabled');
+				}
+			}
+		});
+	}
+	else
+	{
+		toastr.error('Please check the required fields!');
+	}
+	
+});
 
 	$('.new_page').submit(function(e){
 		e.preventDefault();
@@ -212,95 +397,69 @@ jQuery(document).ready(function(){
 		}
 	});
 	
-	$('.insert_coupon_data').submit(function(e){
-		e.preventDefault();
-		
-		$('.insert_coupon_data input[name=child_category]').val($('#child_category').val());
-		$('.insert_coupon_data input[name=product_id]').val($('#product_id').val());
-		
-		var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
-		$.ajax({
-			type: 'POST',
-			url: baseURL + "admin/insert_coupon_data",
-			data: new FormData(this),
-			dataType: "json",
-			contentType: false,
-			processData: false,
-			beforeSend: function() {
-				$(this_id + ' input[type=submit]').attr('disabled', 'true');
-			},
-			success: function(response){
-				console.log(response)
-				if(response.result == 1)
-				{
-					$(this_id)[0].reset();
-					toastr.success('Success!');
-					$(this_id + ' input[type=submit]').removeAttr('disabled');
-					
-					if($(this_id).attr('reload-action') === 'true')
-					{
-						setTimeout(function(){ location.reload(); }, 1000);
-					}
-				}
-				else if(response.result == 2)
-				{
-					toastr.error('Coupon code already exists!');
-					$(this_id + ' input[type=submit]').removeAttr('disabled');
-				}
-				else
-				{
-					toastr.error('Something went wrong! Please try again later!');
-					$(this_id + ' input[type=submit]').removeAttr('disabled');
-				}
-			}
-		});
-	});
+
+
+
 	
-	$('.update_coupon_data').submit(function(e){
-		e.preventDefault();
-		
-		$('.update_coupon_data input[name=child_category]').val($('#child_category_1').val());
-		$('.update_coupon_data input[name=product_id]').val($('#product_id_1').val());
-		
-		var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
-		$.ajax({
-			type: 'POST',
-			url: baseURL + "admin/update_data",
-			data: new FormData(this),
-			dataType: "json",
-			contentType: false,
-			processData: false,
-			beforeSend: function() {
-				$(this_id + ' input[type=submit]').attr('disabled', 'true');
-			},
-			success: function(response){
-				console.log(response)
-				if(response.result == 1)
-				{
-					$(this_id)[0].reset();
-					toastr.success('Success!');
-					$(this_id + ' input[type=submit]').removeAttr('disabled');
-					
-					if($(this_id).attr('reload-action') === 'true')
-					{
-						setTimeout(function(){ location.reload(); }, 1000);
-					}
-				}
-				else if(response.result == 2)
-				{
-					toastr.error('Coupon code already exists!');
-					$(this_id + ' input[type=submit]').removeAttr('disabled');
-				}
-				else
-				{
-					toastr.error('Something went wrong! Please try again later!');
-					$(this_id + ' input[type=submit]').removeAttr('disabled');
-				}
-			}
-		});
-	});
+    $('.insert_data').submit(function(e){
+        e.preventDefault();
+        
+        var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
+        if(is_required(this_id) === true)
+        {
+            $.ajax({
+                type: 'POST',
+                url:baseURL+ "admin/insert",
+                data: new FormData(this),
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                
+                success: function(response){
+                    console.log(response)
+                    if(response.result == 1)
+                    {
+                        //location.reload();
+                        $(this_id + ' input[type=submit]').removeAttr('disabled');
+                        //alert(response.insert_id);
+                        $("#builder_id").val(response.insert_id);
+                        $("#idreg").val(response.uniq_id);
+                         toastr.success('Success');
+                   
+                         //window.location.href="builder/add-property";
+                        
+                    }
+                    else if(response.result == 2)
+                    {
+                         toastr.error('Email Id already registered with us');
+                    }
+                    else if(response.result == 3)
+                    {
+                         toastr.error('Contact already registered with us');
+                    }
+                    else if(response.result == 4)
+                    {
+                         toastr.error('Account Blocked!! contact admin');
+                    }
+                    else
+                    {
+                        toastr.error('Something went wrong! Please try again later!');
+                        $(this_id + ' input[type=submit]').removeAttr('disabled');
+                    }
+                }
+            });
+        }
+        else
+        {
+            toastr.error('Please check the required fields!');
+        }
+        
+    });
+
+
+
 	
-	$('.insert_data').submit(function(e){
+	$('.file_data').submit(function(e){
 		e.preventDefault();
 		
 		var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
@@ -309,7 +468,7 @@ jQuery(document).ready(function(){
 		{
 			$.ajax({
 				type: 'POST',
-				url: baseURL + "admin/insert",
+				url: baseURL + "admin/file_update",
 				data: new FormData(this),
 				dataType: "json",
 				contentType: false,
@@ -324,107 +483,341 @@ jQuery(document).ready(function(){
 						$(this_id)[0].reset();
 						toastr.success('Success!');
 						$(this_id + ' input[type=submit]').removeAttr('disabled');
+
 						
-						if($(this_id).attr('row-data') === 'yes')
-						{
-							update_table_data(this_id);
-						}
 						
-						if($(this_id).attr('reload-action') === 'true')
+					}
+					else
+					{
+						toastr.error('Something went wrong! Please try again later!');
+						$(this_id + ' input[type=submit]').removeAttr('disabled');
+					}
+				}
+			});
+		}
+		else
+		{
+			toastr.error('Please check the required fields!');
+		}
+	});
+
+	
+	$('.update_tags').submit(function(e){
+	e.preventDefault();
+
+
+	var selected_tags = $('#select_tags').val();
+
+	$table_name = $('.update_tags input[name=table_name]').val();
+	$row_id = $('.update_tags input[name=row_id]').val();
+	
+
+Swal.fire({
+			title: 'Are you sure?',
+			text: "You want To add tags,"+selected_tags,
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes!'
+		  }).then((result) => {
+			if (result.value) {
+
+
+				$.ajax({
+					type: 'POST',
+					url: baseURL + "admin/tags_insert",
+					data: 'table_name=' + $table_name + '&row_id=' + $row_id + '&tags=' + selected_tags,
+					dataType: "json",
+					success: function(response){
+						if(response.result == 1)
 						{
-							setTimeout(function(){ location.reload(); }, 1000);
+						
+							setTimeout(function () {
+							location.reload(1);
+							},2000);
+
+							document.getElementsByClassName(row_id).style.display = "none";
+						
+							
+							
+							$(this).parent().next('td').html("<span class='btn btn-sm btn-danger'>Inactive</span>");
+							
+
+							
+						}
+						else
+						{
+							toastr.error('Something went wrong! Please try again later!');
 						}
 					}
-					else
-					{
-						toastr.error('Something went wrong! Please try again later!');
-						$(this_id + ' input[type=submit]').removeAttr('disabled');
-					}
-				}
-			});
-		}
-		else
-		{
-			toastr.error('Please check the required fields!');
-		}
-	});
+				});
+		
 	
-	$('.from-new-pincodes').submit(function(e){
-		e.preventDefault();
-		
-		var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
-		
-		if(is_required(this_id) === true)
-		{
-			$.ajax({
-				type: 'POST',
-				url: baseURL + "admin/from-new-pincodes-post",
-				data: $(this).serialize(),
-				dataType: "json",
-				beforeSend: function() {
-					$(this_id + ' input[type=submit]').attr('disabled', 'true');
-				},
-				success: function(response){
-					console.log(response)
-					if(response.result == 1)
-					{
-						toastr.success('Success!');
-						$(this_id + ' input[type=submit]').removeAttr('disabled');
-						setTimeout(function(){ location.reload(); }, 1000);
-					}
-					else
-					{
-						toastr.error('Something went wrong! Please try again later!');
-						$(this_id + ' input[type=submit]').removeAttr('disabled');
-					}
-				}
-			});
-		}
-		else
-		{
-			toastr.error('Please check the required fields!');
-		}
-	});
+			  Swal.fire(
+				'You added tags!',
+				'Your Record  is Updated.',
+				'success'
+			  )
+
+
+
+			}
+		  })
+		});
+
 	
-	$('.add_new_color_variant').submit(function(e){
-		e.preventDefault();
-		
-		var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
-		
-		if(is_required(this_id) === true)
-		{
-			$.ajax({
-				type: 'POST',
-				url: baseURL + "admin/add_new_color_variant",
-				data: new FormData(this),
-				dataType: "json",
-				contentType: false,
-				processData: false,
-				beforeSend: function() {
-					$(this_id + ' input[type=submit]').attr('disabled', 'true');
-				},
-				success: function(response){
-					console.log(response)
-					if(response.result == 1)
-					{
-						toastr.success('Success!');
-						$(this_id + ' input[type=submit]').removeAttr('disabled');
-						setTimeout(function(){ location.reload(); }, 1000);
-					}
-					else
-					{
-						toastr.error('Something went wrong! Please try again later!');
-						$(this_id + ' input[type=submit]').removeAttr('disabled');
-					}
-				}
-			});
-		}
-		else
-		{
-			toastr.error('Please check the required fields!');
-		}
-	});
+
+
+
 	
+	function myFunction(obj,row_id,table) {
+	
+
+	
+
+
+
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete it!'
+		  }).then((result) => {
+			if (result.value) {
+
+
+				$.ajax({
+					type: 'POST',
+					url: baseURL + "admin/update",
+					data: 'table_name=' + table + '&row_id=' + row_id + '&status=1',
+					dataType: "json",
+					success: function(response){
+						if(response.result == 1)
+						{
+						
+							setTimeout(function () {
+							location.reload(1);
+							},2000);
+
+							document.getElementsByClassName(row_id).style.display = "none";
+						
+							
+							
+							$(this).parent().next('td').html("<span class='btn btn-sm btn-danger'>Inactive</span>");
+							
+
+							
+						}
+						else
+						{
+							toastr.error('Something went wrong! Please try again later!');
+						}
+					}
+				});
+		
+	
+			  Swal.fire(
+				'Deleted!',
+				'Your Record  has been deleted.',
+				'success'
+			  )
+
+
+
+			}
+		  })
+	
+	
+	}
+
+$('.change_builder_pwd').submit(function(e){
+        e.preventDefault();
+        
+        var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
+        var validity = 0;
+
+    var old_password = $("#pwd").val();
+    var password = $("#pwd1").val();
+    var confirm_Password = $("#pwd2").val();
+    if(old_password == password || old_password==confirm_Password )
+    {
+        toastr.error("Old password and new password must not be same");
+        $("#pwd1").val("");
+        $("#pwd2").val("");
+        return false;
+    }
+    else if(password != confirm_Password )
+    {
+        toastr.error("Passwords do not match");
+        $("#pwd1").val("");
+        $("#pwd2").val("");
+        return false;
+    }
+    else validity++;
+
+
+    
+    if(validity == 1) {
+   
+            $.ajax({
+                type: 'POST',
+                url: baseURL+"builder/builder_change_password",
+                data: new FormData(this),
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $(this_id + ' input[type=submit]').attr('disabled', 'true');
+                },
+                success: function(response){
+                    console.log(response)
+                    if(response.result == 1)
+                    {
+                        toastr.success('Success!');
+
+                        $(this_id + ' input[type=submit]').removeAttr('disabled');
+                        $("#pwd").val("");           
+                        
+                        $("#pwd1").val("");
+                        $("#pwd2").val("");           
+                        
+                        
+                    }
+                    else if(response.result == 0)
+                    {
+                        toastr.error('Old Password is Incorrect!');
+                        $(this_id + ' input[type=submit]').removeAttr('disabled');
+                    }
+                }
+            });
+        }
+        else
+        {
+            toastr.error('Please check the required fields!');
+        }
+        
+    });
+
+
+	function statusChange(obj,row_id,status,field,table) {
+		
+		Swal.fire({
+			title: 'Are you sure?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, Update it!'
+		  }).then((result) => {
+			if (result.value) {
+
+
+				$.ajax({
+					type: 'POST',
+					url: baseURL + "admin/status-update",
+					data: 'table=' + table + '&row_id=' + row_id + '&status='+status+'&field='+field,
+					dataType: "json",
+					success: function(response){
+						if(response.result == 1)
+						{
+						
+							setTimeout(function () {
+							location.reload(1);
+							},2000);
+
+							document.getElementsByClassName(row_id).style.display = "none";
+						
+							
+							
+							//$(this).parent().next('td').html("<span class='btn btn-sm btn-danger'>Inactive</span>");
+							
+
+							
+						}
+						else
+						{
+							toastr.error('Something went wrong! Please try again later!');
+						}
+					}
+				});
+		
+	
+			  Swal.fire(
+				'Updated!',
+				'Your Record  has been Updated.',
+				'success'
+			  )
+
+
+
+			}
+		  })
+	
+	}
+	
+	function myFunctionactivate(obj,row_id,table) {
+	
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You want to activate this section!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, Activate it!'
+		  }).then((result) => {
+			if (result.value) {
+
+
+				$.ajax({
+					type: 'POST',
+					url: baseURL + "admin/activate",
+					data: 'table_name=' + table + '&row_id=' + row_id + '&status=1',
+					dataType: "json",
+					success: function(response){
+						if(response.result == 1)
+						{
+						
+							setTimeout(function () {
+							location.reload(1);
+							},2000);
+
+							document.getElementsByClassName(row_id).style.display = "none";
+						
+							
+							
+
+							
+						}
+						else
+						{
+							toastr.error('Something went wrong! Please try again later!');
+						}
+					}
+				});
+		
+	
+			  Swal.fire(
+				'Activated!',
+				'Your Record  has been Activated.',
+				'success'
+			  )
+
+
+
+			}
+		  })
+	
+	
+			
+	 
+    }
+
+
 	$('.update_data').submit(function(e){
 		e.preventDefault();
 		
@@ -441,17 +834,15 @@ jQuery(document).ready(function(){
 				processData: false,
 				beforeSend: function() {
 					$(this_id + ' input[type=submit]').attr('disabled', 'true');
+				
 				},
 				success: function(response){
 					if(response.result == 1)
 					{
 						toastr.success('Success!');
+					
 						$(this_id + ' input[type=submit]').removeAttr('disabled');
 						
-						if($(this_id).attr('reload-action') === 'true')
-						{
-							setTimeout(function(){ location.reload(); }, 1000);
-						}
 					}
 					else
 					{
@@ -466,8 +857,7 @@ jQuery(document).ready(function(){
 			toastr.error('Please check the required fields!');
 		}
 	});
-	
-	$('.update_product_properties_data').submit(function(e){
+	$('.builder_update_data').submit(function(e){
 		e.preventDefault();
 		
 		var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
@@ -476,17 +866,22 @@ jQuery(document).ready(function(){
 		{
 			$.ajax({
 				type: 'POST',
-				url: baseURL + "admin/update_product_properties_data",
-				data: $(this).serialize(),
+				url: baseURL + "builder/builder-update",
+				data: new FormData(this),
 				dataType: "json",
+				contentType: false,
+				processData: false,
 				beforeSend: function() {
 					$(this_id + ' input[type=submit]').attr('disabled', 'true');
+				
 				},
 				success: function(response){
 					if(response.result == 1)
 					{
 						toastr.success('Success!');
+						
 						$(this_id + ' input[type=submit]').removeAttr('disabled');
+						
 					}
 					else
 					{
@@ -505,7 +900,7 @@ jQuery(document).ready(function(){
 	$('.deletebtn').click(function(e){
 		e.preventDefault();
 		
-		if(confirm("Are you sure?") === true)
+		if(confirm("Press a button!") === true)
 		{
 			var table = $(this).attr('data-table');
 			var row_id = $(this).attr('data-id');
@@ -535,7 +930,7 @@ jQuery(document).ready(function(){
 	$('.deletecats').click(function(e){
 		e.preventDefault();
 		
-		if(confirm("Are you sure?") === true)
+		if(confirm("Press a button!") === true)
 		{
 			var table = $(this).attr('data-table');
 			var row_id = $(this).attr('data-id');
@@ -553,7 +948,111 @@ jQuery(document).ready(function(){
 						$(tis).next('.activebtn').show();
 						$(tis).parent().next('td').html("<span class='btn btn-sm btn-danger'>Inactive</span>");
 					}
-					else if(response.result == 2)
+					else if(response.result == 2){
+						toastr.success('something went wrong!');
+
+					}
+					
+				}
+			});
+		}
+	});
+	 $('.builder_image_data').submit(function(e){
+        e.preventDefault();
+    
+        var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
+        
+        if(is_required(this_id) === true)
+        {
+            $.ajax({
+                type: 'POST',
+                url: baseURL + "admin/builder-image-update",
+                data: new FormData(this),
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $(this_id + ' input[type=submit]').attr('disabled', 'true');
+                
+                },
+                success: function(response){
+                    if(response.result == 1)
+                    {
+                        toastr.success('Success!');
+                        
+                        $(this_id + ' input[type=submit]').removeAttr('disabled');
+                        
+                    }
+                    else
+                    {
+                        toastr.error('Something went wrong! Please try again later!');
+                        $(this_id + ' input[type=submit]').removeAttr('disabled');
+                    }
+                }
+            });
+        }
+        else
+        {
+            toastr.error('Please check the required fields!');
+        }
+    });
+    
+	$('.deletelist').click(function(e){
+		e.preventDefault();
+		
+		if(confirm("Press a button!") === true)
+		{
+			var table = $(this).attr('data-table');
+			var row_id = $(this).attr('data-id');
+			var tis = this;
+			$.ajax({
+				type: 'POST',
+				url: baseURL + "builder/delete",
+				data: 'table_name=' + table + '&row_id=' + row_id + '&status=1',
+				dataType: "json",
+				success: function(response){
+					if(response.result == 1)
+					{
+						toastr.success('Success!');
+						$(tis).hide();
+						$(tis).next('.activebtn').show();
+						$(tis).parent().next('td').html("<span class='btn btn-sm btn-danger'>Inactive</span>");
+					}
+					else if(response.result == 2){
+						toastr.success('something went wrong!');
+
+					}
+					
+				}
+			});
+		}
+	});
+	
+	$('.delete').click(function(e){
+		e.preventDefault();
+		
+		if(confirm("Press a button!") === true)
+		{
+			var table = $(this).attr('data-table');
+			var row_id = $(this).attr('data-id');
+			var tis = this;
+			var status = $(this).attr('data-status');
+
+			print(status);
+			$.ajax({
+				type: 'GET',
+				url: baseURL + "admin/delete",
+				data: 'table_name=' + table + '&id=' + row_id + '&id2=' + status,
+				dataType: "json",
+				success: function(response){
+					if(response.result == 1)
+					{
+						toastr.success('Success!');
+						$(tis).hide();
+						$(tis).next('.activebtn').show();
+						$(tis).parent().next('td').html("<span class='btn btn-sm btn-danger'>Inactive</span>");
+					}
+					if(response.result == 2)
 					{
 						toastr.error(response.msg);
 					}
@@ -565,11 +1064,16 @@ jQuery(document).ready(function(){
 			});
 		}
 	});
-	
+
+
+
+
+
+
 	$('.activebtn').click(function(e){
 		e.preventDefault();
 		
-		if(confirm("Are you sure?") === true)
+		if(confirm("Press a button!") === true)
 		{
 			var table = $(this).attr('data-table');
 			var row_id = $(this).attr('data-id');
@@ -647,4 +1151,44 @@ jQuery(document).ready(function(){
 	}
 	
 $('input').attr("autocomplete", "new-password");
-	
+
+$('.update_data_amenities').submit(function(e){
+		e.preventDefault();
+		
+		var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
+		
+		if(is_required(this_id) === true)
+		{
+			$.ajax({
+				type: 'POST',
+				url: baseURL + "builder/update-amenities",
+				data: new FormData(this),
+				dataType: "json",
+				contentType: false,
+				processData: false,
+				beforeSend: function() {
+					$(this_id + ' input[type=submit]').attr('disabled', 'true');
+				},
+				success: function(response){
+					console.log(response)
+					if(response.result == 1)
+					{
+						$(this_id)[0].reset();
+						toastr.success('Success!');
+						$(this_id + ' input[type=submit]').removeAttr('disabled');
+						window.location.reload();
+						
+					}
+					else
+					{
+						toastr.error('Something went wrong! Please try again later!');
+						$(this_id + ' input[type=submit]').removeAttr('disabled');
+					}
+				}
+			});
+		}
+		else
+		{
+			toastr.error('Please check the required fields!');
+		}
+	});

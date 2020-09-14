@@ -31,7 +31,7 @@
 							</td>
 							<td><?php echo $record->phone_number ?></td>
 							<td class="text-center">
-								<a href="<?=base_url()?>admin/orders?user-id=<?=$record->id?>" class="btn btn-sm btn-primary">
+								<a href="<?=base_url()?>admin/orders?user-id=<?=$record->id?>">
 									<?php echo sizeof($this->common_model->get_records('tbl_orders', "status = '0' and user_id=" . $record->id)) ?>
 								</a>
 							</td>

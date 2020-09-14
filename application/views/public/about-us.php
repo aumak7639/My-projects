@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-md-5 section-reponsive col-sm-6">
                         <div class="feature-about-us">
-                            <img src="images/home-about.jpg" alt="image">
+                            <img src="<?= base_url() ?>assets/front/images/home-about.jpg" alt="image">
                         </div>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                             </div>
                         </div>
                         <div class="feature-contact">
-                            <img src="images/profile.jpg" alt="image">
+                            <img src="<?= base_url() ?>assets/front/images/profile.jpg" alt="image">
                         </div>
                     </form>
                     </div>
@@ -137,7 +137,7 @@
                         <div class="flat-testimonials  owl-carousel" data-item="2" data-nav="false" data-dots="false" data-auto="true">
                             <div class="testimonials space"> 
                                 <div class="avatar">    
-                                    <img src="images/testimonial/1.jpg" alt="image">
+                                    <img src="<?= base_url() ?>assets/front/images/testimonial/1.jpg" alt="image">
                                 </div>  
                                 <div class="message">
                                     <strong class="title">i have successfully completed</strong>                                
@@ -150,7 +150,7 @@
                             </div>
                             <div class="testimonials"> 
                                 <div class="avatar">   
-                                    <img src="images/testimonial/2.jpg" alt="image">
+                                    <img src="<?= base_url() ?>assets/front/images/testimonial/2.jpg" alt="image">
                                 </div>  
                                 <div class="message">
                                     <strong class="title">i have successfully completed</strong>                                

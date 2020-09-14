@@ -9,7 +9,7 @@ class Common_controller extends BaseController
     {
         parent::__construct();
         $this->load->model('admin/common_model');
-        $this->isLoggedIn();   
+        //$this->isLoggedIn();   
 		
 		$this->global['tis'] = $this;
     }
@@ -22,87 +22,65 @@ class Common_controller extends BaseController
 		$this->global['countofsubcategory'] = $this->common_model->get_records('tbl_sub_category', "status = '0'");
 		$this->global['countofchildcategory'] = $this->common_model->get_records('tbl_child_category', "status = '0'");
 		$this->global['countofproduct'] = $this->common_model->get_records('tbl_product', "status = '0'");
-		
-        $this->loadViews("dashboard", $this->global, NULL , NULL);
-    }
-    
-    public function coupons()
+	
+        $this->loadViews("product", $this->global, NULL , NULL);
+     
+	}
+	
+
+
+       public function logout()
     {
-        $this->global['pageTitle'] = 'Coupons - ' . $this->config->item('app_name');
+        session_destroy();
+        redirect(base_url()."admin");
+    }
+    public function coupons(){
+    	$this->load->model('Common_model');
+    	$data["fetch_data"]=$this->Common_model->fetch_data1();
+    	$this->loadViews("coupons",$data);
+    }
+     public function used_coupons(){
+  
+    	
+    	$this->global['rows'] = $this->common_model->get_records('tbl_coupon_users', "status = 'A'");
+    	$this->loadViews("used_coupons", $this->global, NULL , NULL);
+    }
+
+    public function insert1(){
+    	$this->load->model('Common_model');
+    	$this->load->helper('string');
+		$coupon_number=random_string('alnum',10);
+
+    	$data=array(
+    		"Coupon_number"=>$coupon_number,
+    		"Generated_date"=>date("yy-m-d"),
+    		"Used_date"=>"",
+    		"User_id"=>"",
+    		"Expiry_date"=>$this->input->post("expiry_date"),
+    		"Point"=>$this->input->post("point"),
+    		"IsFlat"=>$this->input->post("IsFlat"),   
+    		 "Status"=>"C"
+    	);
+    	$this->Common_model->insert_data1($data);
+    	redirect(base_url()."admin/coupons");
+
+    }
+
+    public function update1(){
+    	$id=$this->input->get('Id');
+    	$this->load->model('Common_model');
+    	$this->Common_model->update1($id);
+    	//echo '<script>alert($id)</script>';
+    	redirect(base_url()."admin/coupons");
+    }
+
+    public function stores()
+    {
+        $this->global['pageTitle'] = 'Stores - ' . $this->config->item('app_name');
         
-		$this->global['records'] = $this->common_model->get_records('tbl_coupons', "status = '0' order by id desc");
+		$this->global['records'] = $this->common_model->get_records('tbl_stores', "status = '0' order by id desc");
 		
-        $this->loadViews("coupons", $this->global, NULL , NULL);
-    }
-    
-    public function new_blog()
-    {
-        $this->global['pageTitle'] = 'New Blog - ' . $this->config->item('app_name');
-		
-        $this->loadViews("new-blog", $this->global, NULL , NULL);
-    }
-    
-    public function list_blogs()
-    {
-        $this->global['pageTitle'] = 'List Blog - ' . $this->config->item('app_name');
-        
-		$this->global['records'] = $this->common_model->get_records('tbl_blogs', "status = '0' order by id desc");
-		
-        $this->loadViews("list-blogs", $this->global, NULL , NULL);
-    }
-    
-    public function edit_blog($id)
-    {
-		$this->global['record'] = $this->common_model->get_records('tbl_blogs', "status = '0' and id = '$id' order by id desc")[0];
-		
-		$this->global['pageTitle'] = $this->global['record']->title . " - " . $this->config->item('app_name');
-		
-        $this->loadViews("edit-blog", $this->global, NULL , NULL);
-    }
-    
-    public function newsletter()
-    {
-		$this->global['records'] = $this->common_model->get_records('tbl_newsletter', "status = '0' order by id desc");
-		
-		$this->global['pageTitle'] = "Newsletter - " . $this->config->item('app_name');
-		
-        $this->loadViews("newsletter", $this->global, NULL , NULL);
-    }
-    
-    public function pincodes()
-    {
-		$this->global['records'] = $this->common_model->get_records('tbl_pincodes', "status = '0' order by id desc");
-		
-		$this->global['pageTitle'] = "Pincodes - " . $this->config->item('app_name');
-		
-        $this->loadViews("pincodes", $this->global, NULL , NULL);
-    }
-    
-    public function add_new_color_variant()
-    {
-		$folder_name = "products";
-		$file_new_name = date('Ydm') . time() . uniqid() . "." . strtolower(pathinfo($_FILES[color_image]["name"],PATHINFO_EXTENSION));
-		if($this->image_upload(color_image, $file_new_name, 'uploads/' . $folder_name . '/') == true)
-		{
-			$info['color_image'] = $file_new_name;
-			$info['value'] = $this->input->post("value");
-			$info['product_id'] = $this->input->post("product_id");
-		
-			$this->common_model->insert("tbl_product_color_variants", $info);
-			
-			$info1['color_image'] = $this->common_model->get_record('tbl_product', "id='" . $this->input->post("product_id") . "'", "product_color_image");
-			$info1['value'] = $this->input->post("product_id");
-			$info1['product_id'] = $this->input->post("value");
-		
-			$this->common_model->insert("tbl_product_color_variants", $info1);
-			$data['result'] = 1;
-		}
-		else
-		{
-			$data['result'] = 0;
-		}
-		
-		echo json_encode($data);
+        $this->loadViews("store", $this->global, NULL , NULL);
     }
     
     public function contact_form()
@@ -112,24 +90,6 @@ class Common_controller extends BaseController
 		$this->global['records'] = $this->common_model->get_records('tbl_contact_form', "status = '0' order by id desc");
 		
         $this->loadViews("contact_form", $this->global, NULL , NULL);
-    }
-    
-    public function properties_master()
-    {
-        $this->global['pageTitle'] = 'Properties Master - ' . $this->config->item('app_name');
-        
-		$this->global['records'] = $this->common_model->get_records('tbl_product_properties_master', "status = '0' order by id desc");
-		
-        $this->loadViews("properties-master", $this->global, NULL , NULL);
-    }
-    
-    function orders_transactions()
-    {
-        $this->global['pageTitle'] =  'Orders Transactions' . " - " . $this->config->item('app_name');
-        
-		$this->global['records'] = $this->common_model->get_records('tbl_transactions', "status = '0' and order_ids != '' order by id desc");
-		
-        $this->loadViews("order-transactions", $this->global, NULL , NULL);
     }
     
     public function order_help_center()
@@ -172,38 +132,21 @@ class Common_controller extends BaseController
         $this->loadViews("new_page", $this->global, NULL , NULL);
     }
     
-    function orders()
+     function orders()
     {
         $this->global['pageTitle'] =  'Orders' . " - " . $this->config->item('app_name');
         
+		$this->global['records'] = $this->common_model->get_custom_query("select a.*, b.name, b.slug from tbl_order_item a, tbl_product b where a.status = '0' and b.id = a.product_id group by a.order_id");
+		
 		if(isset($_GET['user-id']))
 		{
-			$this->global['records'] = $this->common_model->get_custom_query("select a.*, b.name, b.slug from tbl_order_item a, tbl_product b where a.status = '0' and b.id = a.product_id and a.user_id='" . $_GET['user-id'] . "' group by a.order_id order by a.id desc");
-		}
-		else
-		{
-			$this->global['records'] = $this->common_model->get_custom_query("select a.*, b.name, b.slug from tbl_order_item a, tbl_product b where a.status = '0' and b.id = a.product_id group by a.order_id order by a.id desc");
+			$this->global['records'] = $this->common_model->get_records('tbl_orders', "status = '0' and user_id='" . $_GET['user-id'] . "' order by id desc");
 		}
 		
         $this->loadViews("orders", $this->global, NULL , NULL);
+       
     }
-    
-    function orders_report()
-    {
-        $this->global['pageTitle'] =  'Orders' . " - " . $this->config->item('app_name');
-        
-		if(isset($_GET['user-id']))
-		{
-			$this->global['records'] = $this->common_model->get_custom_query("select a.*, b.name, b.slug from tbl_order_item a, tbl_product b where a.status = '0' and b.id = a.product_id and a.user_id='" . $_GET['user-id'] . "' group by a.order_id order by a.id desc");
-		}
-		else
-		{
-			$this->global['records'] = $this->common_model->get_custom_query("select a.*, b.name, b.slug from tbl_order_item a, tbl_product b where a.status = '0' and b.id = a.product_id group by a.order_id order by a.id desc");
-		}
-		
-        $this->loadViews("orders-report", $this->global, NULL , NULL);
-    }
-    
+   
     function order_details($order_id)
     {
         $this->global['pageTitle'] =  'Order Details' . " - " . $this->config->item('app_name');
@@ -233,15 +176,6 @@ class Common_controller extends BaseController
         $this->loadViews("customers", $this->global, NULL , NULL);
     }
     
-    function customers_report()
-    {
-        $this->global['pageTitle'] =  'Customers' . " - " . $this->config->item('app_name');
-        
-		$this->global['records'] = $this->common_model->get_records('tbl_general_users', "status = '0' order by id desc");
-		
-        $this->loadViews("customers-report", $this->global, NULL , NULL);
-    }
-    
     function pages()
     {
         $this->global['pageTitle'] =  'Pages' . " - " . $this->config->item('app_name');
@@ -249,15 +183,6 @@ class Common_controller extends BaseController
 		$this->global['records'] = $this->common_model->get_records('tbl_pages', "status = '0' order by name asc");
 		
         $this->loadViews("pages", $this->global, NULL , NULL);
-    }
-    
-    function reviews()
-    {
-        $this->global['pageTitle'] =  'Reviews' . " - " . $this->config->item('app_name');
-        
-		$this->global['records'] = $this->common_model->get_records('tbl_reviews', "status = '0' order by id desc");
-		
-        $this->loadViews("reviews", $this->global, NULL , NULL);
     }
     
     function edit_page($id)
@@ -316,7 +241,7 @@ class Common_controller extends BaseController
 			echo '<span class="text-danger">Something went wrong!</span>';
 		}
     }
-	function get_records()
+    function get_records()
     {
 		$table_name = $this->input->post('table_name');
 		$where = $this->input->post('where');
@@ -326,7 +251,120 @@ class Common_controller extends BaseController
 		
 		echo json_encode($data);
 	}
-    
+	
+
+
+	
+	
+
+	public function banner()
+{       
+    $this->load->library('upload');
+    $dataInfo = array();
+	$files = $_FILES;
+
+	print_r($files);
+
+
+	
+
+    $cpt = count($_FILES['userfile']['name']);
+    for($i=0; $i<$cpt; $i++)
+    {           
+        $_FILES['userfile']['name']= $files['userfile']['name'][$i];
+        $_FILES['userfile']['type']= $files['userfile']['type'][$i];
+        $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
+        $_FILES['userfile']['error']= $files['userfile']['error'][$i];
+        $_FILES['userfile']['size']= $files['userfile']['size'][$i];    
+
+        $this->upload->initialize($this->set_upload_options());
+        $this->upload->do_upload('userfile');
+        $dataInfo[] = $this->upload->data();
+    }
+	$a=array();
+
+	for($i=0;$i<count($dataInfo);$i++){
+	array_push($a,$dataInfo[$i]['file_name']);
+}	
+$data= array();
+    $data['images']=implode(",",$a);
+
+   
+	
+		$insert_id=$this->common_model->update($table = '', $info = $data, $where = 'id=1');
+		if($insert_id)
+		{
+			$data['result'] = 1;
+			
+		}
+     echo json_encode($data);
+}
+
+
+
+
+
+public function file_update()
+{       
+    $this->load->library('upload');
+    $dataInfo = array();
+	$files = $_FILES;
+
+	print_r($files);
+
+
+	
+
+    $cpt = count($_FILES['userfile']['name']);
+    for($i=0; $i<$cpt; $i++)
+    {           
+        $_FILES['userfile']['name']= $files['userfile']['name'][$i];
+        $_FILES['userfile']['type']= $files['userfile']['type'][$i];
+        $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
+        $_FILES['userfile']['error']= $files['userfile']['error'][$i];
+        $_FILES['userfile']['size']= $files['userfile']['size'][$i];    
+
+        $this->upload->initialize($this->set_upload_options());
+        $this->upload->do_upload('userfile');
+        $dataInfo[] = $this->upload->data();
+    }
+	$a=array();
+
+	for($i=0;$i<count($dataInfo);$i++){
+	array_push($a,$dataInfo[$i]['file_name']);
+}	
+$data= array();
+    $data['images']=implode(",",$a);
+
+   
+
+		$insert_id=$this->common_model->update('tbl_banner', $data,"id='1'");
+		if($insert_id)
+		{
+			$data['result'] = 1;
+			
+		}
+     echo json_encode($data);
+}
+
+
+
+
+  function set_upload_options()
+{   
+    //upload an image options
+    $config = array();
+    $config['upload_path'] = 'uploads/common/';
+
+    $config ['allowed_types'] = 'gif|jpg|png|jpeg|txt|pdf|xsl|doc';
+    $config['max_size']      = '0';
+    $config['overwrite']     = FALSE;
+
+    return $config;
+}
+	
+	
+	
     function deletecats()
     {
 		$table_name = $this->input->post('table_name');
@@ -382,8 +420,37 @@ class Common_controller extends BaseController
 			}
 		}
 		
-		if($table_name == "tbl_product_properties_master")
+		if($table_name == "tbl_child_category")
 		{
+			$info['status'] = '1';
+				
+			$where = "id=" . $row_id;
+				
+			if($this->common_model->update($table_name, $info, $where))
+			{
+				$data['result'] = 1;
+			}
+			else
+			{
+				$data['result'] = 0;
+			}
+		}
+		if($table_name == "tbl_child_category")
+		{
+			$info['status'] = '1';
+				
+			$where = "id=" . $row_id;
+				
+			if($this->common_model->update($table_name, $info, $where))
+			{
+				$data['result'] = 1;
+			}
+			else
+			{
+				$data['result'] = 0;
+			}
+		}
+		else{
 			$info['status'] = '1';
 				
 			$where = "id=" . $row_id;
@@ -400,6 +467,69 @@ class Common_controller extends BaseController
 		
 		echo json_encode($data);
     }
+	
+
+
+
+	function delete()
+    {
+		$table_name = $this->input->get('table_name');
+		$row_id = $this->input->get('id');
+		$status = $this->input->get('status');
+
+		$data['result'] = 0;
+		
+		
+			if($this->common_model->delete_data($table_name,$row_id,$status)){
+				$data['result'] = 1;
+
+			}
+		
+		
+		echo json_encode($data);
+    }
+    function status_update()
+    {
+		$table_name = $this->input->post('table');
+		$row_id = $this->input->post('row_id');
+		$status = $this->input->post('status');
+		$field=$this->input->post('field');
+
+		$data['result'] = 0;
+		if($status==0)
+		{
+			$status=1;
+		}
+		else{
+			$status=0;
+		}
+		
+			if($this->common_model->update_status($table_name,$row_id,$status,$field)){
+				$data['result'] = 1;
+
+			}
+		
+		
+		echo json_encode($data);
+    }
+  	function activate()
+    {
+		$table_name = $this->input->post('table_name');
+		$row_id = $this->input->post('row_id');
+		$status = 0;
+
+		$data['result'] = 0;
+		
+		
+			if($this->common_model->activate_data($table_name,$row_id,$status)){
+				$data['result'] = 1;
+
+			}
+		
+		
+		echo json_encode($data);
+    }
+    
     
     function delete_data()
     {
@@ -463,15 +593,6 @@ class Common_controller extends BaseController
         $this->loadViews("bottom_footer", $this->global, NULL , NULL);
     }
     
-    public function products_report()
-    {
-        $this->global['pageTitle'] = 'Products' . ' - ' . $this->config->item('app_name');
-        
-		$this->global['records'] = $this->common_model->get_records('tbl_product', "status != '9' order by name asc");
-        
-        $this->loadViews("products-report", $this->global, NULL , NULL);
-    }
-	
     function list_sections_page()
     {
         $this->global['pageTitle'] =  'Sections' . " - " . $this->config->item('app_name');
@@ -486,17 +607,13 @@ class Common_controller extends BaseController
 		$slugs = $this->common_model->get_records($table, "slug = '$slug'");
         if(sizeof($slugs) > 1)
 		{
-			return $slug . '-' . uniqid();
+			return $slug . '-' . time();
 		}
         if(sizeof($slugs) == 1)
 		{
 			if($slugs[0]->id == $id)
 			{
 				return $slug;
-			}
-			else
-			{
-				return $slug . '-' . uniqid();
 			}
 		}
 		return $slug;
@@ -606,7 +723,6 @@ class Common_controller extends BaseController
 				if($this->image_upload($key, $file_new_name, 'uploads/' . $folder_name . '/') == true)
 				{
 					$info['image'] = $file_new_name;
-					$info['image_link'] = $this->input->post('image_link_' . $key);
 					$this->common_model->update('tbl_header_menu', $info, 'id=' . $key);
 				}
 			}
@@ -625,83 +741,11 @@ class Common_controller extends BaseController
 		$this->load->view("admin/edit-product/product-additional-images", $data);
     }
 	
-    function product_dimensions_images($product_id)
-    {
-		$data['product_id'] = $product_id;
-		$this->load->view("admin/edit-product/product-dimensions-images", $data);
-    }
-	
-    public function insert_coupon_data()
-    {
-        if($this->isAdmin() == TRUE)
-        {
-            $data['result'] = 0;
-        }
-        else
-        {
-			$coupon_code = $this->input->post('coupon_code');
-			if(sizeof($this->common_model->get_records("tbl_coupons", "status = '0' and coupon_code = '$coupon_code'")) < 1)
-			{
-				foreach($_POST as $key => $value)
-				{
-					if($key != 'table_name' && $key != 'row_id')
-					{
-						$info[$key] = $value;
-					}
-				}
-				
-				$table = $this->input->post('table_name');
-				
-				if($insert_id = $this->common_model->insert($table, $info))
-				{
-					$data['result'] = 1;
-					$data['insert_id'] = $insert_id;
-				}
-				else
-				{
-					$data['result'] = 0;
-				}
-			}
-			else
-			{
-				$data['result'] = 2;
-			}
-        }
-		echo json_encode($data);
-	}
-	function status_update()
-    {
-		$table_name = $this->input->post('table');
-		$row_id = $this->input->post('row_id');
-		$status = $this->input->post('status');
-		$field=$this->input->post('field');
-
-		$data['result'] = 0;
-		if($status==0)
-		{
-			$status=1;
-		}
-		else{
-			$status=0;
-		}
-		
-			if($this->common_model->update_status($table_name,$row_id,$status,$field)){
-				$data['result'] = 1;
-
-			}
-		
-		
-		echo json_encode($data);
-    }
-    
     function insert()
     {
-        if($this->isAdmin() == TRUE)
-        {
-            $data['result'] = 0;
-        }
-        else
-        {
+
+
+
 			foreach($_POST as $key => $value)
 			{
 				if($key != 'table_name' && $key != 'row_id')
@@ -725,6 +769,76 @@ class Common_controller extends BaseController
 			}
 			
 			$table = $this->input->post('table_name');
+
+
+
+			if($table == "tbl_general_users"){
+
+				$data['result'] = 0;
+		      $info['first_name'] = $this->input->post('first_name');
+		       $info['last_name'] = $this->input->post('last_name');
+	          	$info['email'] = $this->input->post('email');
+		        $info['phone_number']=$this->input->post('phone_number');
+		          $info['password'] = md5($this->input->post('password'));
+		       $info['user_type'] = $this->input->post('user_type');
+				 $info['is_verified'] = "1";
+				 if(sizeof($this->common_model->get_records('tbl_general_users', "email = '" . $this->input->post('email') . "'")) > 0)
+				 {
+					 $data['result'] = 2;
+					 $data['EmailExist'] = "Email Is already Exist";
+				 }
+				 else if(sizeof($this->common_model->get_records('tbl_general_users', "phone_number = '" . $this->input->post('phone_number') . "'")) > 0)
+				 {
+					 $data['result'] = 3;
+					 $data['Moobile_num'] = "Mobile Number Is already Exist";
+				 }else{
+					if($insert_id = $this->common_model->insert('tbl_general_users', $info))
+					{
+						
+						$data['result'] = 1;
+					}
+
+
+				 }
+				
+			}
+			else if($table == "tbl_builder_register"){
+
+				$data['result'] = 0;
+		      $info['first_name'] = $this->input->post('first_name');
+		       $info['last_name'] = $this->input->post('last_name');
+	          	$info['email'] = $this->input->post('email');
+		        $info['mobile']=$this->input->post('mobile');
+		          $info['password'] = md5($this->input->post('password'));
+		       $info['name'] = $this->input->post('name');
+			
+				 if(sizeof($this->common_model->get_records('tbl_builder_register', "email = '" . $this->input->post('email') . "'")) > 0)
+				 {
+					 $data['result'] = 2;
+					 $data['EmailExist'] = "Email Is already Exist";
+				 }
+				 else if(sizeof($this->common_model->get_records('tbl_builder_register', "mobile = '" . $this->input->post('mobile') . "'")) > 0)
+				 {
+					 $data['result'] = 3;
+					 $data['Moobile_num'] = "Mobile Number Is already Exist";
+				 }else{
+					if($insert_id = $this->common_model->insert('tbl_builder_register', $info))
+					{
+						
+						$data['result'] = 1;
+					}
+
+
+				 }
+				
+			}
+
+              else{
+		
+
+
+
+
 			
 			if($table == "tbl_sections")
 			{
@@ -738,10 +852,6 @@ class Common_controller extends BaseController
 				$folder_name = 'brands';
 			}
 			elseif($table == 'tbl_product_images')
-			{
-				$folder_name = 'products';
-			}
-			elseif($table == 'tbl_product_dimensions_images')
 			{
 				$folder_name = 'products';
 			}
@@ -761,12 +871,30 @@ class Common_controller extends BaseController
 			{
 				$folder_name = 'pages';
 			}
+			
+			elseif($table=="locations"){
+				$folder_name = 'locations';
+
+			}
+			elseif($table=="mydetails"){
+				$folder_name = 'mydetails';
+
+			}
+			elseif($table=="builder"){
+				$folder_name = 'builder';
+
+			}
+			elseif($table=="yearbuilt"){
+				$folder_name = 'yearbuilt';
+
+			}
+			
 			else
 			{
 				$folder_name = "common";
 			}
-			
-			
+
+		
 			if(sizeof($_FILES) > 0)
 			{
 				if($table == 'tbl_product_images')
@@ -790,27 +918,6 @@ class Common_controller extends BaseController
 					
 					$data['result'] = 1;
 				}
-				elseif($table == 'tbl_product_dimensions_images')
-				{
-					$incc = 0; 
-					while($incc < sizeof($_FILES['file_name']['name']))
-					{
-						if($_FILES['file_name']['error'][$incc] != 4)
-						{
-							$file_new_name = "mimaas-product-" . date('Ydm') . time() . uniqid() . "." . strtolower(pathinfo($_FILES['file_name']["name"][$incc],PATHINFO_EXTENSION));
-							if($this->product_images_upload('file_name', $file_new_name, 'uploads/products/', $incc) == true)
-							{
-								$info['file_name'] = $file_new_name;
-								//echo $file_new_name;
-								$this->common_model->insert('tbl_product_dimensions_images', $info);
-							}
-						}
-						
-						$incc++;
-					}
-					
-					$data['result'] = 1;
-				}
 				else
 				{
 					foreach($_FILES as $key => $value)
@@ -821,6 +928,7 @@ class Common_controller extends BaseController
 							$info[$key] = $file_new_name;
 						}
 					}
+
 					if($insert_id = $this->common_model->insert($table, $info))
 					{
 						if(array_key_exists('slug', $info))
@@ -858,9 +966,13 @@ class Common_controller extends BaseController
 					$data['result'] = 0;
 				}
 			}
-        }
+		}
+        
 		echo json_encode($data);
-    }
+	}
+	
+
+
 	
     function insert_product()
     {
@@ -870,70 +982,80 @@ class Common_controller extends BaseController
         }
         else
         {
-			$info = array();
 			foreach($_POST as $key => $value)
 			{
-				if($key != 'table_name' && $key != 'row_id' && $key != 'product_1')
+				if($key != 'table_name' && $key != 'spec_id' && $key != 'spec_description' && $key != 'highlight')
 				{
 					if($key == 'slug')
 					{
-						$info[$key] = $this->slugify($this->input->post('name'));
+						if(strlen($value) > 0)
+						{
+							$info[$key] = $this->slugify($value);
+						}
+						else
+						{
+							$info[$key] = $this->slugify($this->input->post('name'));
+						}
 					}
 					else
 					{
-						$info[$key] = $value;
+						$info[$key] = htmlentities($value);
 					}
 				}
 			}
 			
-			$info['slug'] = $this->slugify($this->input->post('name'));
-			
-			$info['meta_title'] = ucfirst($this->input->post('name'));
-			$info['meta_description'] = $this->input->post('short_description');
-			$info['sku_id'] = uniqid();
-			$info['product_status'] = "approved";
-			
-			$child_category = $this->input->post('child_category');
-			
-			$parent_cat = $this->common_model->get_record("tbl_child_category", "id=" . $child_category, "category_id");
-			$sub_cat = $this->common_model->get_record("tbl_child_category", "id=" . $child_category, "sub_category_id");
-			$child_cat = $child_category;
-			
-			$info['category'] = $parent_cat;
-			$info['sub_category'] = $sub_cat;
-			$info['child_category'] = $child_cat;
-			$info['product_status'] = "approved";
-			$info['created_by'] = "1";
-			
-			$table = "tbl_product";
+			$table = $this->input->post('table_name');
 			
 			if(sizeof($_FILES) > 0)
 			{
-    			$folder_name = 'products';
-    			
-				foreach($_FILES as $key => $value)
+				$file_new_name1 = date('Ydm') . time() . uniqid() . "." . strtolower(pathinfo($_FILES['highlight']["name"],PATHINFO_EXTENSION));
+				if($this->image_upload('highlight', $file_new_name1, 'uploads/product-highlight/') == true)
 				{
-					$file_new_name = date('Ydm') . time() . uniqid() . "." . strtolower(pathinfo($_FILES[$key]["name"],PATHINFO_EXTENSION));
-					if($this->image_upload($key, $file_new_name, 'uploads/' . $folder_name . '/') == true)
-					{
-						$info[$key] = $file_new_name;
-					}
+					$info['highlight'] = $file_new_name1;
 				}
-				if($insert_id = $this->common_model->insert($table, $info))
+				$file_new_name = date('Ydm') . time() . uniqid() . "." . strtolower(pathinfo($_FILES['product_image']["name"],PATHINFO_EXTENSION));
+				if($this->product_image_upload('product_image', $file_new_name, 'uploads/products/') == true)
 				{
-					if(array_key_exists('slug', $info))
+					$info['product_image'] = $file_new_name;
+					if($insert_id = $this->common_model->insert($table, $info))
 					{
-						$info['slug'] = $this->checkSlugExists($info['slug'], "tbl_product", $insert_id);
-						$info2['slug'] = $info['slug'];
-						$this->common_model->update("tbl_product", $info2, "id=" . $insert_id);
-						$this->insert_slug($info, "tbl_product", $insert_id);
+						if(array_key_exists('slug', $info))
+						{
+							$info['slug'] = $this->checkSlugExists($info['slug'], $table, $insert_id);
+							$info2['slug'] = $info['slug'];
+							$this->common_model->update($table, $info2, "id=" . $insert_id);
+							$this->insert_slug($info, $table, $insert_id);
+						}
+						
+						$info3['product_id'] = $insert_id;
+						
+						$data['result'] = 1;
 					}
-					$data['product_id'] = $insert_id;
-					$data['result'] = 1;
+					else
+					{
+						$data['result'] = 0;
+					}
 				}
 				else
 				{
-					$data['result'] = 0;
+					if($insert_id = $this->common_model->insert($table, $info))
+					{
+						if(array_key_exists('slug', $info))
+						{
+							$info['slug'] = $this->checkSlugExists($info['slug'], $table, $insert_id);
+							$info2['slug'] = $info['slug'];
+							$this->common_model->update($table, $info2, "id=" . $insert_id);
+							$this->insert_slug($info, $table, $insert_id);
+						}
+						
+						$info2['product_id'] = $insert_id;
+						
+						$data['result'] = 1;
+					}
+					else
+					{
+						$data['result'] = 0;
+					}
 				}
 			}
 			else
@@ -942,12 +1064,11 @@ class Common_controller extends BaseController
 				{
 					if(array_key_exists('slug', $info))
 					{
-						$info['slug'] = $this->checkSlugExists($info['slug'], "tbl_product", $insert_id);
+						$info['slug'] = $this->checkSlugExists($info['slug'], $table, $insert_id);
 						$info2['slug'] = $info['slug'];
-						$this->common_model->update("tbl_product", $info2, "id=" . $insert_id);
-						$this->insert_slug($info, "tbl_product", $insert_id);
+						$this->common_model->update($table, $info2, "id=" . $insert_id);
+						$this->insert_slug($info, $table, $insert_id);
 					}
-					$data['product_id'] = $insert_id;
 					$data['result'] = 1;
 				}
 				else
@@ -956,6 +1077,28 @@ class Common_controller extends BaseController
 				}
 			}
 			
+			$incc = 0; 
+			while($incc < sizeof($_FILES['product_images']['name']))
+			{
+				if($_FILES['product_images']['error'][$incc] != 4)
+				{
+					$file_new_name = date('Ydm') . time() . uniqid() . "." . strtolower(pathinfo($_FILES['product_images']["name"][$incc],PATHINFO_EXTENSION));
+					if($this->product_images_upload('product_images', $file_new_name, 'uploads/products/', $incc) == true)
+					{
+						$info1['product_id'] = $insert_id;
+						$info1['file_name'] = $file_new_name;
+						if($this->common_model->insert('tbl_product_images', $info1))
+						{
+							$data['result'] = 1;
+						}
+						else
+						{
+							$data['result'] = 0;
+						}
+					}
+				}
+				$incc++;
+			}
         }
 		echo json_encode($data);
     }
@@ -986,9 +1129,20 @@ class Common_controller extends BaseController
 			
 			$child_category = $this->input->post('child_category');
 			
-			$parent_cat = $this->common_model->get_record("tbl_child_category", "id=" . $child_category, "category_id");
-			$sub_cat = $this->common_model->get_record("tbl_child_category", "id=" . $child_category, "sub_category_id");
-			$child_cat = $child_category;
+			$sub_cat = "";
+			$parent_cat = "";
+			$child_cat = "";
+			
+			foreach($child_category as $child_category_explode_val)
+			{
+			    $parent_cat = $parent_cat . $this->common_model->get_record("tbl_child_category", "id=" . $child_category_explode_val, "category_id") . ",";
+			    $sub_cat = $sub_cat . $this->common_model->get_record("tbl_child_category", "id=" . $child_category_explode_val, "sub_category_id") . ",";
+			    $child_cat = $child_cat . $child_category_explode_val . ",";
+			}
+			
+			$parent_cat = substr($parent_cat, 0, -1);
+			$sub_cat = substr($sub_cat, 0, -1);
+			$child_cat = substr($child_cat, 0, -1);
 			
 			$info['category'] = $parent_cat;
 			$info['sub_category'] = $sub_cat;
@@ -1013,12 +1167,11 @@ class Common_controller extends BaseController
 				{
 					if(array_key_exists('slug', $info))
 					{
-						$info['slug'] = $this->checkSlugExists($info['slug'], "tbl_product", $row_id);
+						$info['slug'] = $this->checkSlugExists($info['slug'], $table, $row_id);
 						$info2['slug'] = $info['slug'];
-						$this->common_model->update("tbl_product", $info2, "id=" . $row_id);
-						$this->common_model->update("tbl_slug", $info2, "product_id=" . $row_id);
+						$this->common_model->update($table, $info2, "id=" . $row_id);
+						$this->update_slug($info, $table, $row_id);
 					}
-					
 					$data['result'] = 1;
 				}
 				else
@@ -1048,17 +1201,30 @@ class Common_controller extends BaseController
         }
 		
 		echo json_encode($data);
-    }
+	}
 	
+	function tags_insert(){
+
+		$table = $this->input->post('table_name');
+			$row_id = $this->input->post('row_id');
+			$info['tags'] = $this->input->post('tags');
+
+			if($this->common_model->update($table, $info, "id = '" . $row_id . "'"))
+				{
+				
+					$data['result'] = 1;
+				}
+				else
+				{
+					$data['result'] = 0;
+				}
+
+	}
+	
+  
     function update()
     {
-        if($this->isAdmin() == TRUE)
-        {
-            $data['result'] = 0;
-        }
-        else
-        {
-			$info = array();
+       	$info = array();
 			foreach($_POST as $key => $value)
 			{
 				if($key != 'table_name' && $key != 'row_id' && $key != 'product_1')
@@ -1080,11 +1246,19 @@ class Common_controller extends BaseController
 					}
 				}
 			}
-			
+			  if($this->input->post('video_url[]'))
+            {
+                 $info['video_url']=implode(",",$this->input->post('video_url[]'));
+            }
+            if($this->input->post('similar_properties[]'))
+            {
+                 $info['similar_properties']=implode(",",$this->input->post('similar_properties[]'));
+            }
+		
 			$table = $this->input->post('table_name');
 			$row_id = $this->input->post('row_id');
 			
-			if(sizeof($_FILES) > 0)
+          	if(sizeof($_FILES) > 0)
 			{
 				if($table == 'tbl_brands')
 				{
@@ -1097,6 +1271,11 @@ class Common_controller extends BaseController
 				elseif($table == 'tbl_category' || $table == 'tbl_sub_category' || $table == 'tbl_child_category')
 				{
 					$folder_name = 'category';
+				}
+
+				elseif($table == 'mydetails')
+				{
+					$folder_name = 'mydetails';
 				}
 				else
 				{
@@ -1146,30 +1325,7 @@ class Common_controller extends BaseController
 				}
 			}
 			
-        }
-		echo json_encode($data);
-    }
-	
-    function update_product_properties_data()
-    {
-        if($this->isAdmin() == TRUE)
-        {
-            $data['result'] = 0;
-        }
-        else
-        {
-			$this->common_model->delete_data('tbl_product_properties', "product_id=" . $this->input->post("product_id"));
-			for($i = 0; $i < sizeof($_POST['title_id']); $i++)
-			{
-				$info['product_id'] = $this->input->post("product_id");
-				$info['title_id'] = $_POST["title_id"][$i];
-				$info['title'] = $this->common_model->get_record("tbl_product_properties_master", "id=" . $_POST["title_id"][$i], "title");
-				$info['value'] = $_POST["value"][$i];
-				$this->common_model->insert("tbl_product_properties", $info);
-			}
-			
-			$data['result'] = 1;
-        }
+        
 		echo json_encode($data);
     }
 	
@@ -1285,7 +1441,7 @@ class Common_controller extends BaseController
 			$uploadOk = 0;
 		} */
 		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-		&& $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG" && $imageFileType != "svg") {
+		&& $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG") {
 			$uploadOk = 0;
 		}
 		if ($uploadOk == 0) {
@@ -1370,24 +1526,689 @@ class Common_controller extends BaseController
 			}
 		}
 	}
-	function related_products()
-    { 
-      $this->global['records'] = $this->common_model->get_records("tbl_product","status='0'");
-		
-        $this->loadViews("related-products", $this->global, NULL , NULL);
+	function property(){
+		$this->global['records']=$this->common_model->get_records('tbl_property_details', "status = '0' and post_status!='OP' order by date_time desc");
+		$this->loadViews("item-product-page",$this->global);
 	}
-    
-	function rproducts_update()
-    { 
-    	$row_id=$this->input->post('product');
-    	$rp=$this->input->post('related_products[]');
-    	$info['related_products']=implode(",",$rp);
 
-      //	$info1=implode(",",$this->input->post('related_products'));
-       	$this->common_model->update("tbl_product", $info, "id='$row_id'");
+	function admindashboard(){
+		// $this->global['records']=$this->common_model->get_records('tbl_property_details', "status = '0' order by date_time desc");
+		$this->loadViews("admin-dashboard",$this->global);
+	}
+
+
+
+
+
+
+
+	function edit_property($id)
+	{
+		$this->global['records']=$this->common_model->get_records('tbl_property_details', "status = '0' and id='$id' order by date_time desc");
+		$this->loadViews("edit-product-page",$this->global);
+	}
+
+	public function  assign_tags($id)
+    {
+     $this->global['pageTitle'] = 'tags' . ' - ' . $this->config->item('app_name');
+        
+        
+     $this->global['records'] = $this->common_model->get_records('tbl_property_details', "status = '0'and id='$id'")[0];
+        
+        $this->loadViews("assign-tags", $this->global, NULL , NULL);
+    }
+    
+
+
+
+
+
+	function user_registration(){
+		$this->global['records']=$this->common_model->get_records('tbl_general_users', "status = '0' order by date_time desc");
+		$this->loadViews("user-registration",$this->global);
+	}
+	function user_list($id,$value){
+
+        if($value==1)
+        {
+           $lists = $this->common_model->get_custom_query("select user_id from tbl_user_wishlist where status = '0' and item_id='$id' order by date_time desc");
+           $user=array();
+           foreach($lists as $list){
+                array_push($user,$list->user_id);
+           }
+       }
+       else if($value==2)
+        {
+           $lists = $this->common_model->get_custom_query("select user_id from tbl_user_reviews where status = '0' and property_id='$id' order by Updated_time desc");
+           $user=array();
+           foreach($lists as $list){
+                array_push($user,$list->user_id);
+           }
+       }
+       else if($value==3)
+        {
+           $lists = $this->common_model->get_custom_query("select login_id from tbl_recently_viewed where status = '0' and item_id='$id' order by date_time desc");
+           $user=array();
+           foreach($lists as $list){
+                array_push($user,$list->login_id);
+           }
+       }
+           
+           $listuser=implode(",",$user);
+           
+            if(sizeof($listuser)>0 && $listuser[0]!='' && $listuser[0]!=','){
+
+
+           $this->global['records'] = $this->common_model->get_custom_query("select * from tbl_general_users where status = '0' and id IN ($listuser) order by date_time desc");
+       }
+       
+       else{
+         $this->global['records'] = array();
+       
+       }
+		$this->loadViews("user-registration",$this->global);
+	}
+
+	function builder_registration(){
+		$this->global['records']=$this->common_model->get_records('tbl_builder_register', "status = '0' order by date_time desc");
+		$this->loadViews("builder-registration",$this->global);
+	}
+	function update_amenities(){
+		$id=$this->input->post('id');
+		$info['ameneties']=implode(",",$this->input->post('amenities[]'));
+		$this->common_model->update('tbl_property_details',$info,"status = '0' and id='$id'");
 		$data['result']=1;
 		echo json_encode($data);
-       }
+	}
+	
+	function builder_image_update()
+{      
+	$data= array();
+
+    $row_id=$this->input->post('row_id');
+    $this->load->library('upload');
+    $dataInfo = array();
+    $files = $_FILES;
+    $cpt = count($_FILES['userfile']['name']);
+
+if($_FILES['userfile']['name'][0] != '')
+		{
+    for($i=0; $i<$cpt; $i++)
+    {           
+        $_FILES['userfile']['name']= $files['userfile']['name'][$i];
+        $_FILES['userfile']['type']= $files['userfile']['type'][$i];
+        $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
+        $_FILES['userfile']['error']= $files['userfile']['error'][$i];
+        $_FILES['userfile']['size']= $files['userfile']['size'][$i];    
+
+        $this->upload->initialize($this->set_upload_options());
+        $this->upload->do_upload('userfile');
+        $dataInfo[] = $this->upload->data();
+    }
+    $a=array();
+
+    for($i=0;$i<count($dataInfo);$i++){
+    array_push($a,$dataInfo[$i]['file_name']);
+	}
+ $data['image']=implode(",",$a);
+
+}
+$dataInfo2= array();
+$cpt = count($_FILES['file']['name']);
+
+	if($_FILES['file']['name'][0] != '')
+	{
+    for($i=0; $i<$cpt; $i++)
+    {           
+        $_FILES['file']['name']= $files['file']['name'][$i];
+        $_FILES['file']['type']= $files['file']['type'][$i];
+        $_FILES['file']['tmp_name']= $files['file']['tmp_name'][$i];
+        $_FILES['file']['error']= $files['file']['error'][$i];
+        $_FILES['file']['size']= $files['file']['size'][$i];    
+
+        $this->upload->initialize($this->set_upload_options());
+        $this->upload->do_upload('file');
+        $dataInfo2[] = $this->upload->data();
+    }
+    $b=array();
+
+    for($i=0;$i<count($dataInfo2);$i++){
+    array_push($b,$dataInfo2[$i]['file_name']);
+
+
+	}
+	       $data['attachment']=implode(",",$b);
+}
+		if($_FILES['profile_image']['name'] != '')
+		{
+			$store_profile_image = date('Ydm') . time() . uniqid() . "." . strtolower(pathinfo($_FILES['profile_image']["name"],PATHINFO_EXTENSION));
+			if($this->image_upload('profile_image', $store_profile_image, 'uploads/common/') == true)
+			{
+				$data['profile_image'] = $store_profile_image;
+			}
+		}
+
+   
+
+
+        $insert_id=$this->common_model->update('tbl_property_images', $data,"id='$row_id'");
+        if($insert_id)
+        {
+            $data['result'] = 1;
+           
+        }
+     echo json_encode($data);
+}
+
+
+
+
+
+
+ function approve()
+    {
+		$row_id = $this->input->post('row_id');
+		$info['post_status'] = $this->input->post('post_status');
+
+		$data['result'] = 0;
+		
+		
+			if($this->common_model->update("tbl_property_details",$info,"id='$row_id'")){
+				$data['result'] = 1;
+
+			}
+		
+		
+		echo json_encode($data);
+	}
+
+
+
+
+
+	function insert_form1()
+	{
+		$info=array();
+		$info['property_name']=$this->input->post('property_name');
+		$info['description']=$this->input->post('description');
+		$info['property_type']=$this->input->post('property_type');
+		$info['property_status']=$this->input->post('property_status');
+		$info['category_id']=$this->input->post('category_id');
+		$info['price']=$this->input->post('price');
+		$info['area']=$this->input->post('area');
+		$info['sqft']=$this->input->post('sqft');
+		$info['rooms']=$this->input->post('rooms');
+		$info['RERA_ID']=$this->input->post('RERA_ID');
+		$info['DTCP']=$this->input->post('DTCP');
+		
+		$info['bhk']=$this->input->post('bhk');
+		$info['built_up_area']=$this->input->post('built_up_area');
+		$info['subcategory_id']=$this->input->post('subcategory_id');
+		$info['post_status']="OP";
+			
+		$info['builders_info_id']=$this->input->post('builders_info_id');
+		$form1_id=$this->input->post('uniq_id');
+		if($form1_id=='')
+		{
+			$info['uniq_id']=uniqid();
+			if($this->common_model->insert("tbl_property_details", $info))
+			{
+				$data['result']=1;
+				$data['uniq_id']=$info['uniq_id'];
+				$_SESSION['form']=3;
+				$_SESSION['id']=$info['uniq_id'];
+				$_SESSION['form_id']=$info['uniq_id'];
+				
+			}
+		}
+		else
+		{
+			$info['uniq_id']=$form1_id;
+			if($this->common_model->update("tbl_property_details", $info,"uniq_id='$form1_id'"))
+			{
+				$data['result']=1;
+				$data['uniq_id']=$info['uniq_id'];
+				$_SESSION['form']=3;
+				$_SESSION['id']=$info['uniq_id'];
+		
+			}
+		}
+		echo json_encode($data);
+
+	}
+
+	function insert_form2()
+	{
+		$info=array();
+		$info['address']=$this->input->post('address');
+		$info['location']=$this->input->post('location');
+		$info['sub_location']=$this->input->post('sub_location');
+		$info['state']=$this->input->post('state');
+		$info['city']=$this->input->post('city');
+		$info['neighborhood']=$this->input->post('neighborhood');
+		$info['zip']=$this->input->post('pincode');
+		$info['country']=$this->input->post('country');
+		//$info['map']=$this->input->post('map');
+		$info['uniq_id']=$this->input->post('uniq_id');
+		$id=$info['uniq_id'];
+		if($_SESSION['count1']==1)
+		{
+				$this->common_model->update("tbl_property_location", $info,"uniq_id='$id'");
+			
+				$data['result']=1;
+				$data['uniq_id']=$info['uniq_id'];
+				$_SESSION['form']=4;
+			
+		}
+		else
+		{
+			$insert_id=$this->common_model->insert("tbl_property_location", $info);
+			if($insert_id)
+			{
+				$info2['location_id']=$insert_id;
+				$this->common_model->update('tbl_property_details', $info2, "uniq_id = '$id'");
+				$data['result']=1;
+				$data['uniq_id']=$info['uniq_id'];
+				$_SESSION['form']=4;
+				$_SESSION['count1']=1;
+			}
+		}	
+		echo json_encode($data);
+
+	}
+
+	function insert_form3()
+	{
+		$info=array();
+		$info['area_size']=$this->input->post('property_size');
+		$info['size_prefix']=$this->input->post('size_prefix');
+		$info['landarea']=$this->input->post('landarea');
+		$info['landarea_size_postfix']=$this->input->post('landarea_sizeprefix');
+		$info['bedrooms']=$this->input->post('bedrooms');
+		$info['bathrooms']=$this->input->post('bathrooms');
+		$info['balconies']=$this->input->post('balconies');
+		$info['is_your_property']=$this->input->post('is_your_property');
+		$info['floor_no']=$this->input->post('floor_no');
+		$info['total_floors']=$this->input->post('total_floors');
+		$info['car_parking_area']=$this->input->post('car_parking_area');
+		$info['no_of_car_parking']=$this->input->post('no_of_car_parking');
+		$info['garages']=$this->input->post('garage');
+		$info['garages_size']=$this->input->post('garage_size');
+
+		$info['transaction_type']=$this->input->post('transaction_type');
+		$info['possession_status']=$this->input->post('possession_status');
+		$info['month_a']=$this->input->post('month_a');
+		$info['year_a']=$this->input->post('year_a');
+		$info['age_of_construction']=$this->input->post('age_of_construction');
+		$info['available_from']=$this->input->post('available_from');
+		$info['year_built']=$this->input->post('year_built');
+		if($this->input->post('video_url[]'))
+		{
+			$info['video_url']=implode(",",$this->input->post('video_url[]'));
+		}
+		$info['map']=$this->input->post('map');
+		$info['virtual_tour']=$this->input->post('virtual_tour');
+		$info['education']=$this->input->post('education');
+		$info['health']=$this->input->post('health');
+		$info['transport']=$this->input->post('transport');
+		$info['edistance']=$this->input->post('edistance');
+		$info['hdistance']=$this->input->post('hdistance');
+		$info['tdistance']=$this->input->post('tdistance');
+		$info['ac']=$this->input->post('ac');
+		$info['sofa']=$this->input->post('sofa');
+		$info['tv']=$this->input->post('tv');
+		$info['fridge']=$this->input->post('fridge');
+		$info['wardrobe']=$this->input->post('wardrobe');
+		$info['washing_machine']=$this->input->post('washing_machine');
+		$info['dining_table']=$this->input->post('dining_table');
+		$info['store_room']=$this->input->post('store_room');
+		$info['study_room']=$this->input->post('study_room');
+			
+		
+		
+		if($this->input->post('amenities[]'))
+		{
+			
+		$arr=implode(",",$this->input->post('amenities[]'));
+	}
+	else
+	{
+		$arr="";
+	}
+		
+		$features=$this->input->post('features');
+
+			$info['uniq_id']=$this->input->post('uniq_id');
+		$id=$info['uniq_id'];
+
+		if($_SESSION['count2']==1)
+		{
+			$this->common_model->update("tbl_detailed_property_info", $info,"uniq_id = '$id'");
+				$info2['ameneties']=$arr;
+					$info2['features']=$features;
+				$this->common_model->update('tbl_property_details', $info2, "uniq_id = '$id'");
+				$data['result']=1;
+				$data['uniq_id']=$info['uniq_id'];
+				$_SESSION['form']=5;
+				$data['update']="true";
+			
+		}
+		else	
+		{
+			$insert_id=$this->common_model->insert("tbl_detailed_property_info", $info);
+			if($insert_id)
+			{
+				$info3['property_id']="Prop000".$insert_id;
+				$this->common_model->update('tbl_detailed_property_info', $info3, "uniq_id = '$id'");
+				
+				$info2['ameneties']=$arr;
+					$info2['features']=$features;
+				$info2['detailed_property_info_id']=$insert_id;
+				$this->common_model->update('tbl_property_details', $info2, "uniq_id = '$id'");
+				$data['result']=1;
+				$data['uniq_id']=$info['uniq_id'];
+				$_SESSION['form']=5;
+				$_SESSION['count2']=1;
+				$data['insert']="true";
+			}
+	}
+		echo json_encode($data);
+
+	}
+  public function insert_form4()
+    {
+		$data['result'] = 0;
+        $info['uniq_id'] = $this->input->post('uniq_id');
+        $store_id=$info['uniq_id'];
+		if($_FILES['image']['name'] != '')
+		{
+			$store_profile_image = date('Ydm') . time() . uniqid() . "." . strtolower(pathinfo($_FILES['image']["name"],PATHINFO_EXTENSION));
+			if($this->image_upload('image', $store_profile_image, 'uploads/common/') == true)
+			{
+				$info['image'] = $store_profile_image;
+			}
+		}
+
+		$insert_id=$this->common_model->insert('tbl_property_images', $info);
+		if($insert_id)
+		{
+			$id=$info['uniq_id'];
+			$info2['property_image_id']=$insert_id;
+			$this->common_model->update('tbl_property_details', $info2, "uniq_id = '$id'");
+			$data['result'] = 1;
+
+			$data['uniq_id']=$info['uniq_id'];
+	
+		}
+		echo json_encode($data);
+    }
+	
+     	
+     function insert_form5()
+	{
+		$info=array();
+		//$info['plan']=$this->input->post('plan');
+		//$info['plan_bedrooms']=$this->input->post('plan_bedrooms');
+		$info['plan_bhk']=implode(",",$this->input->post('plan_bhk[]'));
+
+		$info['plan_title']=implode(",",$this->input->post('title[]'));
+		$info['plan_sqft']=implode(",",$this->input->post('sqft[]'));
+		$info['plan_description']=implode(",",$this->input->post('plan_description[]'));
+		$info['site_description']=$this->input->post('site_description');
+		$info['uniq_id']=$_SESSION['id'];
+		$this->load->library('upload');
+	    $dataInfo = array();
+	    
+		$data= array();
+	    $files = $_FILES;
+	    $cpt = count($_FILES['plan_image']['name']);
+	    for($i=0; $i<$cpt; $i++)
+	    {           
+	        $_FILES['plan_image']['name']= $files['plan_image']['name'][$i];
+	        $_FILES['plan_image']['type']= $files['plan_image']['type'][$i];
+	        $_FILES['plan_image']['tmp_name']= $files['plan_image']['tmp_name'][$i];
+	        $_FILES['plan_image']['error']= $files['plan_image']['error'][$i];
+	        $_FILES['plan_image']['size']= $files['plan_image']['size'][$i];    
+
+	        $this->upload->initialize($this->set_upload_options());
+	        $this->upload->do_upload('plan_image');
+	        $dataInfo[] = $this->upload->data();
+	    }
+		$a=array();
+
+		for($i=0;$i<count($dataInfo);$i++){
+		array_push($a,$dataInfo[$i]['file_name']);
+	}
+			$info['plan_image']=implode(",",$a);
+		if($_FILES['site_image']['name'] != '')
+		{
+			$store_profile_image = date('Ydm') . time() . uniqid() . "." . strtolower(pathinfo($_FILES['site_image']["name"],PATHINFO_EXTENSION));
+			if($this->image_upload('site_image', $store_profile_image, 'uploads/common/') == true)
+			{
+				$info['site_image'] = $store_profile_image;
+			}
+		}
+		if($_SESSION['count4']==1)
+		{
+			$this->common_model->update("tbl_floor_plans", $info,"uniq_id = '$id'");
+				//$info2['floor_plans_id']=$insert_id;
+				
+				$data['result']=1;
+				$data['uniq_id']=$info['uniq_id'];
+				$_SESSION['form']=5;
+				$data['update']="true";
+			
+		}
+		else	
+		{
+			$insert_id=$this->common_model->insert("tbl_floor_plans", $info);
+			if($insert_id)
+			{
+				$id=$info['uniq_id'];
+				$info2['floor_plans_id']=$insert_id;
+				//$info2['post_status']='W';
+				$this->common_model->update('tbl_property_details', $info2, "uniq_id = '$id'");
+				
+				$data['result']=1;
+				$data['uniq_id']=$info['uniq_id'];
+				$data['url']=base_url();
+
+			}
+			}
+		echo json_encode($data);
+
+	}
+
+	function insert_form6()
+    {
+     		foreach($_POST as $key => $value)
+			{
+				if($key != 'table_name' && $key != 'row_id')
+				{
+					if($key == 'slug')
+					{
+						if(strlen($value) > 0)
+						{
+							$info[$key] = $this->slugify($value);
+						}
+						else
+						{
+							$info[$key] = $this->slugify($this->input->post('name'));
+						}
+					}
+					else
+					{
+						$info[$key] = $value;
+					}
+				}
+			}
+				if($this->input->post('rooms[]'))
+			{
+				$info['rooms']=implode(",",$this->input->post('rooms[]'));
+			}
+			if($this->input->post('floor_no[]'))
+			{
+				$info['floor_no']=implode(",",$this->input->post('floor_no[]'));
+			}
+		
+			if($info['uniq_id'])
+			{
+				$id=$info['uniq_id'];
+
+			}
+			else
+			{
+				$id=$_SESSION['id'];
+			}			
+			$insert_id=$this->common_model->insert("tbl_additional_info", $info);
+		if($insert_id)
+		{
+			$info2['additional_info_id']=$insert_id;
+			$info2['post_status']='W';
+			$this->common_model->update('tbl_property_details', $info2, "uniq_id = '$id'");
+			
+			$data['result']=1;
+			$data['uniq_id']=$info['uniq_id'];
+			$data['url']=base_url();
+
+		}
+		else
+		{
+				$info2['post_status']='W';
+			$this->common_model->update('tbl_property_details', $info2, "uniq_id = '$id'");
+		
+		}
+		$_SESSION['form']='';
+		$_SESSION['id']='';
+		$_SESSION['count1']=0;
+		$_SESSION['count2']=0;
+		$_SESSION['count3']=0;
+		echo json_encode($data);
+
+			
+	}
+			public function form4d()
+{       
+    $this->load->library('upload');
+    $dataInfo = array();
+    
+	$data= array();
+    $files = $_FILES;
+    $cpt = count($_FILES['userfile']['name']);
+    for($i=0; $i<$cpt; $i++)
+    {           
+        $_FILES['userfile']['name']= $files['userfile']['name'][$i];
+        $_FILES['userfile']['type']= $files['userfile']['type'][$i];
+        $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
+        $_FILES['userfile']['error']= $files['userfile']['error'][$i];
+        $_FILES['userfile']['size']= $files['userfile']['size'][$i];    
+
+        $this->upload->initialize($this->set_upload_options());
+        $this->upload->do_upload('userfile');
+        $dataInfo[] = $this->upload->data();
+    }
+	$a=array();
+
+	for($i=0;$i<count($dataInfo);$i++){
+	array_push($a,$dataInfo[$i]['file_name']);
+}
+$dataInfo2= array();
+$cpt = count($_FILES['file']['name']);
+    for($i=0; $i<$cpt; $i++)
+    {           
+        $_FILES['file']['name']= $files['file']['name'][$i];
+        $_FILES['file']['type']= $files['file']['type'][$i];
+        $_FILES['file']['tmp_name']= $files['file']['tmp_name'][$i];
+        $_FILES['file']['error']= $files['file']['error'][$i];
+        $_FILES['file']['size']= $files['file']['size'][$i];    
+
+        $this->upload->initialize($this->set_upload_options());
+        $this->upload->do_upload('file');
+        $dataInfo2[] = $this->upload->data();
+    }
+	$b=array();
+
+	for($i=0;$i<count($dataInfo2);$i++){
+	array_push($b,$dataInfo2[$i]['file_name']);
+}
+$dataInfo3= array();
+$cpt = count($_FILES['actual']['name']);
+    for($i=0; $i<$cpt; $i++)
+    {           
+        $_FILES['actual']['name']= $files['actual']['name'][$i];
+        $_FILES['actual']['type']= $files['actual']['type'][$i];
+        $_FILES['actual']['tmp_name']= $files['actual']['tmp_name'][$i];
+        $_FILES['actual']['error']= $files['actual']['error'][$i];
+        $_FILES['actual']['size']= $files['actual']['size'][$i];    
+
+        $this->upload->initialize($this->set_upload_options());
+        $this->upload->do_upload('actual');
+        $dataInfo2[] = $this->upload->data();
+    }
+	$c=array();
+
+	for($i=0;$i<count($dataInfo3);$i++){
+	array_push($c,$dataInfo3[$i]['file_name']);
+}
+
+if($_FILES['profile_image']['name'] != '')
+		{
+			$store_profile_image = date('Ydm') . time() . uniqid() . "." . strtolower(pathinfo($_FILES['profile_image']["name"],PATHINFO_EXTENSION));
+			if($this->image_upload('profile_image', $store_profile_image, 'uploads/common/') == true)
+			{
+				$data['profile_image'] = $store_profile_image;
+			}
+		}
+if($_FILES['banner']['name'] != '')
+		{
+			$store_profile_image = date('Ydm') . time() . uniqid() . "." . strtolower(pathinfo($_FILES['banner']["name"],PATHINFO_EXTENSION));
+			if($this->image_upload('banner', $store_profile_image, 'uploads/common/') == true)
+			{
+				$data['banner_image'] = $store_profile_image;
+			}
+		}
+
+				 
+    $data['image']=implode(",",$a);
+     $data['actual_image']=implode(",",$c);
+    $data['attachment']=implode(",",$b);
+    $data['uniq_id']=$this->input->post('uniq_id');
+    $id=$data['uniq_id'];
+
+    if($_SESSION['count3']==1)
+	{
+		$this->common_model->update('tbl_property_images', $data,"uniq_id = '$id'");
+		
+			$id=$data['uniq_id'];
+			$dat['result'] = 1;
+			$_SESSION['form']=6;
+
+		
+	}
+	else
+	{
+		$insert_id=$this->common_model->insert('tbl_property_images', $data);
+		if($insert_id)
+		{
+			$id=$data['uniq_id'];
+			$info2['property_image_id']=$insert_id;
+			$this->common_model->update('tbl_property_details', $info2, "uniq_id = '$id'");
+			$dat['result'] = 1;
+			$_SESSION['form']=6;
+			$_SESSION['count3']=1;
+
+		}
+	}
+     echo json_encode($dat);
+}
+public function builder_properties($id){
+	$this->global['records']=$this->common_model->get_records('tbl_property_details', "status='0' and builders_info_id='$id'");
+
+	$this->loadViews("builder-properties",$this->global);
+                                   
+}
+
+    
 }
 
 ?>

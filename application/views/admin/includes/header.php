@@ -1,301 +1,551 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title><?php echo $pageTitle; ?></title>
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <!-- Bootstrap 3.3.4 -->
-    <link href="<?php echo base_url(); ?>assets/admin/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />    
-    <!-- FontAwesome 4.3.0 -->
-    <link href="<?php echo base_url(); ?>assets/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <!-- Ionicons 2.0.0 -->
-    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-    <!-- Theme style -->
-    <link href="<?php echo base_url(); ?>assets/admin/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-    <!-- AdminLTE Skins. Choose a skin from the css/skins 
-         folder instead of downloading all of them to reduce the load. -->
-    <link href="<?php echo base_url(); ?>assets/admin/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-    
-	<style>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Proptoday</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
+    <meta content="Coderthemes" name="author">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- App favicon -->
+
+    <link href="<?php echo base_url()?>assets/front/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+
+        <!-- Bootstrap Tables css -->
+        <link href="<?php echo base_url() ?>assets/admin/libs/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" type="text/css">
+
+        <!-- App css -->
+        <link href="<?php echo base_url() ?>assets/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="<?php echo base_url() ?>assets/admin/css/icons.min.css" rel="stylesheet" type="text/css">
+        <link href="<?php echo base_url() ?>assets/admin/css/app.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+        
+        <link href="<?php echo base_url() ?>assets/admin/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+
+        <style>
+    	.error-span {
+    display: none;
+}
     	.error{
     		color:red;
     		font-weight: normal;
+            
     	}
+
+
     </style>
     <!-- jQuery 2.1.4 -->
+
     <script src="<?php echo base_url(); ?>assets/admin/js/jQuery-2.1.4.min.js"></script>
-    
-	<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" type="text/css" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-	<link href="<?php echo base_url(); ?>assets/admin/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/js/common.js" charset="utf-8"></script>
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/dist/js/select2.full.min.js" charset="utf-8"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+  <link href="<?php echo base_url()?>assets/admin/css/chosen.css" rel="stylesheet" type="text/css" />
+ <!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.1/chosen.jquery.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.1/chosen.css" />
+
+    <script src="<?php echo base_url()?>assets/admin/js/chosen.jquery.js" type="text/javascript"></script>
+      <script type="text/javascript">  
+       $(function () {
+            $(".chzn-select").chosen();
+        });
+</script>-->
+
 	
 	<script type="text/javascript">
         var baseURL = "<?php echo base_url(); ?>";
+
     </script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-flash-1.6.1/b-print-1.6.1/rr-1.2.6/datatables.min.css"/>
-	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-flash-1.6.1/b-print-1.6.1/rr-1.2.6/datatables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
-	<script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
-  </head>
-  <body class="skin-black sidebar-mini">
-    <div class="wrapper">
-      
-      <header class="main-header">
-        <!-- Logo -->
-        <a href="<?php echo base_url(); ?>admin/" class="logo">
-          <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><img src="<?=base_url()?>assets/front/images/logo.jpg" height="50"></span>
-          <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><img src="<?=base_url()?>assets/front/images/logo.jpg" height="50"></span>
-        </a>
-        <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top" role="navigation">
-          <!-- Sidebar toggle button-->
-          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
-          </a>
-          <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-              <!-- User Account: style can be found in dropdown.less -->
-              <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="<?php echo base_url(); ?>assets/admin/dist/img/avatar.png" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs"><?php echo $name; ?></span>
-                </a>
-                <ul class="dropdown-menu">
-                  <!-- User image -->
-                  <li class="user-header">
-                    <img src="<?php echo base_url(); ?>assets/admin/dist/img/avatar.png" class="img-circle" alt="User Image" />
-                    <p>
-                      <?php echo $name; ?>
-                      <small><?php echo $role_text; ?></small>
-                    </p>
-                  </li>
-                  <!-- Menu Footer-->
-                  <li class="user-footer">
-                    <div class="pull-left">
-                      <a href="<?php echo base_url(); ?>admin/loadChangePass" class="btn btn-default btn-flat"><i class="fa fa-key"></i> Change Password</a>
+
+
+
+   
+
+    
+    
+
+
+</head>
+
+<body>
+
+
+
+
+
+
+    <!-- Begin page -->
+    <div id="wrapper">
+    
+  
+  
+
+        <!-- Topbar Start -->
+        <div class="navbar-custom">
+            <ul class="list-unstyled topnav-menu float-right mb-0">
+
+                <!-- <li class="d-none d-sm-block">
+                    <form class="app-search">
+                        <div class="app-search-box">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <div class="input-group-append">
+                                    <button class="btn" type="submit">
+                                        <i class="fe-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </li> -->
+
+                <!-- <li class="dropdown notification-list">
+                    <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#"
+                        role="button" aria-haspopup="false" aria-expanded="false">
+                        <i class="fe-bell noti-icon"></i>
+                        <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+
+                      
+                        <div class="dropdown-item noti-title">
+                            <h5 class="m-0">
+                                <span class="float-right">
+                                    <a href="" class="text-dark">
+                                        <small>Clear All</small>
+                                    </a>
+                                </span>Notification
+                            </h5>
+                        </div>
+
+                        <div class="slimscroll noti-scroll">
+
+                         
+                            <a href="javascript:void(0);" class="dropdown-item notify-item active">
+                                <div class="notify-icon">
+                                    <img src="<?php echo base_url() ?>assets/admin/images/users/user-1.jpg"
+                                        class="img-fluid rounded-circle" alt=""> </div>
+                                <p class="notify-details">Cristina Pride</p>
+                                <p class="text-muted mb-0 user-msg">
+                                    <small>Hi, How are you? What about our next meeting</small>
+                                </p>
+                            </a>
+
+                          
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon bg-primary">
+                                    <i class="mdi mdi-comment-account-outline"></i>
+                                </div>
+                                <p class="notify-details">Caleb Flakelar commented on Admin
+                                    <small class="text-muted">1 min ago</small>
+                                </p>
+                            </a>
+
+                        
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon">
+                                    <img src="<?php echo base_url() ?>assets/admin/images/users/user-4.jpg"
+                                        class="img-fluid rounded-circle" alt=""> </div>
+                                <p class="notify-details">Karen Robinson</p>
+                                <p class="text-muted mb-0 user-msg">
+                                    <small>Wow ! this admin looks good and awesome design</small>
+                                </p>
+                            </a>
+
+                           
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon bg-warning">
+                                    <i class="mdi mdi-account-plus"></i>
+                                </div>
+                                <p class="notify-details">New user registered.
+                                    <small class="text-muted">5 hours ago</small>
+                                </p>
+                            </a>
+
+                           
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon bg-info">
+                                    <i class="mdi mdi-comment-account-outline"></i>
+                                </div>
+                                <p class="notify-details">Caleb Flakelar commented on Admin
+                                    <small class="text-muted">4 days ago</small>
+                                </p>
+                            </a>
+
+                          
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon bg-secondary">
+                                    <i class="mdi mdi-heart"></i>
+                                </div>
+                                <p class="notify-details">Carlos Crouch liked
+                                    <b>Admin</b>
+                                    <small class="text-muted">13 days ago</small>
+                                </p>
+                            </a>
+                        </div>
+
+                       
+                        <a href="javascript:void(0);"
+                            class="dropdown-item text-center text-primary notify-item notify-all">
+                            View all
+                            <i class="fi-arrow-right"></i>
+                        </a>
+
                     </div>
-                    <div class="pull-right">
-                      <a href="<?php echo base_url(); ?>admin/logout" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i> Sign out</a>
+                </li> -->
+
+                <li class="dropdown notification-list">
+                    <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown"
+                        href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <img src="<?=base_url()?>uploads/common/user.png" alt="user-image"
+                            class="rounded-circle">
+
+                        
+
+                        <span class="pro-user-name ml-1">
+                        <?php echo $role_text; ?> <i class="mdi mdi-chevron-down"></i>
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                        <!-- item-->
+                     
+
+                        <!-- item-->
+                        <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="fe-user"></i>
+                            <span>My Account</span>
+                        </a> -->
+
+                        <!-- item-->
+                        <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="fe-settings"></i>
+                            <span>Settings</span>
+                        </a> -->
+
+                        <!-- item-->
+                        <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="fe-lock"></i>
+                            <span>Lock Screen</span>
+                        </a> -->
+
+                        <div class="dropdown-divider"></div>
+
+                        <!-- item-->
+                        <a href="<?php echo base_url(); ?>admin/logout" class="dropdown-item notify-item">
+                            <i class="fe-log-out"></i>
+                            <span>Logout</span>
+                        </a>
+
                     </div>
-                  </li>
-                </ul>
-              </li>
+                </li>
+
+              
+
             </ul>
-          </div>
-        </nav>
-      </header>
-      <!-- Left side column. contains the logo and sidebar -->
-      <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-          
-          <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu">
-				<li class="treeview">
-				  <a href="<?php echo base_url(); ?>admin/dashboard">
-					<i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
-				  </a>
-				</li>
-				<?php
-					if($role == ROLE_ADMIN || $role == ROLE_SUPER_ADMIN)
-					{
-				?>
-					<li class="treeview">
-					  <a href="javascript:void(0)">
-						<i class="fa fa-pencil-square-o"></i>
-						<span>Frontend Settings</span>
-						<span class="pull-right-container">
-						  <i class="fa fa-angle-left pull-right"></i>
-						</span>
-					  </a>
-					  <ul class="treeview-menu">
-				        <?php if($role == ROLE_SUPER_ADMIN): ?>
-						<li><a href="<?=base_url()?>admin/top-header"><i class="fa fa-circle-o"></i> Top Header</a></li>
-						<li><a href="<?=base_url()?>admin/bottom-footer"><i class="fa fa-circle-o"></i> Bottom Footer</a></li>
-						<?php endif; ?>
-						<li><a href="<?=base_url()?>admin/header-menu"><i class="fa fa-circle-o"></i> Header Menu</a></li>
-					  </ul>
-					</li>
-				<?php 
-					}
-				?>
-				<li class="treeview">
-				  <a href="javascript:void(0)">
-					<i class="fa fa-clipboard"></i>
-					<span>Pages</span>
-					<span class="pull-right-container">
-					  <i class="fa fa-angle-left pull-right"></i>
-					</span>
-				  </a>
-				  <ul class="treeview-menu">
-					<li><a href="<?=base_url()?>admin/new-page"><i class="fa fa-circle-o"></i> New Page</a></li>
-					<li><a href="<?=base_url()?>admin/pages"><i class="fa fa-circle-o"></i> Pages</a></li>
-					<?php if($role == ROLE_SUPER_ADMIN): ?>
-						<li><a href="<?=base_url()?>admin/sections"><i class="fa fa-circle-o"></i> Sections</a></li>
-					<?php endif; ?>
-				  </ul>
-				</li>
-				<li class="treeview">
-				  <a href="javascript:void(0)">
-					<i class="fa fa-clipboard"></i>
-					<span>Contact</span>
-					<span class="pull-right-container">
-					  <i class="fa fa-angle-left pull-right"></i>
-					</span>
-				  </a>
-				  <ul class="treeview-menu">
-					<li><a href="<?=base_url()?>admin/contact_list"><i class="fa fa-circle-o"></i> Contact list</a></li>
-					
-				  </ul>
-				</li>
-				<li class="treeview">
-				  <a href="javascript:void(0)">
-					<i class="fa fa-barcode"></i>
-					<span>Products</span>
-					<span class="pull-right-container">
-					  <i class="fa fa-angle-left pull-right"></i>
-					</span>
-				  </a>
-				  <ul class="treeview-menu">
-					<li><a href="<?=base_url()?>admin/add-product"><i class="fa fa-circle-o"></i> New Product</a></li>
-					<li><a href="<?=base_url()?>admin/products"><i class="fa fa-circle-o"></i> Products</a></li>
-					<li><a href="<?=base_url()?>admin/related-products"><i class="fa fa-circle-o"></i> Related Products</a></li>
-				  
-					<li><a href="<?=base_url()?>admin/properties-master"><i class="fa fa-circle-o"></i> Properties Master</a></li>
-				  </ul>
-				</li>
-				<li class="treeview">
-				  <a href="javascript:void(0)">
-					<i class="fa fa-code"></i>
-					<span>Categories</span>
-					<span class="pull-right-container">
-					  <i class="fa fa-angle-left pull-right"></i>
-					</span>
-				  </a>
-				  <ul class="treeview-menu">
-					<li><a href="<?=base_url()?>admin/categories"><i class="fa fa-circle-o"></i> Categories</a></li>
-					<li><a href="<?=base_url()?>admin/sub-categories"><i class="fa fa-circle-o"></i> Sub-Categories</a></li>
-					<li><a href="<?=base_url()?>admin/child-categories"><i class="fa fa-circle-o"></i> Child-Categories</a></li>
-					<li><a href="<?=base_url()?>admin/brands"><i class="fa fa-circle-o"></i> Brands</a></li>
-				  </ul>
-				</li>
-				<li class="treeview">
-				  <a href="javascript:void(0)">
-					<i class="fa fa-ticket"></i>
-					<span>Tickets</span>
-					<span class="pull-right-container">
-					  <i class="fa fa-angle-left pull-right"></i>
-					</span>
-				  </a>
-				  <ul class="treeview-menu">
-					<li><a href="<?=base_url()?>admin/contact-form"><i class="fa fa-circle-o"></i> Contact Form</a></li>
-					<?php if(0 == 1): ?>
-						<li><a href="<?=base_url()?>admin/order-help-center"><i class="fa fa-circle-o"></i> Order Help Center</a></li>
-						<li><a href="<?=base_url()?>admin/product-enquiry"><i class="fa fa-circle-o"></i> Product Enquiry</a></li>
-					<?php endif; ?>
-				  </ul>
-				</li>
-            <?php
-            if($role == ROLE_ADMIN || $role == ROLE_SUPER_ADMIN || $role == ROLE_MANAGER)
-            {
-            ?>
-				<li class="treeview">
-				  <a href="<?=base_url()?>admin/orders" >
-					<i class="fa fa-file"></i>
-					<span>Orders</span>
-				  </a>
-				</li>
-				<li class="treeview">
-				  <a href="<?=base_url()?>admin/orders-transactions" >
-					<i class="fa fa-money"></i>
-					<span>Transactions</span>
-				  </a>
-				</li>
-				<li class="treeview">
-				  <a href="<?=base_url()?>admin/customers" >
-					<i class="fa fa-users"></i>
-					<span>Customers</span>
-				  </a>
-				</li>
-            <?php
-            }
-            if($role == ROLE_ADMIN || $role == ROLE_SUPER_ADMIN)
-            {
-            ?>
-				<li class="treeview">
-				  <a href="<?=base_url()?>admin/userListing" >
-					<i class="fa fa-users"></i>
-					<span>Users</span>
-				  </a>
-				</li>
-				<li class="treeview">
-				  <a href="javascript:void(0)">
-					<i class="fa fa-file-text-o"></i>
-					<span>Reports</span>
-					<span class="pull-right-container">
-					  <i class="fa fa-angle-left pull-right"></i>
-					</span>
-				  </a>
-				  <ul class="treeview-menu">
-					<li><a href="<?=base_url()?>admin/customers-report"><i class="fa fa-circle-o"></i> Customers</a></li>
-					<li><a href="<?=base_url()?>admin/orders-report"><i class="fa fa-circle-o"></i> Orders</a></li>
-					<li><a href="<?=base_url()?>admin/products-report"><i class="fa fa-circle-o"></i> Products</a></li>
-				  </ul>
-				</li>
-				<?php if(0 == 1): ?>
-				<li class="treeview">
-				  <a href="<?=base_url()?>admin/coupons" >
-					<i class="fa fa-bitcoin"></i>
-					<span>Coupons</span>
-				  </a>
-				</li>		
-				<?php endif; ?>
-			<?php
-            }
-            ?>
-			
-			<li class="treeview">
-			  <a href="javascript:void(0)">
-				<i class="fa fa-book"></i>
-				<span>Blogs</span>
-				<span class="pull-right-container">
-				  <i class="fa fa-angle-left pull-right"></i>
-				</span>
-			  </a>
-			  <ul class="treeview-menu">
-				<li><a href="<?=base_url()?>admin/new-blog"><i class="fa fa-circle-o"></i> New Blog</a></li>
-				<li><a href="<?=base_url()?>admin/list-blogs"><i class="fa fa-circle-o"></i> All Blogs</a></li>
-			  </ul>
-			</li>
-			<li class="treeview">
-			  <a href="<?=base_url()?>admin/newsletter" >
-				<i class="fa fa-newspaper-o"></i>
-				<span>Newsletter Subscribers</span>
-			  </a>
-			</li>
-			<li class="treeview">
-			  <a href="<?=base_url()?>admin/pincodes" >
-				<i class="fa fa-phone"></i>
-				<span>Pincodes</span>
-			  </a>
-			</li>
-			<li class="treeview">
-			  <a href="<?=base_url()?>admin/reviews" >
-				<i class="fa fa-star"></i>
-				<span>Reviews</span>
-			  </a>
-			</li>
-          </ul>
-        </section>
-        <!-- /.sidebar -->
-      </aside>
+
+            <!-- LOGO -->
+            <div class="logo-box">
+                <a href="index.html" class="logo text-center">
+                    <span class="logo-lg">
+                 
+                        <img src="<?php echo base_url() ?>assets/front/images/logo.png" alt="">
+                        <!-- <span class="logo-lg-text-light">UBold</span> -->
+                    </span>
+                    <span class="logo-sm">
+                        <!-- <span class="logo-sm-text-dark">U</span> -->
+                        <img src="<?php echo base_url() ?>assets/front/images/logo.png" alt="" height="10">
+                    </span>
+                </a>
+            </div>
+
+            <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+                <li>
+                    <button class="button-menu-mobile waves-effect waves-light">
+                        <i class="fe-menu"></i>
+                    </button>
+                </li>
+
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- end Topbar -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left-side-menu">
+
+            <div class="slimscroll-menu">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+
+                    <ul class="metismenu" id="side-menu">
+
+                        <li class="menu-title">Navigation</li>
+
+
+                        <?php
+if($role == ROLE_ADMIN || $role == ROLE_SUPER_ADMIN || $role == ROLE_MANAGER)
+{?>
+
+
+                         <li>
+                            <a href="<?=base_url()?>admin/dashboard">
+                                <i class="fe-users"></i>
+                                <span>Dashboard</span>
+                            </a>
+                            
+                        </li>
+
+
+
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="fe-pocket"></i>
+                                <span>Property</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+
+                           
+
+                            <li>
+                                    <a href="<?= base_url()?>admin/admin_add_property">Add Property</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url()?>admin/property">List Property</a>
+                                </li>
+
+                            </ul>
+                        </li>
+ 
+
+
+
+
+
+                         <li>
+                            <a href="<?=base_url()?>admin/report">
+                                <i class="fe-airplay"></i>
+                                <span>Report</span>
+                            </a>
+                            
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="fe-pocket"></i>
+                                <span>Location</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                               
+
+                                <li>
+                                    <a href="<?=base_url()?>admin/location">Location</a>
+
+                                </li>
+                                
+                                <li>
+                                    <a href="<?=base_url()?>admin/sub_location">Sub Location</a>
+                                </li>
+                                
+
+                            </ul>
+                        </li>
+
+
+
+
+                        
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="fe-pocket"></i>
+                                <span>Property Actions</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                            <li>
+                                    <a href="<?=base_url()?>admin/property_status">Property Status</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/property_type">Property Type</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/category">Category</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/sub-category">Sub-category</a>
+                                </li>
+                               
+
+                               
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="fe-airplay"></i>
+                                <span class="badge badge-success badge-pill float-right"></span>
+                                <span> Master Data </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <!-- <li>
+                                    <a href="<?= base_url()?>admin/builder">Builder</a>
+                                </li> -->
+                                <li>
+                                    <a href="<?=base_url()?>admin/buildupAr">Buit Up Area</a>
+                                </li>
+                               
+                                <li>
+                                    <a href="<?=base_url()?>admin/yearbuilt">Year Built</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/amenities">Amenities</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/bhk">BHK</a>
+                                </li>
+                              
+                                <li>
+                                    <a href="<?=base_url()?>admin/transaction_type">Transaction Type</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/possession_status">Posession Status</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/tags">Tags</a>
+                                </Ti>
+                                <li>
+                                    <a href="<?=base_url()?>admin/feature">Feature List</a>
+                                </Ti>
+
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="fe-pocket"></i>
+                                <span> Section </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+
+                                 <li>
+                                    <a href="<?=base_url()?>admin/banner">Banner</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/Freeevaluation">Free Evaluation</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/what_are_you_looking_for">What Are You looking For</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/Property_section" >Property Section </a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/Realestate" >Search Smarter from Anywhere</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/Testimonialtitle" >Testimonial Title</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/Slidersection">Slider Section</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/clientstitle">Clients Title</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/clientssection">Our Clients</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/partnertitle">Partners Title</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/partnersection">Our Partners</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/join_venture">join_venture</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="fe-users"></i>
+                                <span> Registration </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li>
+                                    <a href="<?=base_url()?>admin/user-registration">User Registration</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url()?>admin/builder-registration">Builder Registration</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="fe-users"></i>
+                                <span>Enquiry</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li>
+                                    <a href="<?=base_url()?>admin/enquiry_list">Enquiry list</a>
+                                </li>
+                                 <li>
+                                    <a href="<?= base_url()?>admin/admin-joint-ventures">Joint Venture</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url()?>admin/admin-evaluation">  Free evaluation</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url()?>admin/admin-residential"> Residential Sale   </a>
+                                </li>
+
+                          
+
+                            </ul>
+                        </li>
+
+
+
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="fe-folder-plus"></i>
+                                <span>Profile </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level nav" aria-expanded="false">
+                                <li>
+                                    <a href="<?php echo base_url(); ?>admin/logout">Logout</a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <?php  }
+?>
+                    </ul>
+
+
+                </div>
+                <!-- End Sidebar -->
+
+                <div class="clearfix"></div>
+
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>
+
+
+        

@@ -19,6 +19,8 @@ class Login extends CI_Controller
     {
         $this->isLoggedIn();
     }
+
+
     
     /**
      * This function used to check the user is logged in or not
@@ -69,12 +71,14 @@ class Login extends CI_Controller
                                             'role'=>$res->roleId,
                                             'roleText'=>$res->role,
                                             'name'=>$res->name,
+                                            'email'=> $res->email,
                                             'isLoggedIn' => TRUE
                                     );
                                     
                     $this->session->set_userdata($sessionArray);
-                    
+                 
                     redirect('admin/dashboard');
+                    echo $_SESSION['email'].' ds '.$res->email ;
                 }
             }
             else
@@ -86,6 +90,8 @@ class Login extends CI_Controller
         }
     }
 
+
+    
     /**
      * This function used to load forgot password view
      */

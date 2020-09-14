@@ -6,10 +6,7 @@
 					<div class="nav-tabs-custom">
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Basic Details</a></li>
-							<li><a href="#tab_6" data-toggle="tab" aria-expanded="true">Properties</a></li>
-							<li><a href="#tab_8" data-toggle="tab" aria-expanded="true">Variants</a></li>
 							<li><a href="#tab_2" data-toggle="tab" aria-expanded="true">Product Images</a></li>
-							<li><a href="#tab_3" data-toggle="tab" aria-expanded="true">Product Dimensions</a></li>
 							<li><a href="#tab_5" data-toggle="tab" aria-expanded="true">Inventory</a></li>
 							<li><a href="#tab_4" data-toggle="tab" aria-expanded="true">SEO </a></li>
 							<li><a href="#tab_7" data-toggle="tab" aria-expanded="true">Badges / Highlight </a></li>
@@ -18,18 +15,8 @@
 							<div class="tab-pane active" id="tab_1">
 								<?php include("edit-product/basic-info.php"); ?>
 							</div>
-							
-							<div class="tab-pane" id="tab_6">
-								<?php include("edit-product/product-properties.php"); ?>
-							</div>
-							<div class="tab-pane" id="tab_8">
-								<?php include("edit-product/product-variants.php"); ?>
-							</div>
 							<div class="tab-pane" id="tab_2">
 								<?php include("edit-product/product-images.php"); ?>
-							</div>
-							<div class="tab-pane" id="tab_3">
-								<?php include("edit-product/product-dimensions.php"); ?>
 							</div>
 							<div class="tab-pane" id="tab_4">
 								<?php include("edit-product/seo-info.php"); ?>
@@ -116,40 +103,6 @@
 						toastr.success('Product images uploaded!');
 						$(this_id + ' input[type=submit]').removeAttr('disabled');
 						$('#product-add-images').load("<?=base_url()?>admin/product-additional-images/" + $('.insert_product_image input[name=product_id]').val());
-					}
-					else
-					{
-						toastr.error('Something went wrong! Please try again later!');
-						$(this_id + ' input[type=submit]').removeAttr('disabled');
-					}
-				}
-			});
-		});
-		
-		$('.insert_product_dimension_image').submit(function(e){
-			e.preventDefault();
-			var this_id = 'form[this_id=' + $(this).attr('this_id') + ']';
-			
-			$.ajax({
-				type: 'POST',
-				url: baseURL + "admin/insert",
-				data: new FormData($('.insert_product_dimension_image')[0]),
-				dataType: "json",
-				contentType: false,
-				processData: false,
-				beforeSend: function() {
-					$(this_id + ' input[type=submit]').attr('disabled', 'true');
-				},
-				success: function(response){
-					console.log(response)
-					if(response.result == 1)
-					{
-						$(this_id)[0].reset();
-						$('.uploaded').empty();
-						$('.image-uploader').removeClass('has-files');
-						toastr.success('Product dimension images uploaded!');
-						$(this_id + ' input[type=submit]').removeAttr('disabled');
-						$('#product-dimension-images').load("<?=base_url()?>admin/product-dimensions-images/" + $('.insert_product_dimension_image input[name=product_id]').val());
 					}
 					else
 					{
@@ -257,34 +210,6 @@
 			}
 		}
 		
-		function deleteimage1(data_id)
-		{
-			if(confirm('Are you sure to delete this image from product details?') === true)
-			{	
-				$.ajax({
-					type: 'POST',
-					url: baseURL + "admin/update",
-					data: 'row_id=' + data_id + '&table_name=tbl_product_dimensions_images&status=1',
-					dataType: "json",
-					beforeSend: function() {
-						$(this).attr('disabled', 'disabled');
-					},
-					success: function(response){
-						if(response.result == 1)
-						{
-							toastr.success('Success!');
-							$('#product-dimension-images').load("<?=base_url()?>admin/product-dimensions-images/" + $('.insert_product_dimension_image input[name=product_id]').val());
-						}
-						else
-						{
-							toastr.error('Something went wrong! Please try again later!');
-							$('span[data-id=' + data_id + ']').removeAttr('disabled');
-						}
-					}
-				});
-			}
-		}
-		
 		function addbtn()
 		{
 			$('#technical_spec').append('<div class="row">'+
@@ -361,9 +286,6 @@
 	<script>
 		CKEDITOR.replace( 'editor' );
 		CKEDITOR.replace( 'editor1' );
-		CKEDITOR.replace( 'editor2' );
-		CKEDITOR.replace( 'editor3' );
-		CKEDITOR.replace( 'editor4' );
 		
 		CKEDITOR.editorConfig = function( config ) {
         	config.toolbar = [
@@ -388,13 +310,6 @@
 	<script>
 		$(function () {
 			$('.input-images-1').imageUploader({
-				imagesInputName: 'file_name',
-				extensions: ['.jpg','.jpeg','.png','.gif','.svg'],
-				mimes: ['image/jpeg','image/png','image/gif','image/svg+xml'],
-			});
-		});
-		$(function () {
-			$('.input-images-2').imageUploader({
 				imagesInputName: 'file_name',
 				extensions: ['.jpg','.jpeg','.png','.gif','.svg'],
 				mimes: ['image/jpeg','image/png','image/gif','image/svg+xml'],

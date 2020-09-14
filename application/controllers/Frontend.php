@@ -59,11 +59,20 @@ class Frontend extends BaseController {
 
     public function about_us() {
 
-        $this->global['pageTitle'] = "sea product";
+        $this->global['pageTitle'] = "Marumani";
 
-        $this->global['record'] = $this->frontend_model->get_records("tbl_product", "status = '0' and id=$id");
+        //$this->global['record'] = $this->frontend_model->get_records("tbl_product", "status = '0' and id=$id");
 
         $this->loadPage("about-us", $this->global);
+    }
+
+    public function Courses() {
+
+        $this->global['pageTitle'] = "Marumani";
+
+        //$this->global['record'] = $this->frontend_model->get_records("tbl_product", "status = '0' and id=$id");
+
+        $this->loadPage("courses", $this->global);
     }
 
     public function dashboard() {

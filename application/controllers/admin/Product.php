@@ -1,3 +1,4 @@
+
 <?php 
 if(!defined('BASEPATH')) exit('No direct script access allowed');
 
@@ -20,7 +21,7 @@ class Product extends BaseController
         $this->loadViews("dashboard", $this->global, NULL , NULL);
     }
     
-    public function list_product_page()
+ public function list_product_page()
     {
         $this->global['pageTitle'] = 'Products' . ' - ' . $this->config->item('app_name');
         
@@ -28,14 +29,41 @@ class Product extends BaseController
         
         $this->loadViews("list_products_page", $this->global, NULL , NULL);
     }
+public function list_product()
+    {
+	
+	
+        $this->global['pageTitle'] = 'Products' . ' - ' . $this->config->item('app_name');
+        $data=array();
+	$row = $this->common_model->get_records('tbl_product', "status != '9' order by name asc");
+$i=0;
+foreach($row as $rows)
+			{
+		
+
+				$data[$i]['id']= $rows->id;
+				$data[$i]['slno']=$i+1;
+				$data[$i]['name']=$rows->name;
+				$data[$i]['storename']=$this->common_model->slugify($this->common_model->get_record("tbl_stores", "store_id='" . $rows->store_id . "'", "name"));
+$data[$i]['storeid']=$rows->store_id;
+$data[$i]['categoryname']=$this->common_model->get_record("tbl_category", "id='" . $rows->category . "'", "slug");
+$data[$i]['subcategoryname']=$this->common_model->get_record("tbl_sub_category", "id='" . $rows->sub_category . "'", "slug");
+$data[$i]['childcategoryname']=$this->common_model->get_record("tbl_child_category", "id='" . $rows->child_category . "'", "slug");
+$data[$i]['price']=$rows->price; 
+$i++;
+}
+        echo json_encode($data);
+    }
 	
     public function edit_product_page($id)
     {
          $this->global['pageTitle'] = 'Edit Product' . ' - ' . $this->config->item('app_name');
         
-		 $this->global['categories'] = $this->common_model->get_records('tbl_category', "status = '0' order by name asc");
+		 $this->global['categories'] = $this->common_model->get_records('tbl_category', "status = '0' order by id asc");
 		 $this->global['sub_categories'] = $this->common_model->get_records('tbl_sub_category', "status = '0' order by name asc");
 		 $this->global['child_categories'] = $this->common_model->get_records('tbl_child_category', "status = '0' order by name asc");
+		
+		$this->global['technical_specifications'] = $this->common_model->get_records('tbl_technical_specifications', "status = '0' order by title asc");
 		
 		 $this->global['brands'] = $this->common_model->get_records('tbl_brands', "status = '0' order by name asc");
 		
@@ -44,7 +72,6 @@ class Product extends BaseController
 		
 		
 		$this->global['product_images'] = $this->common_model->get_records('tbl_product_images', "product_id = '$id' and status = 0");
-		$this->global['product_dimensions'] = $this->common_model->get_records('tbl_product_dimensions_images', "product_id = '$id' and status = 0");
         
 		 if(sizeof($this->global['records']) > 0)
 		 {
@@ -65,9 +92,20 @@ class Product extends BaseController
 		$this->global['sub_categories'] = $this->common_model->get_records('tbl_sub_category', "status = '0' order by name asc");
 		$this->global['child_categories'] = $this->common_model->get_records('tbl_child_category', "status = '0' order by name asc");
 		
+		$this->global['technical_specifications'] = $this->common_model->get_records('tbl_technical_specifications', "status = '0' order by title asc");
+		
 		$this->global['brands'] = $this->common_model->get_records('tbl_brands', "status = '0' order by name asc");
         
         $this->loadViews("add_product_page", $this->global, NULL , NULL);
+    }
+	
+    public function technical_specifications()
+    {
+        $this->global['pageTitle'] = 'Technical Specifications' . ' - ' . $this->config->item('app_name');
+        
+		$this->global['records'] = $this->common_model->get_records('tbl_technical_specifications', "status != '9' order by title asc");
+		
+        $this->loadViews("list_technical_specifications_page", $this->global, NULL , NULL);
     }
 	
     public function brands()
@@ -87,9 +125,9 @@ class Product extends BaseController
 			$i = 0;
 			foreach($subs as $sub)
 			{
-				$data['subs'][$i] = $sub;
-				$data['subs'][$i]->value = base64_encode($sub->id);
-				$data['subs'][$i]->name = ucfirst($sub->name);
+				$data['slno'][$i] = $sub;
+				$data['id'][$i] = base64_encode($sub->id);
+				$data['name'][$i] = ucfirst($sub->name);
 				$i++;
 			}
 			$data['result'] = 1;
@@ -110,6 +148,7 @@ class Product extends BaseController
 			$i = 0;
 			foreach($childs as $child)
 			{
+
 				$data['child'][$i] = $child;
 				$data['child'][$i]->value = base64_encode($child->id);
 				$data['child'][$i]->name = ucfirst($child->name);

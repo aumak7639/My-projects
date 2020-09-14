@@ -37,7 +37,16 @@
 							<td><?php echo $record->quantity ?></td>
 							<td><?php echo $record->notes ?></td>
 							<td><?php echo $record->enquiry_status ?></td>
-							<td><?php echo $record->date_time ?></td>
+							<?php
+                                    $myvalue = $record->date_time;
+
+                                 $datetime = new DateTime($myvalue);
+ 
+                                     $date = $datetime->format('Y-m-d');
+                                   $time = $datetime->format('H:i:s');
+                                  ?>
+
+                                    <td><?php echo $date;echo " ".$time?></td>
 						</tr>
 						<?php
 							$inc++;

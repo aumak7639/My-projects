@@ -36,25 +36,19 @@
 										<div class="col-md-2 padding--15 allborder-ddd">
 											<div class="form-group">
 												<label for="name">
-													<?php
-														if($menu->cat_type == 'category'){
-															echo $this->common_model->get_category_name($menu->cat_id);
-														}
-														elseif($menu->cat_type == 'sub_category'){
-															echo $this->common_model->get_sub_category_name($menu->cat_id);
-														}
-														elseif($menu->cat_type == 'child_category'){
-															echo $this->common_model->get_child_category_name($menu->cat_id);
-														}
-													?>
-												</label>
+												<?php
+													if($menu->cat_type == 'category'){
+														echo $this->common_model->get_category_name($menu->cat_id);
+													}
+													elseif($menu->cat_type == 'sub_category'){
+														echo $this->common_model->get_sub_category_name($menu->cat_id);
+													}
+													elseif($menu->cat_type == 'child_category'){
+														echo $this->common_model->get_child_category_name($menu->cat_id);
+													}
+												?>
+												<span class="text-danger">*</span></label>
 												<input type="file" name="<?=$menu->id?>" accept="image/x-png,image/gif,image/jpeg" class="required form-control">
-											</div>		
-											<div class="form-group">
-												<label for="name">
-													Image Link
-												</label>
-												<input type="url" name="image_link_<?=$menu->id?>" value="<?=$menu->image_link?>" placeholder="https:// or http:// is must" class="required form-control">
 											</div>									
 											<a href="<?=base_url()?>uploads/header-menu/<?=$menu->image?>" target="_blank"><img src="<?=base_url()?>uploads/header-menu/<?=$menu->image?>" class="w--100"></a>
 										</div>	

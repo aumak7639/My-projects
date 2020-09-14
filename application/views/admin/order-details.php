@@ -43,6 +43,7 @@
 									</div>
 								</div>
 								<div class="col-md-12">
+									<button class="btn btn-info" type="button" data-target="#view_images" data-toggle="modal">View Package Images</button>
 									<button class="btn btn-primary pull-right" type="submit">Submit</button>
 								</div>
 							</form>
@@ -94,7 +95,7 @@
 					<?php endif; ?>
 					<?php if($order_address->option_name == "shipping"): ?>
 						<div class="col-sm-4 invoice-col">
-							Shipping Address
+							Billing Address
 							<address>
 								<strong>
 									<?=ucfirst($order_address->first_name) ?> 
@@ -148,15 +149,7 @@
 					<?php foreach($order_items as $order_item): ?>
 						<tr>
 							<td><?=$i?></td>
-							<td>
-								<?=$this->common_model->get_record('tbl_product', "id=" . $order_item->product_id, 'name')?>
-								<br>
-								<b>Finishing:</b> <?=$order->finishing_variant?>
-								<br>
-								<b>Loft:</b> <?=$order->loft_variant?>
-								<br>
-								<b>Mirror:</b> <?=$order->mirror_variant?>
-							</td>
+							<td><?=$this->common_model->get_record('tbl_product', "id=" . $order_item->product_id, 'name')?></td>
 							<td><?=$order_item->quantity?></td>
 							<td>₹<?=number_format($order_item->price, 2)?></td>
 						</tr>
@@ -208,6 +201,26 @@
 			</div>
 		</div>
     </section>
+</div>
+
+<div class="modal fade common-modal" id="view_images" tabindex="-1" role="dialog" aria-labelledby="view_images" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content"><span class="modal-close" data-dismiss="modal"><i class="icon-cross2"></i></span>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<?php foreach($order_process_images as $order_process_image): ?>
+							<div class="col-md-4">
+								<a target="_blank" href="<?=base_url()?>uploads/common/<?=$order_process_image->file_name?>">
+									<img src="<?=base_url()?>uploads/common/<?=$order_process_image->file_name?>" class="w--100">
+								</a>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/js/common.js" charset="utf-8"></script>

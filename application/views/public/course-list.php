@@ -3,10 +3,10 @@
         <article class="post style3 clearfix">
             <div class="entry">
                 <div class="featured-post">
-                    <a href="cources/teenoprenuer" target="_blank"><img src="<?= base_url() ?>assets/front/images/portfolio/p1.jpg" alt="image"></a>
+                    <a href="<?= base_url() ?>assets/front/cources/teenoprenuer" target="_blank"><img src="<?= base_url() ?>assets/front/images/portfolio/p1.jpg" alt="image"></a>
                 </div><!-- /.feature-post -->
                 <div class="entry-post">                                    
-                    <h6 class="entry-title"><a href="cources/teenoprenuer" target="_blank">Teenoprenuer </a></h6>
+                    <h6 class="entry-title"><a href="<?= base_url() ?>assets/front/cources/teenoprenuer" target="_blank">Teenoprenuer </a></h6>
                     <p class="course-tags">
                         <span>தமிழ்</span>
                         <span>English</span>
@@ -14,7 +14,7 @@
                     <p>Start early and succeed early and become a teenopreneur.</p>
                     <div class="entry-number">
                         <div class="entry-price">
-                            <span class="price"><a href="cources/teenoprenuer" target="_blank">More Details</a></span>
+                            <span class="price"><a href="<?= base_url() ?>assets/front/cources/teenoprenuer" target="_blank">More Details</a></span>
                         </div>
                     </div>
                 </div>
@@ -26,10 +26,10 @@
         <article class="post style3 clearfix">
             <div class="entry">
                 <div class="featured-post">
-                    <a href="cources/teachoprenuer" target="_blank"><img src="<?= base_url() ?>assets/front/images/portfolio/p2.jpg" alt="image"></a>
+                    <a href="<?= base_url() ?>assets/front/cources/teachoprenuer" target="_blank"><img src="<?= base_url() ?>assets/front/images/portfolio/p2.jpg" alt="image"></a>
                 </div><!-- /.feature-post -->
                 <div class="entry-post">                                    
-                    <h6 class="entry-title"><a href="cources/teachoprenuer" target="_blank">Teachoprenuer</a></h6>
+                    <h6 class="entry-title"><a href="<?= base_url() ?>assets/front/cources/teachoprenuer" target="_blank">Teachoprenuer</a></h6>
                     <p class="course-tags">
                         <span>தமிழ்</span>
                         <span>English</span>
@@ -37,7 +37,7 @@
                     <p>Channelise your teaching skills and earn by becoming a teachoprenuer.</p>
                     <div class="entry-number">
                         <div class="entry-price">
-                            <span class="price"><a href="cources/teachoprenuer" target="_blank">More Details</a></span>
+                            <span class="price"><a href="<?= base_url() ?>assets/front/cources/teachoprenuer" target="_blank">More Details</a></span>
                         </div>
                     </div>
                 </div>
@@ -49,10 +49,10 @@
         <article class="post style3 clearfix">
             <div class="entry">
                 <div class="featured-post">
-                    <a href="cources/online-trainoprener" target="_blank"><img src="<?= base_url() ?>assets/front/images/portfolio/p3.jpg" alt="image"></a>
+                    <a href="<?= base_url() ?>assets/front/cources/online-trainoprener" target="_blank"><img src="<?= base_url() ?>assets/front/images/portfolio/p3.jpg" alt="image"></a>
                 </div><!-- /.feature-post -->
                 <div class="entry-post">                                    
-                    <h6 class="entry-title"><a href="cources/online-trainoprener" target="_blank">Make Money Through Online Coaching</a></h6>
+                    <h6 class="entry-title"><a href="<?= base_url() ?>assets/front/cources/online-trainoprener" target="_blank">Make Money Through Online Coaching</a></h6>
                     <p class="course-tags">
                         <span>தமிழ்</span>
                         <span>English</span>
@@ -60,7 +60,7 @@
                     <p>The knowledge in your head is potentially worth millions right now if you reach out to the right people.</p>
                     <div class="entry-number">
                         <div class="entry-price">
-                            <span class="price"><a href="cources/online-trainoprener" target="_blank">More Details</a></span>
+                            <span class="price"><a href="<?= base_url() ?>assets/front/cources/online-trainoprener" target="_blank">More Details</a></span>
                         </div>
                     </div>
                 </div>

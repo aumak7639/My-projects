@@ -11,25 +11,29 @@
 				<div class="row">
 					<?php $inv = 1; ?>
 					<?php 
-						if(!isset($product_images))
-						{
-							$product_images = $this->common_model->get_records("tbl_product_images", "product_id='" . $product_id . "' and status = '0'"); 
-						}
+						
+							$product_images = $this->common_model->get_records("tbl_property_images", "id='" . $record->property_image_id. "' and status = '0'"); 
+						
 					?>
 					<?php foreach($product_images as $product_image): ?>
 						<div class="col-md-4 text-center">
-							<form class="padding--15 allborder-ddd update_data" onsubmit="return false;">
-								<a target="_blank" href="<?=base_url()?>uploads/products/<?=$product_image->file_name?>">
-									<img class="w--100" src="<?=base_url()?>uploads/products/<?=$product_image->file_name?>">
+							<form class="padding--15 allborder-ddd update_product_data" onsubmit="return false;">
+								<?php $imgs=explode(",",$product_image->image); ?>
+                        		<?php foreach($imgs as $img):?>
+                        
+								<a target="_blank" href="<?=base_url()?>uploads/common/<?=$img?>">
+									<img class="w--100" src="<?=base_url()?>uploads/common/<?=$img?>">
+								
 								</a>
+								<?php endforeach;?>
 								<br>
 								<br>
 								<div class="text-left">
 									<label>Image Alt Text</label>
 									<input class="w--100 form-control" value="<?=$product_image->alt?>" type="text" name="alt" placeholder="Image Alt Text">
 									<label>Replace image</label>
-									<input class="w--100 form-control" type="file" name="file_name">
-									<input type="hidden" value="tbl_product_images" name="table_name">
+									<input class="w--100 form-control" type="file" name="image[]" multiple="multiple">
+									<input type="hidden" value="tbl_property_images" name="table_name">
 									<input type="hidden" value="<?=$product_image->id?>" name="row_id">
 									<br>
 								</div>

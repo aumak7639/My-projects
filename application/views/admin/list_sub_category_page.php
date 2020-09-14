@@ -12,55 +12,31 @@
                             <div class="row">
                                 <div class="col-md-6">                                
                                     <div class="form-group">
-                                        <label for="name">Category Name <span class="text-danger">*</span></label>
-                                        <select class="form-control required" name="category_id">
-											<option value="">Select Category</option>
-											<?php foreach($categories as $category): ?>
-												<option value="<?=$category->id?>"><?=$category->name?></option>
-											<?php endforeach; ?>
-										</select>
+                                        <label for="name">Name <span class="text-danger">*</span></label>
+										<input type="text" class="form-control required" name="name">
+									  
 										<span class="text-danger error-span">This input is required.</span>
-                                        <input type="hidden" value="tbl_sub_category" name="table_name">
-										<input type="hidden" value="" name="slug">
+                                        <input type="hidden" value="mydetails" name="table_name">
+										<input type="hidden" value="" name="row_id">
                                     </div>
                                 </div>
                                 <div class="col-md-6">                                
                                     <div class="form-group">
-                                        <label for="name">Sub Category Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control required" name="name">
+                                        <label for="age">age <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control required" name="age">
 										<span class="text-danger error-span">This input is required.</span>
                                     </div>
                                 </div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="slug">Meta Title</label>
-										<input type="text" class="form-control" name="meta_title">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="slug">Meta Keywords</label>
-										<input type="text" class="form-control" name="meta_keywords">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="slug">Meta Description</label>
-										<input type="text" class="form-control" name="meta_description">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="slug">Ad / Promotion Image </label>
-										<input type="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" name="image">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="slug">Ad / Promotion Image Link </label>
-										<input type="url" class="form-control" placeholder="Link should have http:// or https:// in prefix" name="ad_link">
-									</div>
-								</div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="gender">gender</label>
+                                        <input type="text" class="form-control" name="gender" placeholder="Leave blank for auto generation">
+                                    </div>
+                                </div>
+								
+							
+							
+                                
                             </div>
                         </div>
                         <div class="box-footer">
@@ -70,6 +46,9 @@
                 </div>
             </div>
         </div>  
+
+
+		
         <div class="row">
             <div class="col-md-12">
               <div class="box">
@@ -77,13 +56,24 @@
                   <table class="table table-hover data_table">
 					<thead>
 						<tr>
-							<th>Sl. No.</th>
+							<!-- <th>Sl. No.</th>
 							<th>Image</th>
 							<th>Category Name</th>
 							<th>Sub Category Name</th>
 							<th>Slug</th>
 							<th class="text-center">Actions</th>
-							<th class="text-center">Status</th>
+							<th class="text-center">Status</th> -->
+
+							<th>ID</th>
+							<th>Name</th>
+							<th>age</th>
+							<th>gender</th>
+							<th>Action</th>
+							<th>Status</th>
+							
+							
+							
+
 						</tr>
 					</thead>
 					<tbody>
@@ -95,41 +85,45 @@
 							{
 						?>
 						<tr>
+
+					
 							<td><?php echo $inc; ?></td>
-							<td><a target="_blank" href="<?=base_url()?>uploads/category/<?php echo $record->image ?>"><img width="50" height="50" src="<?=base_url()?>uploads/category/<?php echo $record->image ?>"></a></td>
-							<td><?php echo $this->common_model->get_category_name($record->category_id) ?></td>
-							<td><?php echo $record->name ?></td>
-							<td><?php echo $record->slug ?></td>
+						
+							
+							 <td><?php echo $record->name ?></td>
+							<td><?php echo $record->age ?></td> 
+							<td><?php echo $record->gender ?></td> 
+
+							
 							<td class="text-center">
 								<?php if($record->id != 0): ?>
 									<?php if(0 == 1): ?>
-									<a class="btn btn-sm btn-info" data-toggle="modal" data-target="#editSlider" onclick="get_records('tbl_category_images', 'sub_category_id=<?=$record->id?>')"><i class="fa fa-book"></i></a>
-									
+									<!-- <a class="btn btn-sm btn-info" data-toggle="modal" data-target="#editSlider" onclick="get_records('tbl_category_images', 'sub_category_id=?=$record->id?>')"><i class="fa fa-book"></i></a>
+									 -->
 									<a class="btn btn-sm btn-info" data-toggle="modal" data-target="#addSlider" onclick="$('#addSlider input[name=sub_category_id]').val('<?=$record->id?>')"><i class="fa fa-plus"></i></a>
 									<?php endif; ?>
 									<a class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal-default" onclick="
-									$('.update_data .img-a').attr('href', '<?=base_url()?>uploads/category/<?=$record->image?>');
-									$('.update_data img').attr('src', '<?=base_url()?>uploads/category/<?=$record->image?>');
-									$('.update_data select[name=category_id]').val('<?=$record->category_id?>');
+								
+									
 									$('.update_data input[name=name]').val('<?=$record->name?>');
 									$('.update_data input[name=row_id]').val('<?=$record->id?>');
-									$('.update_data input[name=slug]').val('<?=$record->slug?>');
-									$('.update_data input[name=meta_title]').val('<?=$record->meta_title?>');
-									$('.update_data input[name=meta_keywords]').val('<?=$record->meta_keywords?>');
-									$('.update_data input[name=ad_link]').val('<?=$record->ad_link?>');
-									$('.update_data input[name=meta_description]').val('<?=$record->meta_description?>');
+									$('.update_data input[name=age]').val('<?=$record->age?>');
+									$('.update_data input[name=gender]').val('<?=$record->gender?>');
+								
 									"><i class="fa fa-pencil"></i></a>
 									
-									<a class="btn btn-sm btn-danger deletecats" style="<?php if($record->status == 1){ echo 'display: none;'; } ?>" href="#" data-table="tbl_sub_category" data-id="<?php echo $record->id; ?>"><i class="fa fa-close"></i></a>
+									<a class="btn btn-sm btn-danger delete" style="<?php if($record->status == 1){ echo 'display: none;'; } ?>" href="#" data-table="mydetails" data-id="<?php echo $record->id; ?>"><i class="fa fa-close"></i></a>
 									
-									<a class="btn btn-sm btn-success activebtn" style="<?php if($record->status == 0){ echo 'display: none;'; } ?>" href="#" data-table="tbl_sub_category" data-id="<?php echo $record->id; ?>"><i class="fa fa-check"></i></a>
+									<a class="btn btn-sm btn-success activebtn" style="<?php if($record->status == 0){ echo 'display: none;'; } ?>" href="#" data-table="mydetails" data-id="<?php echo $record->id; ?>"><i class="fa fa-check"></i></a>
 								<?php endif; ?>
 							</td>
-							<td class="text-center">
-								<?php if($record->id != 0): ?>
+
+
+						 <td class="text-center">
+							 <?php if($record->id != 0): ?>
 									<?php if($record->status == 0){ echo "<span class='btn btn-sm btn-success'>Active</span>"; }else{  echo "<span class='btn btn-sm btn-danger'>Inactive</span>"; } ?>
 								<?php endif; ?>
-							</td>
+							</td> 
 						</tr>
 						<?php
 							$inc++;
@@ -146,7 +140,12 @@
     </section>
 </div>
 
-	<div class="modal fade" id="modal-default">
+
+
+
+
+
+<div class="modal fade" id="modal-default">
 	  <div class="modal-dialog">
 		<div class="modal-content">
 			<form reload-action="true" this_id="form-002" class="update_data" method="post" role="form">
@@ -159,68 +158,81 @@
 					<div class="row">
 						<div class="col-md-6">                                
 							<div class="form-group">
-								<label for="name">Category Name <span class="text-danger">*</span></label>
-								<select class="form-control required" name="category_id">
-									<option value="">Select Category</option>
-									<?php foreach($categories as $category): ?>
-										<option value="<?=$category->id?>"><?=$category->name?></option>
-									<?php endforeach; ?>
-								</select>
+								<label for="name">Name <span class="text-danger">*</span></label>
+								<input type="text" class="form-control required" name="name">
+								<span class="text-danger error-span">This input is required.</span>
+								<input type="hidden" value="mydetails" name="table_name">
+								<input type="hidden" name="row_id">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="age">age</label>
+								<input type="text" class="form-control" name="age" placeholder="Leave blank for auto generation">
+								<span class="text-danger error-span">This input is required.</span>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="gender">Meta Title</label>
+								<input type="text" class="form-control" name="gender">
+							</div>
+						</div>
+						
+						
+						
+					
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default pull-left" data-dismiss="modal" value="Close">
+					<input type="submit" class="btn btn-primary" value="Save changes">
+				</div>
+			</form>
+		</div>
+	  </div>
+	</div>
+
+	
+	<!-- <div class="modal fade" id="modal-default">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+			<form reload-action="true" this_id="form-002" class="update_data" method="post" role="form">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span></button>
+					<h4 class="modal-title">Edit</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-6">                                
+							<div class="form-group">
+
+							<label for="name">Name <span class="text-danger">*</span></label>
+										<input type="text" class="form-control required" name="name">
+								
 								<span class="text-danger error-span">This input is required.</span>
 								<input type="hidden" value="tbl_sub_category" name="table_name">
 								<input type="hidden" name="row_id">
 							</div>
 						</div>
 						<div class="col-md-6">                                
-							<div class="form-group">
-								<label for="name">Sub Category Name <span class="text-danger">*</span></label>
-								<input type="text" class="form-control required" name="name">
-								<span class="text-danger error-span">This input is required.</span>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="slug">Slug</label>
-								<input type="text" class="form-control" name="slug" placeholder="Leave blank for auto generation">
-								<span class="text-danger error-span">This input is required.</span>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="slug">Meta Title</label>
-								<input type="text" class="form-control" name="meta_title">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="slug">Meta Keywords</label>
-								<input type="text" class="form-control" name="meta_keywords">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="slug">Meta Description</label>
-								<input type="text" class="form-control" name="meta_description">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="slug">Ad / Promotion Image </label>
-								<input type="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" name="image">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="slug">Ad / Promotion Image Link </label>
-								<input type="url" class="form-control" placeholder="Link should have http:// or https:// in prefix" name="ad_link">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="slug">Current Featured Image</label><br>
-								<a target="_blank" href="#" class="img-a"><img width="50" height="50" src=""></a>
-							</div>
-						</div>
+                                    <div class="form-group">
+                                        <label for="age">age <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control required" name="age">
+										<span class="text-danger error-span">This input is required.</span>
+                                    </div>
+                                </div>
+								<div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="gender">gender</label>
+                                        <input type="text" class="form-control" name="gender" placeholder="Leave blank for auto generation">
+                                    </div>
+                                </div>
+					
+					
+		
+						
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -232,7 +244,7 @@
 		<!-- /.modal-content -->
 	  </div>
 	  <!-- /.modal-dialog -->
-	</div>
+	</div> -->
 	
 	<div class="modal fade" id="addSlider">
 	  <div class="modal-dialog">

@@ -14,11 +14,7 @@ class User extends BaseController
         $this->load->model('admin/user_model');
         $this->isLoggedIn();   
     }
-    public function logout()
-    {
-        session_destroy();
-        redirect('admin');
-    }
+    
     /**
      * This function used to load the first screen of the user
      */

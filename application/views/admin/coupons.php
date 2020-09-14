@@ -1,291 +1,130 @@
+
+
+
+
 <div class="content-wrapper">
-    
     <section class="content">
-		<div class="row">
-			<div class="col-md-12">
-				<span class="btn btn-primary" data-toggle="modal" data-target="#coupon-modal">Add Coupon</span>
-			</div>
-		</div>
         <div class="row">
             <div class="col-md-12">
               <div class="box">
                 <div class="box-body table-responsive">
-                  <table class="table table-hover data_table_1">
+          <!--randomStringToInput(this)-->	
+                <form method="post" action="<?php echo base_url()?>admin/Common_controller/insert1">
+ 	 			
+							  <div class="col-md-12">
+					
+
+							<input type='text'  name="expiry_date"  class="datepicker" placeholder='Expiry date'>
+							</div>
+							 
+							  <div class="col-md-12">
+					
+
+						<select name="IsFlat" id="flat">
+							  <option value="1">Flat</option>
+							  <option value="0">Percentage</option>
+							</select>
+							</div>
+							
+							  <div class="col-md-12">
+					
+
+						<input type='number' id="point" name="point"  placeholder='Points'/>
+							</div>
+								  <div class="col-md-12">
+					
+						<input type="submit" name="submit" class="btn btn-sm btn-success">
+				
+                		</div>
+
+						
+     </form>       
+</div>
+    	<table class="table table-hover data_table">
 					<thead>
 						<tr>
-							<th class="text-center">Sl. No.</th>
-							<th class="text-center">Coupon Code</th>
-							<th class="text-center">Flat / Percentage</th>
-							<th class="text-center">Value</th>
-							<th class="text-center">Start Date</th>
-							<th class="text-center">End Date</th>
-							<th class="text-center">Limit</th>
-							<th class="text-center">Used</th>
-							<th class="text-center">Actions</th>
-							<th class="text-center">Status</th>
+							<th>Id</th>
+							<th>Coupon Number</th>
+							<th>Generated Date</th>							
+							<th>Expiry Date</th>
+							<th>Points</th>
+							<th>Is Flat</th>
+							<th>Status</th>
+							<th class="text-center"></th>
 						</tr>
 					</thead>
-					<tbody>
-						<?php
-						if(!empty($records))
-						{
-							$inc = 1;
-							foreach($records as $record)
+					<tbody>	
+						
+						<?php 
+							if($fetch_data->num_rows()>0)
 							{
-						?>
-						<tr>
-							<td class="text-center"><?php echo $inc; ?></td>
-							<td class="text-center"><?=$record->coupon_code?></td>
-							<td class="text-center"> <?=($record->flat_percentage==0)?"Flat":""?> <?=($record->flat_percentage==1)?"Percentage":""?></td>
-							<td class="text-center"><?=$record->value?></td>
-							<td class="text-center"><?=$record->start_date?></td>
-							<td class="text-center"><?=$record->end_date?></td>
-							<td class="text-center"><?=$record->limits?></td>
-							<td class="text-center"><?=$record->used?></td>
-							<td class="text-center">
-								<span class="btn btn-sm btn-info" data-toggle="modal" data-target="#coupon-edit-modal" onclick="edit_coupon('<?=$record->id?>', '<?=$record->coupon_code?>', '<?=$record->flat_percentage?>', '<?=$record->value?>', '<?=$record->start_date?>', '<?=$record->end_date?>', '<?=$record->limits?>', '<?=$record->coupon_status?>'); child_category_1('<?=$record->child_category?>'); product_id_1('<?=$record->product_id?>');">
-									<i class="fa fa-pencil"></i>
-								</span>
-							</td>
-							<td class="text-center">
-								<?=($record->coupon_status==0)?"Active":""?> <?=($record->coupon_status==1)?"Expired":""?>
-							</td>
-						</tr>
-						<?php
-							$inc++;
+								foreach ($fetch_data->result() as $row) {
+							?>		
+								<tr>
+									<td><?php echo $row->Id;?></td>
+									<td><?php echo $row->Coupon_number;?></td>
+									<td><?php echo $row->Generated_date;?></td>
+				
+									<td><?php echo $row->Expiry_date;?></td>
+									<td><?php if($row->IsFlat==1){echo "Flat";}else{echo "Percentage";}?></td>
+									<td><?php echo $row->Point;?></td>
+									<td><?php if($row->Status=="C"){echo "Created";}else if($row->Status=="D"){echo "Expired";}else{echo "Used";}?></td>
+								
+									<td><a name="Delete" class="btn btn-sm btn-danger" href="<?php echo base_url()?>admin/Common_controller/update1?Id=<?php echo $row->Id;?>">Delete</a></td>
+								</tr>
+
+							<?php	}
 							}
-						}
+							else{?>
+								<tr><td>No data found</td></tr>
+						<?php	}
 						?>
-					</tbody>
-                  </table>
-                  
-                </div><!-- /.box-body -->
+						
+            </tbody>
+   </table>
+</div>
+     <!-- /.box-body -->
               </div><!-- /.box -->
             </div>
         </div>
     </section>
-</div>
 
-<!-- modal start -->
-<div class="modal fade" id="coupon-modal">
-  <div class="modal-dialog">
-	<div class="modal-content text-left">
-		<form this_id="form-002" class="insert_coupon_data" role="form">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">×</span></button>
-				<h4 class="modal-title"><?php echo $record->name ?></h4>
-			</div>
-			<div class="modal-body">
-				<div class="row">
-					<div class="col-md-6">                                
-						<div class="form-group">
-							<label for="name">Select Categories</label>
-							<select class="form-control select2" multiple="multiple" id="child_category">
-								<?php foreach($this->common_model->get_records("tbl_child_category", "status = '0' order by id desc") as $child_category): ?>
-									<option value="<?=$child_category->id?>">
-										<?=$child_category->name?> 
-										(Parent: <?=$this->common_model->get_record("tbl_category", "id=" . $child_category->category_id, "name")?>) 
-										(Sub: <?=$this->common_model->get_record("tbl_sub_category", "id=" . $child_category->sub_category_id, "name")?>)
-									</option>
-								<?php endforeach; ?>
-							</select>
-							<input type="hidden" value="tbl_coupons" name="table_name"> 
-							<input type="hidden" value="" name="child_category"> 
-							<input type="hidden" value="" name="product_id"> 
-						</div>
-					</div>
-					<div class="col-md-6">                                
-						<div class="form-group">
-							<label for="name">Select Product</label>
-							<select class="form-control select2" multiple="multiple" id="product_id">
-								<?php foreach($this->common_model->get_records("tbl_product", "status = '0' and product_status = 'approved' order by id desc") as $product): ?>
-									<option value="<?=$product->id?>">
-										<?=$product->name?> 
-									</option>
-								<?php endforeach; ?>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-6">                                
-						<div class="form-group">
-							<label for="name">Coupon Code <span class="text-danger">*</span></label>
-							<input type="text" class="form-control required" name="coupon_code">
-						</div>
-					</div>
-					<div class="col-md-6">                                
-						<div class="form-group">
-							<label for="name">Flat / Percentage <span class="text-danger">*</span></label>
-							<select class="form-control required" name="flat_percentage" required>
-								<option value="0">Flat</option>
-								<option value="1">Percentage</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-6">                                
-						<div class="form-group">
-							<label for="name">Value <span class="text-danger">*</span></label>
-							<input type="number" class="form-control required" min="1" value="1" name="value" required>
-						</div>
-					</div>
-					<div class="col-md-6">                                
-						<div class="form-group">
-							<label for="name">Start Date <span class="text-danger">*</span></label>
-							<input type="date" class="form-control required" name="start_date" value="<?=date('Y-m-d')?>" required>
-						</div>
-					</div>
-					<div class="col-md-6">                                
-						<div class="form-group">
-							<label for="name">End Date <span class="text-danger">*</span></label>
-							<input type="date" class="form-control required" name="end_date" value="<?=date('Y-m-d')?>" required>
-						</div>
-					</div>
-					<div class="col-md-6">                                
-						<div class="form-group">
-							<label for="name">Limit <span class="text-danger">*</span></label>
-							<input type="number" class="form-control required" min="1" value="1" name="limits" required>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<input type="button" class="btn btn-default pull-left" data-dismiss="modal" value="Close">
-				<input type="submit" class="btn btn-primary" value="Save">
-			</div>
-		</form>
-	</div>
-  </div>
-</div>
-<!-- modal end -->	  
+<!-- jQuery UI CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
 
-<!-- modal start -->
-<div class="modal fade" id="coupon-edit-modal">
-  <div class="modal-dialog">
-	<div class="modal-content text-left">
-		<form reload-action="true" this_id="form-002" class="update_data" role="form">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">×</span></button>
-				<h4 class="modal-title"><?php echo $record->name ?></h4>
-			</div>
-			<div class="modal-body">
-				<div class="row">
-					<div class="col-md-6">                                
-						<div class="form-group">
-							<label for="name">Select Categories</label>
-							<select class="form-control select2" multiple="multiple" id="child_category_1">
-								<?php foreach($this->common_model->get_records("tbl_child_category", "status = '0' order by id desc") as $child_category): ?>
-									<option value="<?=$child_category->id?>">
-										<?=$child_category->name?> 
-										(Parent: <?=$this->common_model->get_record("tbl_category", "id=" . $child_category->category_id, "name")?>) 
-										(Sub: <?=$this->common_model->get_record("tbl_sub_category", "id=" . $child_category->sub_category_id, "name")?>)
-									</option>
-								<?php endforeach; ?>
-							</select>
-							<input type="hidden" value="tbl_coupons" name="table_name"> 
-							<input type="hidden" value="tbl_coupons" name="row_id"> 
-							<input type="hidden" value="" name="child_category"> 
-							<input type="hidden" value="" name="product_id">
-						</div>
-					</div>
-					<div class="col-md-6">                                
-						<div class="form-group">
-							<label for="name">Select Product</label>
-							<select class="form-control select2" multiple="multiple" id="product_id_1">
-								<?php foreach($this->common_model->get_records("tbl_product", "status = '0' and product_status = 'approved' order by id desc") as $product): ?>
-									<option value="<?=$product->id?>">
-										<?=$product->name?> 
-									</option>
-								<?php endforeach; ?>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-6">                                
-						<div class="form-group">
-							<label for="name">Coupon Code <span class="text-danger">*</span></label>
-							<input type="text" class="form-control required" name="coupon_code">
-						</div>
-					</div>
-					<div class="col-md-6">                                
-						<div class="form-group">
-							<label for="name">Flat / Percentage <span class="text-danger">*</span></label>
-							<select class="form-control required" name="flat_percentage" required>
-								<option value="0">Flat</option>
-								<option value="1">Percentage</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-6">                                
-						<div class="form-group">
-							<label for="name">Value <span class="text-danger">*</span></label>
-							<input type="number" class="form-control required" min="1" value="1" name="value" required>
-						</div>
-					</div>
-					<div class="col-md-6">                                
-						<div class="form-group">
-							<label for="name">Start Date <span class="text-danger">*</span></label>
-							<input type="date" class="form-control required" name="start_date" value="<?=date('Y-m-d')?>" required>
-						</div>
-					</div>
-					<div class="col-md-6">                                
-						<div class="form-group">
-							<label for="name">End Date <span class="text-danger">*</span></label>
-							<input type="date" class="form-control required" name="end_date" value="<?=date('Y-m-d')?>" required>
-						</div>
-					</div>
-					<div class="col-md-6">                                
-						<div class="form-group">
-							<label for="name">Limit <span class="text-danger">*</span></label>
-							<input type="number" class="form-control required" min="1" value="1" name="limits" required>
-						</div>
-					</div>
-					<div class="col-md-6">                                
-						<div class="form-group">
-							<label for="name">Coupon Status <span class="text-danger">*</span></label>
-							<select class="form-control required" name="coupon_status" required>
-								<option selected value="0">Active</option>
-								<option selected value="1">Expired</option>
-							</select>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<input type="button" class="btn btn-default pull-left" data-dismiss="modal" value="Close">
-				<input type="submit" class="btn btn-primary" value="Save">
-			</div>
-		</form>
-	</div>
-  </div>
-</div>
-<!-- modal end -->	
+<!-- jQuery Library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- jQuery UI JS -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+<script>
+   // Datapicker 
+   $( ".datepicker" ).datepicker({
+      "dateFormat": "yy-mm-dd"
+   });
+
+ 
+ $(document).ready(function(){
+    $("#flat").change(function(){
+        var isflat = $(this).children("option:selected").val();
+        if(isflat==0){ 
+			     $('#point').on('input', function () {
+			    
+			    var value = $(this).val();
+			    
+			    if ((value !== '') && (value.indexOf('.') === -1)) {
+			        
+			        $(this).val(Math.max(Math.min(value, 100), -90));
+			    }
+			});}
+        
+        
+    });
+});
+
+  
+</script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/js/common.js" charset="utf-8"></script>
 
-<script>
-	function edit_coupon(row_id, coupon_code, flat_percentage, value, start_date, end_date, limits, coupon_status)
-	{
-		$('input[name=row_id]').val(row_id);
-		$('input[name=coupon_code]').val(coupon_code);
-		$('select[name=flat_percentage]').val(flat_percentage);
-		$('input[name=value]').val(value);
-		$('input[name=start_date]').val(start_date);
-		$('input[name=end_date]').val(end_date);
-		$('input[name=limits]').val(limits);
-		$('select[name=coupon_status]').val(coupon_status);
-	}
-</script>
 
-<script>
-	function child_category_1(a)
-	{
-		var selectedValues = new Array();
-		selectedValues[0] = "842";
-		selectedValues[1] = "841";
-		$("#child_category_1").val(selectedValues);
-	}
-	
-	function product_id_1(a)
-	{
-		$("#product_id_1").val(a);
-	}
-</script>

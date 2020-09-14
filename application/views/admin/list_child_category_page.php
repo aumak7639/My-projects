@@ -26,10 +26,15 @@
                                     <div class="form-group">
                                         <label for="name">Child Category Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control required" name="name">
-										<span class="text-danger error-span">This input is required.</span>
                                         <input type="hidden" value="0" id="catt_id" name="category_id">
                                         <input type="hidden" value="tbl_child_category" name="table_name">
-										<input type="hidden" value="" name="slug">
+										<span class="text-danger error-span">This input is required.</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="slug">Slug</label>
+                                        <input type="text" class="form-control" name="slug" placeholder="Leave blank for auto generation">
                                     </div>
                                 </div>
 								<div class="col-md-6">
@@ -50,18 +55,12 @@
 										<input type="text" class="form-control" name="meta_description">
 									</div>
 								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="slug">Ad / Promotion Image </label>
-										<input type="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" name="image">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="slug">Ad / Promotion Image Link </label>
-										<input type="url" class="form-control" placeholder="Link should have http:// or https:// in prefix" name="ad_link">
-									</div>
-								</div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="slug">Featured Image <span class="text-danger">*</span></label>
+                                        <input type="file" class="form-control required" accept="image/x-png,image/gif,image/jpeg" name="image">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="box-footer">
@@ -120,7 +119,6 @@
 								$('.update_data input[name=slug]').val('<?=$record->slug?>');
 								$('.update_data input[name=meta_title]').val('<?=$record->meta_title?>');
 								$('.update_data input[name=meta_keywords]').val('<?=$record->meta_keywords?>');
-								$('.update_data input[name=ad_link]').val('<?=$record->ad_link?>');
 								$('.update_data input[name=meta_description]').val('<?=$record->meta_description?>');
 								"><i class="fa fa-pencil"></i></a>
 								
@@ -210,14 +208,8 @@
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="slug">Ad / Promotion Image </label>
+								<label for="slug">Featured Image</label>
 								<input type="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" name="image">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="slug">Ad / Promotion Image Link </label>
-								<input type="url" class="form-control" placeholder="Link should have http:// or https:// in prefix" name="ad_link">
 							</div>
 						</div>
 						<div class="col-md-6">

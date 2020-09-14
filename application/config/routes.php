@@ -172,6 +172,7 @@ $route['admin/add_new_color_variant'] = "admin/common_controller/add_new_color_v
 
 $route['seaproduct/(:any)'] = "frontend/sea_product/$1";
 $route['about-us'] = "frontend/about_us";
+$route['courses'] = "frontend/Courses";
 $route['contact-us'] = "frontend/contact_us";
 $route['sort']="frontend/sort";
 

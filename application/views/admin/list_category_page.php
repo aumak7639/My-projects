@@ -13,7 +13,12 @@
 										<input type="text" class="form-control required" name="name">
 										<span class="text-danger error-span">This input is required.</span>
 										<input type="hidden" value="tbl_category" name="table_name">
-										<input type="hidden" value="" name="slug">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="slug">Slug <span class="text-danger">*</span></label>
+										<input type="text" class="form-control" name="slug" placeholder="Leave blank for auto generation">
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -36,14 +41,8 @@
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<label for="slug">Ad / Promotion Image </label>
-										<input type="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" name="image">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="slug">Ad / Promotion Image Link </label>
-										<input type="url" class="form-control" placeholder="Link should have http:// or https:// in prefix" name="ad_link">
+										<label for="slug">Featured Image <span class="text-danger">*</span></label>
+										<input type="file" class="form-control required" accept="image/x-png,image/gif,image/jpeg" name="image">
 									</div>
 								</div>
 							</div>
@@ -98,7 +97,6 @@
 								$('.update_data input[name=slug]').val('<?=$record->slug?>');
 								$('.update_data input[name=meta_title]').val('<?=$record->meta_title?>');
 								$('.update_data input[name=meta_keywords]').val('<?=$record->meta_keywords?>');
-								$('.update_data input[name=ad_link]').val('<?=$record->ad_link?>');
 								$('.update_data input[name=meta_description]').val('<?=$record->meta_description?>');
 								"><i class="fa fa-pencil"></i></a>
 								
@@ -127,6 +125,8 @@
         </div>
     </section>
 </div>
+
+
 
 	<div class="modal fade" id="modal-default">
 	  <div class="modal-dialog">
@@ -175,14 +175,8 @@
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="slug">Ad / Promotion Image </label>
+								<label for="slug">Featured Image</label>
 								<input type="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" name="image">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="slug">Ad / Promotion Image Link </label>
-								<input type="url" class="form-control" placeholder="Link should have http:// or https:// in prefix" name="ad_link">
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -201,6 +195,10 @@
 		</div>
 	  </div>
 	</div>
+	
+
+
+
 	
 	<div class="modal fade" id="addSlider">
 	  <div class="modal-dialog">

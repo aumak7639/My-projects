@@ -97,9 +97,9 @@
                                     <div class="nav-wrap">                            
                                         <nav id="mainnav" class="mainnav">
                                             <ul class="menu"> 
-                                                <li><a href="index.php">Home</a></li>
-                                                <li><a href="about-us.php">About</a></li>                                                
-                                                <li><a href="courses.php">Courses</a>
+                                                <li><a href="<?= base_url() ?>">Home</a></li>
+                                                <li><a href="<?= base_url() ?>about-us">About</a></li>                                                
+                                                <li><a href="<?= base_url() ?>courses">Courses</a>
                                                     <ul class="submenu"> 
                                                         <li><a href="<?= base_url() ?>assets/front/cources/teenoprenuer"  target="_blank">Teenoprenuer</a></li>
                                                         <li><a href="<?= base_url() ?>assets/front/cources/teachoprenuer" target="_blank">Teachoprenuer</a></li>
