@@ -33,7 +33,6 @@ if (isset($_SESSION['user_id'])) {
                         </div>
                     </div>
                 </div>
-
                 <div class="main-bd">
                     <div class="left-side">
                         <div class="profile-side">
@@ -46,7 +45,6 @@ if (isset($_SESSION['user_id'])) {
                                 </p>
                             </div>
                         </div>
-
                     </div>
                     <div class="right-side">
                         <ul class="nav nav-tabs">
@@ -55,7 +53,6 @@ if (isset($_SESSION['user_id'])) {
                             <!--                            <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
                                                         <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>-->
                         </ul>
-
                         <div class="tab-content">
                             <div id="home" class="tab-pane fade in active">
                                 <div class="basic-info">
@@ -141,14 +138,35 @@ if (isset($_SESSION['user_id'])) {
                                 </div>
                             </div>
                             <div id="menu1" class="tab-pane fade">
-                                <div class="text-right" style="width: 100%;">
-                                    <button type="file" class="btn btn-success">Upload Photos</button>
+                                <div class="">
+                                    <div class="file-upload">
+                                        <!--place upload image/icon first !-->
+                                        <p>Change Profile</p>
+                                        <!--place input file last !-->
+                                        <input type="file" id="profile_picture" name="profile_picture" onchange="attachAccountFile('profile_picture',<?php echo $_SESSION["user_id"]; ?>);" />
+                                    </div>
                                 </div>
                                 <div class="picture-section">
-                                    <img src="img/dummy-profile.jpg"/>
-                                    <img src="img/dummy-profile.jpg"/>
-                                    <img src="img/dummy-profile.jpg"/>
-                                    <img src="img/dummy-profile.jpg"/>
+                                    <?php if (isset($myprofile['image_path']) != '') { ?>
+                                        <img src="<?php echo BASE_URL . $myprofile['image_path']; ?>" alt="" />
+                                    <?php } else { ?>
+                                        <i class="fa fa-upload" aria-hidden="true"></i>
+                                    <?php } ?>
+                                    <?php if (isset($myprofile['image_path_1']) != '') { ?>
+                                        <img src="<?php echo BASE_URL . $myprofile['image_path_1']; ?>" alt="" />
+                                    <?php } else { ?>
+                                        <i class="fa fa-upload" aria-hidden="true"></i>
+                                    <?php } ?>
+                                    <?php if (isset($myprofile['image_path_2']) != '') { ?>
+                                        <img src="<?php echo BASE_URL . $myprofile['image_path_2']; ?>" alt="" />
+                                    <?php } else { ?>
+                                        <i class="fa fa-upload" aria-hidden="true"></i>
+                                    <?php } ?>
+                                    <?php if (isset($myprofile['image_path_3']) != '') { ?>
+                                        <img src="<?php echo BASE_URL . $myprofile['image_path_3']; ?>" alt="" />
+                                    <?php } else { ?>
+                                        <i class="fa fa-upload" aria-hidden="true"></i>
+                                    <?php } ?>
                                     <img src="img/dummy-profile.jpg"/>
                                 </div>
                             </div>

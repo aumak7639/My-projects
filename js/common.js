@@ -217,3 +217,42 @@ function updateMemberProfile(mid) {
     });
     return false;
 }
+
+function attachAccountFile(id,mid) {
+    var val = $('#' + id).val();
+    var checkfiletype = false;
+    if ($.trim(val) != '' && checkfiletype == false) {
+        $('.loader').addClass('is-active');
+        var form = new FormData();
+        form.append('file', $('#' + id)[0].files[0]);
+        form.append('mid', mid);
+        $.ajax({
+            type: "POST",
+            url: 'api/v1/upload_member_picfile',
+            processData: false,
+            contentType: false,
+            data: form,
+            success: function (data) {
+                $('.loader').removeClass('is-active');
+                if (data.result.error === false) {
+                    if (id == 'profile_picture') {
+                        $("#preview_container").removeClass('hidden');
+                        $("#upload_container").addClass('hidden');
+                        avatar = data.result.data;
+                        $("#preview_container img").attr("src", BASE_IMAGE_URL + avatar);                        
+                    }
+                } else {
+                    swal('Information', data.result.message, 'info');
+                }
+            },
+            error: function (err) {
+                $('.loader').removeClass('is-active');
+                swal('Error', err.statusText, 'error');
+            }
+        });
+    } else {
+        if (id != 'profile_picture' && checkfiletype == false) {
+            swal('Information', 'Please attach profile', 'info');
+        }
+    }
+}

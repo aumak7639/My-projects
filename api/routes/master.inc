@@ -162,3 +162,25 @@ $app->post('/reset_password', function() use ($app) {
     }
     echoRespnse(201, $res);
 });
+
+$app->post('/upload_member_picfile', function() use ($app) {
+    $res = array('error' => true, 'message' => 'Unable to upload image');
+    $obj = new Common();
+    $data = '';
+    if (isset($_FILES) && isset($_FILES['file'])) {
+        $data = $obj->saveFile($_FILES['file'], 'uploads');
+        //echo $data;
+    }
+    if ($data != '') {
+        $res['error'] = false;
+        $res['message'] = 'Image uploaded successfully';
+        $res['data'] = $data;
+
+        $data1 = $app->request->post();
+        $user_id = $data1['mid'];
+        $obj->updateRecordWithWhere(array('profile_image' => $data), 'users', 'user_id=' . $user_id);
+
+        $res['extension'] = $obj->getExtension($data);
+    }
+    echoRespnse(201, $res);
+});
