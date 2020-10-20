@@ -2,6 +2,11 @@
 session_start();
 require_once 'api/include/common.php';
 $obj = new Common();
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: index.php');
+}
+
 if (isset($_SESSION['user_id'])) {
     $login_member = $obj->selectRow('*', 'users', 'user_id=' . $_SESSION['user_id']);
 }

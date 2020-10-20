@@ -389,6 +389,7 @@ blink {
 .member-img img {
     width: 100%;
     margin-bottom: 20px;
+    height: 250px;
 }
 
 .member-info {
@@ -991,6 +992,8 @@ button.createbtn i {
     margin-bottom: 10px;
     background: #fff;
     box-shadow: 0 0 6px 2px #e3e3e3;
+    width: 200px;
+    height: auto;
 }
 
 .razorpay-payment-button {
@@ -1122,6 +1125,7 @@ button.createbtn i {
     position: relative;
     top: 5px;
     cursor: pointer;
+    text-align: center;
 }
 .file-upload input{
     position: absolute;
@@ -1136,4 +1140,110 @@ button.createbtn i {
     height:70px;
     width:70px;
     margin:15px;
+}
+
+
+section.module.parallax-2 {
+    background-image: url(../img/parallax-2.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+section.module.parallax {
+    background-position: 60% 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 30px 0px;
+}
+
+.mobileapp-img {
+    text-align: right;
+}
+
+.parallax-caption {
+    text-align: left;
+    margin-top: 40px;
+}
+
+section.module h2 {
+    font-size: 27px;
+    color: #fff;
+    /*font-family: Open Sans;*/
+    font-weight: bold;
+}
+
+section.module p {
+    font-size: 14px;
+    color: #fff;
+}
+
+.app-download-btn {
+    margin-top: 45px;
+}
+
+.app-download-btn p {
+    margin: 0px;
+    padding: 0px;
+    font-size: 11px!important;
+    color: #fff;
+}
+
+.membership-icon {
+    background: url(../img/playstore-small.png);
+    margin: 0 auto;
+}
+
+.android-app {
+    background-position: 0px 0;
+    width: 104px;
+    height: 31px;
+    display: inline-block;
+}
+
+.home-why-cnt {
+    background: #fff;
+    padding-bottom: 50px;
+}
+
+.home-why-txt {
+    font-size: 24px;
+    line-height: 32px;
+    color: #51505d;
+    padding: 40px 0 0;
+}
+
+.separation {
+    width: 12%;
+    margin: 0 auto;
+}
+
+.MuiDivider-root {
+    border: none;
+    height: 1px;
+    margin: 0;
+    flex-shrink: 0;
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+.home-why-itm-dsc {
+    background: #fff;
+    box-shadow: 0 0 6px 2px #e3e3e3;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 200px;
+}
+
+@media screen and (max-width: 767px) {
+    .home-why-itm-dsc {
+        height: auto;
+    }
+}
+
+.read-more, .read-less {
+    cursor: pointer;
 }

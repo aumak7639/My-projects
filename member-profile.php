@@ -5,6 +5,9 @@ $obj = new Common();
 if (isset($_SESSION['user_id'])) {
     $myprofile = $obj->selectRow('*', 'users', 'user_id=' . $_SESSION['user_id']);
 }
+if (!isset($_SESSION['user_id'])) {
+    header('Location: index.php');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -138,12 +141,18 @@ if (isset($_SESSION['user_id'])) {
                                 </div>
                             </div>
                             <div id="menu1" class="tab-pane fade">
-                                <div class="">
+                                <div class="" style="display: flex">
                                     <div class="file-upload">
                                         <!--place upload image/icon first !-->
                                         <p>Change Profile</p>
                                         <!--place input file last !-->
                                         <input type="file" id="profile_picture" name="profile_picture" onchange="attachAccountFile('profile_picture',<?php echo $_SESSION["user_id"]; ?>);" />
+                                    </div>
+                                    <div class="file-upload">
+                                        <!--place upload image/icon first !-->
+                                        <p>Other Profile</p>
+                                        <!--place input file last !-->
+                                        <input type="file" name="other_picture" />
                                     </div>
                                 </div>
                                 <div class="picture-section">

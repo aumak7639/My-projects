@@ -2,6 +2,7 @@
 session_start();
 require_once 'api/include/common.php';
 $obj = new Common();
+
 $user = $obj->selectAll('*', 'users', 'user_id > 0');
 ?>
 <!DOCTYPE html>
@@ -15,7 +16,6 @@ $user = $obj->selectAll('*', 'users', 'user_id > 0');
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                 <li data-target="#myCarousel" data-slide-to="1"></li>
                 <li data-target="#myCarousel" data-slide-to="2"></li>
-                <!--<li data-target="#myCarousel" data-slide-to="3"></li>-->
             </ol>
 
             <!-- Wrapper for slides -->
@@ -32,18 +32,16 @@ $user = $obj->selectAll('*', 'users', 'user_id > 0');
                 <div class="item">
                     <img src="img/banner-3.jpg" alt="Banner">
                 </div>
-
-                <!--                <div class="item">
-                                    <img src="https://alkite.files.wordpress.com/2009/05/surfing-1.jpg" alt="Banner">
-                                                        <div class="carousel-caption">
-                                                            <h3>Flowers</h3>
-                                                            <p>Beatiful flowers in Kolymbari, Crete.</p>
-                                                        </div>
-                                </div>-->
             </div>
-            <div class="register-btn-section">
-                <a href="#" class="btn" data-toggle="modal" data-target="#myModal"><blink><i class="fa fa-user-circle-o" aria-hidden="true"></i> Register Now</blink></a>
-            </div>
+            <?php if (!isset($_SESSION['user_id'])) { ?>
+                <div class="register-btn-section">
+                    <a href="#" class="btn" data-toggle="modal" data-target="#myModal"><blink><i class="fa fa-user-circle-o" aria-hidden="true"></i> Register Now</blink></a>
+                </div>
+            <?php } else { ?> 
+                <div class="register-btn-section" style="display: none">
+                    <a href="#" class="btn" data-toggle="modal" data-target="#myModal"><blink><i class="fa fa-user-circle-o" aria-hidden="true"></i> Test</blink></a>
+                </div>
+            <?php } ?>
             <!-- Left and right controls -->
             <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
                 <i class="glyphicon fa fa-angle-left" aria-hidden="true"></i>
@@ -60,111 +58,54 @@ $user = $obj->selectAll('*', 'users', 'user_id > 0');
                 <!--<h2>Our  Partners</h2>-->
                 <div class="customer-logos slider">
                     <?php foreach ($user as $row) { ?>
-                    <div class="slide">
-                        <div class="partner-box" data-toggle="modal" data-target="#myModal">
-                            <div class="partner-bg" style="background: url(img/slide-img.jpg)no-repeat;"></div>
-                            <div class="partner-content">
-                                <h4><?php echo $row['name']; ?></h4>
-                                <p>Height: <?php echo $row['height']; ?></p>
-                                <p>Weight: <?php echo $row['weight']; ?></p>
+                        <?php if (isset($_SESSION['user_id'])) { ?>
+                            <div class="slide">
+                                <div class="partner-box" onclick="window.location = 'user-profile.php?uid=<?php echo $row['user_id']; ?>'">
+                                    <div class="partner-bg" style="background: url(<?php echo BASE_URL . $row['image_path']; ?>)no-repeat;"></div>
+                                    <div class="partner-content">
+                                        <h4><?php echo $row['name']; ?></h4>
+                                        <p>Height: <?php echo $row['height']; ?></p>
+                                        <p>Weight: <?php echo $row['weight']; ?></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        <?php } else { ?>
+                            <div class="slide">
+                                <div class="partner-box" data-toggle="modal" data-target="#myModal">
+                                    <div class="partner-bg" style="background: url(<?php echo BASE_URL . $row['image_path']; ?>)no-repeat;"></div>
+                                    <div class="partner-content">
+                                        <h4><?php echo $row['name']; ?></h4>
+                                        <p>Height: <?php echo $row['height']; ?></p>
+                                        <p>Weight: <?php echo $row['weight']; ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
                     <?php } ?>
-<!--                    <div class="slide">
-                        <div class="partner-box" data-toggle="modal" data-target="#myModal">
-                            <div class="partner-bg" style="background: url(img/slide-img.jpg)no-repeat;"></div>
-                            <div class="partner-content">
-                                <h4>Name Comes Here</h4>
-                                <p>Height: </p>
-                                <p>Weight: </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="partner-box" data-toggle="modal" data-target="#myModal">
-                            <div class="partner-bg" style="background: url(img/slide-img.jpg)no-repeat;"></div>
-                            <div class="partner-content">
-                                <h4>Name Comes Here</h4>
-                                <p>Height: </p>
-                                <p>Weight: </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="partner-box" data-toggle="modal" data-target="#myModal">
-                            <div class="partner-bg" style="background: url(img/slide-img.jpg)no-repeat;"></div>
-                            <div class="partner-content">
-                                <h4>Name Comes Here</h4>
-                                <p>Height: </p>
-                                <p>Weight: </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="partner-box" data-toggle="modal" data-target="#myModal">
-                            <div class="partner-bg" style="background: url(img/slide-img.jpg)no-repeat;"></div>
-                            <div class="partner-content">
-                                <h4>Name Comes Here</h4>
-                                <p>Height: </p>
-                                <p>Weight: </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="partner-box" data-toggle="modal" data-target="#myModal">
-                            <div class="partner-bg" style="background: url(img/slide-img.jpg)no-repeat;"></div>
-                            <div class="partner-content">
-                                <h4>Name Comes Here</h4>
-                                <p>Height: </p>
-                                <p>Weight: </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="partner-box" data-toggle="modal" data-target="#myModal">
-                            <div class="partner-bg" style="background: url(img/slide-img.jpg)no-repeat;"></div>
-                            <div class="partner-content">
-                                <h4>Name Comes Here</h4>
-                                <p>Height: </p>
-                                <p>Weight: </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="partner-box" data-toggle="modal" data-target="#myModal">
-                            <div class="partner-bg" style="background: url(img/slide-img.jpg)no-repeat;"></div>
-                            <div class="partner-content">
-                                <h4>Name Comes Here</h4>
-                                <p>Height: </p>
-                                <p>Weight: </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="partner-box" data-toggle="modal" data-target="#myModal">
-                            <div class="partner-bg" style="background: url(img/slide-img.jpg)no-repeat;"></div>
-                            <div class="partner-content">
-                                <h4>Name Comes Here</h4>
-                                <p>Height: </p>
-                                <p>Weight: </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="partner-box" data-toggle="modal" data-target="#myModal">
-                            <div class="partner-bg" style="background: url(img/slide-img.jpg)no-repeat;"></div>
-                            <div class="partner-content">
-                                <h4>Name Comes Here</h4>
-                                <p>Height: </p>
-                                <p>Weight: </p>
-                            </div>
-                        </div>
-                    </div>-->
                 </div>
+                <br/>
+                <?php if (isset($_SESSION['user_id'])) { ?>
+                    <center><a href="profiles" class="btn profile-btn">See More</a></center>
+                <?php } else { ?>
+                    <center><a href="#" class="btn profile-btn" data-toggle="modal" data-target="#myModal">See More</a></center>
+                <?php } ?>
             </div>
         </div>
-
+        <section class="module parallax parallax-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 col-sm-5 mobileapp-img hidden-xs"> <img src="img/MobileAppHome.png" alt="Iniya App"> </div>
+                    <div class="col-md-7 col-sm-7 parallax-caption">
+                        <h2>Happiness is Just an App Away!</h2>
+                        <p>Find your right match with Lovevivah.com </p>
+                        <p style="font-weight:bold;"><i class="fa fa-hand-o-right"></i> Simple |  Fast | Convenient | Safe &amp; Secure</p>
+                        <div class="app-download-btn">
+                            <p>Available on Android</p>
+                            <a href="#" target="_blank"><span class="membership-icon android-app"></span></a> </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section class="application-download-section">
             <div class="container">
                 <div class="row">
@@ -185,7 +126,9 @@ $user = $obj->selectAll('*', 'users', 'user_id > 0');
                 </div>
             </div>
         </section>
-        <?php include 'register-form.php'; ?>
+        <?php if (!isset($_SESSION['user_id'])) { ?>
+            <?php include 'register-form.php'; ?>
+        <?php } ?>
         <?php include 'login.php'; ?>
         <?php include 'footer.php'; ?>
     </body>

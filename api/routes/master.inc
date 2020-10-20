@@ -163,7 +163,7 @@ $app->post('/reset_password', function() use ($app) {
     echoRespnse(201, $res);
 });
 
-$app->post('/upload_member_picfile', function() use ($app) {
+$app->post('/upload_member_picfile:id:mid', function() use ($app) {
     $res = array('error' => true, 'message' => 'Unable to upload image');
     $obj = new Common();
     $data = '';
