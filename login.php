@@ -26,7 +26,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">SUBMIT</button>
                 </form>
-                <p>Don't have an account! <a href='#' data-toggle="modal" data-target="#myModal">Register Now</a></p>
+                <p>Don't have an account! <a href='#' data-toggle="modal" data-target="#myModal" data-dismiss="modal">Register Now</a></p>
             </div>
             <div class="modal-footer">
                 <!--         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->

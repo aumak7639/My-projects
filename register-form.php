@@ -297,7 +297,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">SUBMIT</button>
                 </form>
-                <p>Already Have a Account! <a href='#' data-toggle="modal" data-target="#myModal1">Sign in</a></p>
+                <p>Already Have a Account! <a href='#' data-toggle="modal" data-target="#myModal1" data-dismiss="modal">Sign in</a></p>
             </div>
             <div class="modal-footer">
                 <!--         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
