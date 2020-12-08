@@ -1,9 +1,9 @@
 <footer>
     <div class="container">
         <ul class="footer-menu">
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Terms and Conditions</a></li>
-            <li><a href="#">Contact Us</a></li>
+            <li><a href="about.php">About Us</a></li>
+            <li><a href="terms.php">Terms and Conditions</a></li>
+            <li><a href="contact.php">Contact Us</a></li>
         </ul>
         <p class="text-center"><a href="http://www.iniyaamatrimony.com/">Iniyaamatrimony.com</a> © Copyright 2020, All Rights Reserved.</p>
     </div>

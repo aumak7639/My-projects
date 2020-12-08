@@ -76,3 +76,12 @@ a.animated-button.victoria-two:after {
 .m-b-10 {
     margin-bottom: 10px;
 }
+
+.ptb-1 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.bg-primary {
+    background: #662d91;
+}
